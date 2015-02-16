@@ -10,11 +10,21 @@
 		87147E581A859F6000AB4977 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E571A859F6000AB4977 /* main.m */; };
 		87147E5B1A859F6000AB4977 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E5A1A859F6000AB4977 /* AppDelegate.m */; };
 		87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87147E5C1A859F6000AB4977 /* PontoFacil.xcdatamodeld */; };
-		87147E611A859F6000AB4977 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E601A859F6000AB4977 /* ViewController.m */; };
 		87147E641A859F6000AB4977 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87147E621A859F6000AB4977 /* Main.storyboard */; };
 		87147E661A859F6000AB4977 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87147E651A859F6000AB4977 /* Images.xcassets */; };
-		87147E691A859F6000AB4977 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87147E671A859F6000AB4977 /* LaunchScreen.xib */; };
 		87147E751A859F6100AB4977 /* PontoFacilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E741A859F6100AB4977 /* PontoFacilTests.m */; };
+		87147E891A85A19A00AB4977 /* PersistentStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E861A85A19A00AB4977 /* PersistentStack.m */; };
+		87147E8A1A85A19A00AB4977 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E881A85A19A00AB4977 /* Store.m */; };
+		87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E8E1A85A96E00AB4977 /* ClockViewController.m */; };
+		87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87147E901A86501000AB4977 /* CircularButtonView.xib */; };
+		87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E941A8652E800AB4977 /* CircularButtonView.m */; };
+		876398E71A8D88E00002118E /* Open Sans 800.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 876398E51A8D888F0002118E /* Open Sans 800.ttf */; };
+		876398E81A8D88E00002118E /* Open Sans regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 876398E61A8D888F0002118E /* Open Sans regular.ttf */; };
+		876398EC1A8D9B520002118E /* AcessoryCircularButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 876398EB1A8D9B520002118E /* AcessoryCircularButtonView.xib */; };
+		876398EF1A8D9BA00002118E /* AcessoryCircularButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 876398EE1A8D9BA00002118E /* AcessoryCircularButtonView.m */; };
+		876398F41A911DA00002118E /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 876398F31A911DA00002118E /* DateView.m */; };
+		87BC41491A8706F80007768A /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BC41461A8706F80007768A /* CircleProgressView.m */; };
+		87BC414A1A8706F80007768A /* CircleShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BC41481A8706F80007768A /* CircleShapeLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,20 +38,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.debug.xcconfig"; sourceTree = "<group>"; };
+		4A509C852DCA71143874690E /* Pods-PontoFacil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.release.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.release.xcconfig"; sourceTree = "<group>"; };
 		87147E521A859F6000AB4977 /* PontoFacil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PontoFacil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87147E561A859F6000AB4977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87147E571A859F6000AB4977 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		87147E591A859F6000AB4977 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87147E5A1A859F6000AB4977 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		87147E5D1A859F6000AB4977 /* PontoFacil.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PontoFacil.xcdatamodel; sourceTree = "<group>"; };
-		87147E5F1A859F6000AB4977 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		87147E601A859F6000AB4977 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		87147E631A859F6000AB4977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87147E651A859F6000AB4977 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		87147E681A859F6000AB4977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		87147E6E1A859F6100AB4977 /* PontoFacilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PontoFacilTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87147E731A859F6100AB4977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87147E741A859F6100AB4977 /* PontoFacilTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PontoFacilTests.m; sourceTree = "<group>"; };
+		87147E851A85A19A00AB4977 /* PersistentStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentStack.h; sourceTree = "<group>"; };
+		87147E861A85A19A00AB4977 /* PersistentStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentStack.m; sourceTree = "<group>"; };
+		87147E871A85A19A00AB4977 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		87147E881A85A19A00AB4977 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		87147E8D1A85A96E00AB4977 /* ClockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockViewController.h; sourceTree = "<group>"; };
+		87147E8E1A85A96E00AB4977 /* ClockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockViewController.m; sourceTree = "<group>"; };
+		87147E901A86501000AB4977 /* CircularButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircularButtonView.xib; sourceTree = "<group>"; };
+		87147E931A8652E800AB4977 /* CircularButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularButtonView.h; sourceTree = "<group>"; };
+		87147E941A8652E800AB4977 /* CircularButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonView.m; sourceTree = "<group>"; };
+		87297C4F1A870AD2004E9626 /* libPods-PontoFacil-CircularProgressControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil-CircularProgressControl.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil-CircularProgressControl.a"; sourceTree = "<group>"; };
+		87297C501A870AD2004E9626 /* libPods-PontoFacil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil.a"; sourceTree = "<group>"; };
+		876398E51A8D888F0002118E /* Open Sans 800.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans 800.ttf"; sourceTree = "<group>"; };
+		876398E61A8D888F0002118E /* Open Sans regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans regular.ttf"; sourceTree = "<group>"; };
+		876398EB1A8D9B520002118E /* AcessoryCircularButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AcessoryCircularButtonView.xib; sourceTree = "<group>"; };
+		876398ED1A8D9BA00002118E /* AcessoryCircularButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcessoryCircularButtonView.h; sourceTree = "<group>"; };
+		876398EE1A8D9BA00002118E /* AcessoryCircularButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcessoryCircularButtonView.m; sourceTree = "<group>"; };
+		876398F21A911DA00002118E /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateView.h; sourceTree = "<group>"; };
+		876398F31A911DA00002118E /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateView.m; sourceTree = "<group>"; };
+		87BC41451A8706F80007768A /* CircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressView.h; sourceTree = "<group>"; };
+		87BC41461A8706F80007768A /* CircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressView.m; sourceTree = "<group>"; };
+		87BC41471A8706F80007768A /* CircleShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleShapeLayer.h; sourceTree = "<group>"; };
+		87BC41481A8706F80007768A /* CircleShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleShapeLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,12 +93,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A49D782D2A1205A55AD0438 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */,
+				4A509C852DCA71143874690E /* Pods-PontoFacil.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6D9F0AE42298DF2C8CFB43E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87297C4F1A870AD2004E9626 /* libPods-PontoFacil-CircularProgressControl.a */,
+				87297C501A870AD2004E9626 /* libPods-PontoFacil.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		87147E491A859F6000AB4977 = {
 			isa = PBXGroup;
 			children = (
 				87147E541A859F6000AB4977 /* PontoFacil */,
 				87147E711A859F6100AB4977 /* PontoFacilTests */,
 				87147E531A859F6000AB4977 /* Products */,
+				2A49D782D2A1205A55AD0438 /* Pods */,
+				6D9F0AE42298DF2C8CFB43E1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,14 +134,11 @@
 		87147E541A859F6000AB4977 /* PontoFacil */ = {
 			isa = PBXGroup;
 			children = (
-				87147E591A859F6000AB4977 /* AppDelegate.h */,
-				87147E5A1A859F6000AB4977 /* AppDelegate.m */,
-				87147E5F1A859F6000AB4977 /* ViewController.h */,
-				87147E601A859F6000AB4977 /* ViewController.m */,
-				87147E621A859F6000AB4977 /* Main.storyboard */,
-				87147E651A859F6000AB4977 /* Images.xcassets */,
-				87147E671A859F6000AB4977 /* LaunchScreen.xib */,
-				87147E5C1A859F6000AB4977 /* PontoFacil.xcdatamodeld */,
+				87147E7E1A859F8800AB4977 /* Model */,
+				87147E7F1A859F9000AB4977 /* View */,
+				87147E801A859F9800AB4977 /* Controller */,
+				87147E821A85A01C00AB4977 /* Helper */,
+				87147E831A85A02100AB4977 /* Resources */,
 				87147E551A859F6000AB4977 /* Supporting Files */,
 			);
 			path = PontoFacil;
@@ -99,6 +147,7 @@
 		87147E551A859F6000AB4977 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				87147E621A859F6000AB4977 /* Main.storyboard */,
 				87147E561A859F6000AB4977 /* Info.plist */,
 				87147E571A859F6000AB4977 /* main.m */,
 			);
@@ -120,6 +169,137 @@
 				87147E731A859F6100AB4977 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		87147E7E1A859F8800AB4977 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				87147E8B1A85A2F600AB4977 /* Managed Objects */,
+				87147E851A85A19A00AB4977 /* PersistentStack.h */,
+				87147E861A85A19A00AB4977 /* PersistentStack.m */,
+				87147E871A85A19A00AB4977 /* Store.h */,
+				87147E881A85A19A00AB4977 /* Store.m */,
+				87147E5C1A859F6000AB4977 /* PontoFacil.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		87147E7F1A859F9000AB4977 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				876398EA1A8D922E0002118E /* _AcessoryCircularButton */,
+				87BC41441A8706A00007768A /* Clock */,
+				87147E921A8652C700AB4977 /* CircularButton */,
+				876398F01A911A790002118E /* Date */,
+				876398F21A911DA00002118E /* DateView.h */,
+				876398F31A911DA00002118E /* DateView.m */,
+				876398F11A911A920002118E /* Events */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		87147E801A859F9800AB4977 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				87297C531A883B6A004E9626 /* History */,
+				87147E8C1A85A39000AB4977 /* Clock */,
+				87147E841A85A05000AB4977 /* AppDelegate */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		87147E821A85A01C00AB4977 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		87147E831A85A02100AB4977 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				876398E51A8D888F0002118E /* Open Sans 800.ttf */,
+				876398E61A8D888F0002118E /* Open Sans regular.ttf */,
+				87147E651A859F6000AB4977 /* Images.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		87147E841A85A05000AB4977 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				87147E591A859F6000AB4977 /* AppDelegate.h */,
+				87147E5A1A859F6000AB4977 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		87147E8B1A85A2F600AB4977 /* Managed Objects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Managed Objects";
+			sourceTree = "<group>";
+		};
+		87147E8C1A85A39000AB4977 /* Clock */ = {
+			isa = PBXGroup;
+			children = (
+				87147E8D1A85A96E00AB4977 /* ClockViewController.h */,
+				87147E8E1A85A96E00AB4977 /* ClockViewController.m */,
+			);
+			name = Clock;
+			sourceTree = "<group>";
+		};
+		87147E921A8652C700AB4977 /* CircularButton */ = {
+			isa = PBXGroup;
+			children = (
+				87147E901A86501000AB4977 /* CircularButtonView.xib */,
+				87147E931A8652E800AB4977 /* CircularButtonView.h */,
+				87147E941A8652E800AB4977 /* CircularButtonView.m */,
+			);
+			name = CircularButton;
+			sourceTree = "<group>";
+		};
+		87297C531A883B6A004E9626 /* History */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = History;
+			sourceTree = "<group>";
+		};
+		876398EA1A8D922E0002118E /* _AcessoryCircularButton */ = {
+			isa = PBXGroup;
+			children = (
+				876398EB1A8D9B520002118E /* AcessoryCircularButtonView.xib */,
+				876398ED1A8D9BA00002118E /* AcessoryCircularButtonView.h */,
+				876398EE1A8D9BA00002118E /* AcessoryCircularButtonView.m */,
+			);
+			name = _AcessoryCircularButton;
+			sourceTree = "<group>";
+		};
+		876398F01A911A790002118E /* Date */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Date;
+			sourceTree = "<group>";
+		};
+		876398F11A911A920002118E /* Events */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		87BC41441A8706A00007768A /* Clock */ = {
+			isa = PBXGroup;
+			children = (
+				87BC41451A8706F80007768A /* CircleProgressView.h */,
+				87BC41461A8706F80007768A /* CircleProgressView.m */,
+				87BC41471A8706F80007768A /* CircleShapeLayer.h */,
+				87BC41481A8706F80007768A /* CircleShapeLayer.m */,
+			);
+			name = Clock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,9 +382,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				876398E71A8D88E00002118E /* Open Sans 800.ttf in Resources */,
+				876398E81A8D88E00002118E /* Open Sans regular.ttf in Resources */,
+				876398EC1A8D9B520002118E /* AcessoryCircularButtonView.xib in Resources */,
 				87147E641A859F6000AB4977 /* Main.storyboard in Resources */,
-				87147E691A859F6000AB4977 /* LaunchScreen.xib in Resources */,
 				87147E661A859F6000AB4977 /* Images.xcassets in Resources */,
+				87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,9 +406,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				87147E5B1A859F6000AB4977 /* AppDelegate.m in Sources */,
+				87BC41491A8706F80007768A /* CircleProgressView.m in Sources */,
+				87BC414A1A8706F80007768A /* CircleShapeLayer.m in Sources */,
 				87147E581A859F6000AB4977 /* main.m in Sources */,
-				87147E611A859F6000AB4977 /* ViewController.m in Sources */,
+				876398EF1A8D9BA00002118E /* AcessoryCircularButtonView.m in Sources */,
+				87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */,
 				87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */,
+				87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */,
+				87147E8A1A85A19A00AB4977 /* Store.m in Sources */,
+				876398F41A911DA00002118E /* DateView.m in Sources */,
+				87147E891A85A19A00AB4977 /* PersistentStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,14 +444,6 @@
 				87147E631A859F6000AB4977 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		87147E671A859F6000AB4977 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				87147E681A859F6000AB4977 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -301,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -337,7 +519,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -350,7 +532,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PontoFacil/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -360,7 +544,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PontoFacil/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -418,6 +604,7 @@
 				87147E7A1A859F6100AB4977 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		87147E7B1A859F6100AB4977 /* Build configuration list for PBXNativeTarget "PontoFacilTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +613,7 @@
 				87147E7D1A859F6100AB4977 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
