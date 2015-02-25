@@ -23,8 +23,16 @@
 		876398EC1A8D9B520002118E /* AcessoryCircularButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 876398EB1A8D9B520002118E /* AcessoryCircularButtonView.xib */; };
 		876398EF1A8D9BA00002118E /* AcessoryCircularButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 876398EE1A8D9BA00002118E /* AcessoryCircularButtonView.m */; };
 		876398F41A911DA00002118E /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 876398F31A911DA00002118E /* DateView.m */; };
+		877081CE1A922F5900541AB3 /* Session+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = 877081CD1A922F5900541AB3 /* Session+Management.m */; };
+		877081D11A923D2C00541AB3 /* Event+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = 877081D01A923D2C00541AB3 /* Event+Management.m */; };
+		877081D41A927A3D00541AB3 /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 877081D31A927A3D00541AB3 /* NSDate-Utilities.m */; };
+		877081D81A92AE2700541AB3 /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 877081D71A92AE2700541AB3 /* ActionButton.m */; };
+		879FA6F11A9D613600221AD1 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879FA6F01A9D613600221AD1 /* CalendarView.xib */; };
 		87BC41491A8706F80007768A /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BC41461A8706F80007768A /* CircleProgressView.m */; };
 		87BC414A1A8706F80007768A /* CircleShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BC41481A8706F80007768A /* CircleShapeLayer.m */; };
+		87BD17BE1A99474000FF8ED9 /* Holiday.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BD17BD1A99474000FF8ED9 /* Holiday.m */; };
+		87BD17C11A99474100FF8ED9 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BD17C01A99474100FF8ED9 /* Session.m */; };
+		87BD17C41A99474100FF8ED9 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BD17C31A99474100FF8ED9 /* Event.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,10 +77,25 @@
 		876398EE1A8D9BA00002118E /* AcessoryCircularButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcessoryCircularButtonView.m; sourceTree = "<group>"; };
 		876398F21A911DA00002118E /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateView.h; sourceTree = "<group>"; };
 		876398F31A911DA00002118E /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateView.m; sourceTree = "<group>"; };
+		877081CC1A922F5900541AB3 /* Session+Management.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Session+Management.h"; sourceTree = "<group>"; };
+		877081CD1A922F5900541AB3 /* Session+Management.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Session+Management.m"; sourceTree = "<group>"; };
+		877081CF1A923D2C00541AB3 /* Event+Management.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+Management.h"; sourceTree = "<group>"; };
+		877081D01A923D2C00541AB3 /* Event+Management.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Management.m"; sourceTree = "<group>"; };
+		877081D21A927A3D00541AB3 /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
+		877081D31A927A3D00541AB3 /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
+		877081D61A92AE2700541AB3 /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
+		877081D71A92AE2700541AB3 /* ActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionButton.m; sourceTree = "<group>"; };
+		879FA6F01A9D613600221AD1 /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
 		87BC41451A8706F80007768A /* CircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressView.h; sourceTree = "<group>"; };
 		87BC41461A8706F80007768A /* CircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressView.m; sourceTree = "<group>"; };
 		87BC41471A8706F80007768A /* CircleShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleShapeLayer.h; sourceTree = "<group>"; };
 		87BC41481A8706F80007768A /* CircleShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleShapeLayer.m; sourceTree = "<group>"; };
+		87BD17BC1A99474000FF8ED9 /* Holiday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Holiday.h; sourceTree = "<group>"; };
+		87BD17BD1A99474000FF8ED9 /* Holiday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Holiday.m; sourceTree = "<group>"; };
+		87BD17BF1A99474100FF8ED9 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		87BD17C01A99474100FF8ED9 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		87BD17C21A99474100FF8ED9 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		87BD17C31A99474100FF8ED9 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,11 +198,15 @@
 			isa = PBXGroup;
 			children = (
 				87147E8B1A85A2F600AB4977 /* Managed Objects */,
+				87147E5C1A859F6000AB4977 /* PontoFacil.xcdatamodeld */,
 				87147E851A85A19A00AB4977 /* PersistentStack.h */,
 				87147E861A85A19A00AB4977 /* PersistentStack.m */,
 				87147E871A85A19A00AB4977 /* Store.h */,
 				87147E881A85A19A00AB4977 /* Store.m */,
-				87147E5C1A859F6000AB4977 /* PontoFacil.xcdatamodeld */,
+				877081CC1A922F5900541AB3 /* Session+Management.h */,
+				877081CD1A922F5900541AB3 /* Session+Management.m */,
+				877081CF1A923D2C00541AB3 /* Event+Management.h */,
+				877081D01A923D2C00541AB3 /* Event+Management.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -187,12 +214,12 @@
 		87147E7F1A859F9000AB4977 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				879FA6EF1A9D60FE00221AD1 /* CalendarView */,
+				87147E921A8652C700AB4977 /* _CircularButton */,
 				876398EA1A8D922E0002118E /* _AcessoryCircularButton */,
+				877081D51A92ADFD00541AB3 /* ActionButton */,
 				87BC41441A8706A00007768A /* Clock */,
-				87147E921A8652C700AB4977 /* CircularButton */,
 				876398F01A911A790002118E /* Date */,
-				876398F21A911DA00002118E /* DateView.h */,
-				876398F31A911DA00002118E /* DateView.m */,
 				876398F11A911A920002118E /* Events */,
 			);
 			name = View;
@@ -211,6 +238,8 @@
 		87147E821A85A01C00AB4977 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				877081D21A927A3D00541AB3 /* NSDate-Utilities.h */,
+				877081D31A927A3D00541AB3 /* NSDate-Utilities.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -237,6 +266,12 @@
 		87147E8B1A85A2F600AB4977 /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
+				87BD17C21A99474100FF8ED9 /* Event.h */,
+				87BD17C31A99474100FF8ED9 /* Event.m */,
+				87BD17BF1A99474100FF8ED9 /* Session.h */,
+				87BD17C01A99474100FF8ED9 /* Session.m */,
+				87BD17BC1A99474000FF8ED9 /* Holiday.h */,
+				87BD17BD1A99474000FF8ED9 /* Holiday.m */,
 			);
 			name = "Managed Objects";
 			sourceTree = "<group>";
@@ -250,14 +285,14 @@
 			name = Clock;
 			sourceTree = "<group>";
 		};
-		87147E921A8652C700AB4977 /* CircularButton */ = {
+		87147E921A8652C700AB4977 /* _CircularButton */ = {
 			isa = PBXGroup;
 			children = (
 				87147E901A86501000AB4977 /* CircularButtonView.xib */,
 				87147E931A8652E800AB4977 /* CircularButtonView.h */,
 				87147E941A8652E800AB4977 /* CircularButtonView.m */,
 			);
-			name = CircularButton;
+			name = _CircularButton;
 			sourceTree = "<group>";
 		};
 		87297C531A883B6A004E9626 /* History */ = {
@@ -280,6 +315,8 @@
 		876398F01A911A790002118E /* Date */ = {
 			isa = PBXGroup;
 			children = (
+				876398F21A911DA00002118E /* DateView.h */,
+				876398F31A911DA00002118E /* DateView.m */,
 			);
 			name = Date;
 			sourceTree = "<group>";
@@ -289,6 +326,23 @@
 			children = (
 			);
 			name = Events;
+			sourceTree = "<group>";
+		};
+		877081D51A92ADFD00541AB3 /* ActionButton */ = {
+			isa = PBXGroup;
+			children = (
+				877081D61A92AE2700541AB3 /* ActionButton.h */,
+				877081D71A92AE2700541AB3 /* ActionButton.m */,
+			);
+			name = ActionButton;
+			sourceTree = "<group>";
+		};
+		879FA6EF1A9D60FE00221AD1 /* CalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				879FA6F01A9D613600221AD1 /* CalendarView.xib */,
+			);
+			name = CalendarView;
 			sourceTree = "<group>";
 		};
 		87BC41441A8706A00007768A /* Clock */ = {
@@ -386,6 +440,7 @@
 				876398E81A8D88E00002118E /* Open Sans regular.ttf in Resources */,
 				876398EC1A8D9B520002118E /* AcessoryCircularButtonView.xib in Resources */,
 				87147E641A859F6000AB4977 /* Main.storyboard in Resources */,
+				879FA6F11A9D613600221AD1 /* CalendarView.xib in Resources */,
 				87147E661A859F6000AB4977 /* Images.xcassets in Resources */,
 				87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */,
 			);
@@ -408,13 +463,20 @@
 				87147E5B1A859F6000AB4977 /* AppDelegate.m in Sources */,
 				87BC41491A8706F80007768A /* CircleProgressView.m in Sources */,
 				87BC414A1A8706F80007768A /* CircleShapeLayer.m in Sources */,
+				87BD17C11A99474100FF8ED9 /* Session.m in Sources */,
+				877081D81A92AE2700541AB3 /* ActionButton.m in Sources */,
 				87147E581A859F6000AB4977 /* main.m in Sources */,
 				876398EF1A8D9BA00002118E /* AcessoryCircularButtonView.m in Sources */,
+				877081D11A923D2C00541AB3 /* Event+Management.m in Sources */,
 				87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */,
 				87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */,
+				877081CE1A922F5900541AB3 /* Session+Management.m in Sources */,
 				87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */,
+				87BD17C41A99474100FF8ED9 /* Event.m in Sources */,
+				877081D41A927A3D00541AB3 /* NSDate-Utilities.m in Sources */,
 				87147E8A1A85A19A00AB4977 /* Store.m in Sources */,
 				876398F41A911DA00002118E /* DateView.m in Sources */,
+				87BD17BE1A99474000FF8ED9 /* Holiday.m in Sources */,
 				87147E891A85A19A00AB4977 /* PersistentStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

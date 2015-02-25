@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CircularButtonView : UIView
+@interface CircularButtonView : UIControl
 
 @end

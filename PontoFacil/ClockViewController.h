@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 
 @class CircleProgressView;
+@class ActionButton;
 
 @interface ClockViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet CircleProgressView *clockView;
 
-@property NSUInteger pageIndex;
-@property NSString *titleText;
+@property (strong, nonatomic) IBOutlet UILabel *startDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *breakTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *finishDateLabel;
+
+@property (strong, nonatomic) IBOutlet ActionButton *startBreakButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *stopButton;
 
 @end
