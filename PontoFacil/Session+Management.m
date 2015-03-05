@@ -8,69 +8,30 @@
 
 #import "Session+Management.h"
 #import "Event+Management.h"
+#import "Interval+Management.h"
 #import "Store.h"
 
+static NSString *entityName = @"Session";
 
 @implementation Session (Management)
 
-#pragma mark - Private Methods
 
-+ (NSString*)entityName
-{
-    return @"Session";
+- (SessionStateType)sessionStateType {
+    return (SessionStateType)[[self sessionType] intValue];
 }
 
-- (SessionState)sessionState {
-    return (SessionState)[[self state] intValue];
+- (void)setSessionStateType:(SessionStateType)sessionStateType {
+    [self setSessionType:[NSNumber numberWithInt:sessionStateType]];
 }
 
-- (void)setSessionState:(SessionState)sessionState {
-    [self setState:[NSNumber numberWithInt:sessionState]];
-}
-
-- (NSString *)monthYearSessionDate {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM YYYY" options:0
-                                                              locale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:formatString];
-    
-    return [dateFormatter stringFromDate: self.workStartDate];
-}
-
-
-- (NSTimeInterval)calculateWorkTime {
-    NSTimeInterval _calculatedWorkTime = [self calculateEventSummary:kEventTypeWork];
-    self.workTime = [NSNumber numberWithDouble:_calculatedWorkTime];
-    return _calculatedWorkTime;
-}
-
-- (NSTimeInterval)calculateBreakTime {
-    NSTimeInterval _calculatedBreakTime = [self calculateEventSummary:kEventTypeBreak];
-    self.workBreakTime = [NSNumber numberWithDouble:_calculatedBreakTime];
-    return _calculatedBreakTime;
-}
-
-- (NSTimeInterval)calculateEventSummary: (EventType)eventType {
-    NSTimeInterval eventTime = 0;
-    
-    //Calcula o tempo total trabalhado sem descontos
-    for (Event *event in self.eventList) {
-        if (event.eventType == eventType) {
-            eventTime += event.eventInterval;
-        }
-    }
-    
-    return eventTime;
-}
 
 - (NSDate *)calculateEstimatedFinishDate: (BOOL)adjustBreakTime {
     
     //Calcula a data prevista de saída
-    NSDate *estFinishDateTime = [self.workStartDate dateByAddingTimeInterval:[self.estWorkTime doubleValue]];
+    NSDate *estFinishDateTime = [self.startDate dateByAddingTimeInterval:[self.estWorkTime doubleValue]];
     
-    if  ([self.workBreakTime doubleValue] > 0) {
-        estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.workBreakTime doubleValue]];
+    if  ([self.breakTime doubleValue] > 0) {
+        estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.breakTime doubleValue]];
     }
     else {
         if (adjustBreakTime) {
@@ -83,72 +44,83 @@
 
 #pragma mark - Core Data Methods
 
-+ (instancetype)insertSessionWithEstStartDate:(NSDate *)estStartDate andEstFinishDate:(NSDate *)estFinishDate andEstBreakTime:(NSNumber *)estBreakTime andIsManual:(BOOL)isManual andSessionState:(SessionState)sessionState andWorkStartDate:(NSDate *)workStartDate
++ (instancetype)insertSessionWithEstStartDate:(NSDate *)estStartDate andEstFinishDate:(NSDate *)estFinishDate andEstBreakTime:(NSNumber *)estBreakTime andIsManual:(BOOL)isManual andSessionState:(SessionStateType)sessionStateType andStartDate:(NSDate *)startDate
 {
-    Session *session = [NSEntityDescription insertNewObjectForEntityForName:self.entityName
-                                               inManagedObjectContext:Store.defaultManagedObjectContext];
+    Session *session = [NSEntityDescription insertNewObjectForEntityForName:entityName
+                                                     inManagedObjectContext:Store.defaultManagedObjectContext];
     
     session.estStartDate = estStartDate;
     session.estFinishDate = estFinishDate;
     session.estBreakTime = estBreakTime;
-    session.isAbsence = [NSNumber numberWithBool:false];
     session.isManual = [NSNumber numberWithBool:isManual];
-    session.sessionState = sessionState;
-    session.workStartDate = workStartDate;
-
-
+    session.sessionStateType = sessionStateType;
+    session.startDate = startDate;
+    
     return session;
 }
 
-+ (NSFetchedResultsController*)fetchedResultsController
-{
-    NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:[self.class entityName]];
++ (Session *)sessionFromURI:(NSData *)URIData {
+
+    if (URIData) {
+        NSURL *sessionIDURI = [NSKeyedUnarchiver unarchiveObjectWithData:URIData];
+        
+        if (sessionIDURI) {
+            
+            NSManagedObjectID *sessionID = [[[Store defaultManagedObjectContext] persistentStoreCoordinator] managedObjectIDForURIRepresentation:sessionIDURI];
+            
+            if (sessionID) {
+                NSError *error = nil;
+                return (Session *)[[Store defaultManagedObjectContext]
+                                           existingObjectWithID:sessionID
+                                           error:&error];
+            }
+        }
+    }
     
-    //request.predicate = [NSPredicate predicateWithFormat:@"parent = %@", self];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"isFinished" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"displayOrder" ascending:YES]];
+    return nil;
+}
+
+- (Interval *)activeInterval {
     
-    [request setFetchLimit:50];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO]];
     
-    return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:Store.defaultManagedObjectContext sectionNameKeyPath:@"monthYearSessionDate" cacheName:nil];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"finishDate = nil"];
+    
+    return [[[self.intervalList filteredSetUsingPredicate:predicate] sortedArrayUsingDescriptors:sortDescriptors] firstObject];
 }
 
 #pragma mark - Session Attributes
 
-- (NSNumber *)estWorkTime {
-    
-    NSTimeInterval _estWorkTime = [self.estFinishDate timeIntervalSinceDate:self.estStartDate] - [self.estBreakTime doubleValue];
-    
-    return [NSNumber numberWithDouble:_estWorkTime];
-}
-
 - (NSNumber *)workTime {
     
-    NSNumber *_workTime = [self primitiveValueForKey:@"workTime"];
-    
-    if ((self.sessionState == kSessionStateStop) && ([_workTime doubleValue] > 0)) {
-        return _workTime;
+    if ([self.intervalList count] > 0) {
+        
+        NSSet *workIntervals = [self.intervalList filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"intervalType == %@", [NSNumber numberWithInt:kIntervalTypeWork]]];
+        
+        if ([workIntervals count] > 0) {
+            return [workIntervals valueForKeyPath:@"@sum.intervalTime"];
+        }
+        else
+            return 0;
     }
     else
-    {
-        NSTimeInterval workTime = [self calculateWorkTime];
-        
-        return [NSNumber numberWithDouble:workTime];
-    }
+        return 0;
 }
 
 - (NSNumber *)breakTime {
     
-    NSNumber *_breakTime = [self primitiveValueForKey:@"breakTime"];
-    
-    if ((self.sessionState == kSessionStateStop) && ([_breakTime doubleValue] > 0)) {
-        return _breakTime;
+    if ([self.intervalList count] > 0) {
+        
+        NSSet *breakIntervals = [self.intervalList filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"intervalType == %@", [NSNumber numberWithInt:kIntervalTypeBreak]]];
+        
+        if ([breakIntervals count] > 0) {
+            return [breakIntervals valueForKeyPath:@"@sum.intervalTime"];
+        }
+        else
+            return 0;
     }
     else
-    {
-        NSTimeInterval breakTime = [self calculateBreakTime];
-        
-        return [NSNumber numberWithDouble:breakTime];
-    }
+        return 0;
 }
 
 - (NSTimeInterval)timeBalance {
@@ -160,6 +132,7 @@
     return _balance;
 }
 
+/*
 - (NSTimeInterval)adjustedTimeBalance {
     
     NSTimeInterval _balance = 0;
@@ -168,7 +141,7 @@
     
     return _balance;
 }
-
+*/
 
 - (CGFloat)progress {
     
@@ -182,15 +155,6 @@
     }
     else
         return 0;
-}
-
-- (Event *)activeEvent {
-    
-    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO]];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"stopDate = nil"];
-    
-    return [[[self.eventList filteredSetUsingPredicate:predicate] sortedArrayUsingDescriptors:sortDescriptors] firstObject];
 }
 
 @end

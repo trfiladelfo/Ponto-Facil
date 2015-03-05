@@ -12,29 +12,27 @@ typedef enum {
     kSessionStateStart = 0,
     kSessionStateStop = 1,
     kSessionStatePaused = 2
-} SessionState;
+} SessionStateType;
 
 @interface Session (Management)
 
-@property (nonatomic) SessionState sessionState;
-//@property (nonatomic, retain, readonly) NSNumber * estWorkTime;
-
-+ (instancetype)insertSessionWithEstStartDate:(NSDate *)estStartDate andEstFinishDate:(NSDate *)estFinishDate andEstBreakTime:(NSNumber *)estBreakTime andIsManual:(BOOL)isManual andSessionState:(SessionState)sessionState andWorkStartDate:(NSDate *)workStartDate;
-
-//+ (Session *)sessionWithDate:(NSDate *)sessionDate;
-
-+ (NSFetchedResultsController *)fetchedResultsController;
+@property (nonatomic) SessionStateType sessionStateType;
+@property (nonatomic, assign, readonly) NSNumber *workTime;
+@property (nonatomic, assign, readonly) NSNumber *breakTime;
 
 - (NSTimeInterval)timeBalance;
-
-- (NSTimeInterval)adjustedTimeBalance;
-
-- (NSTimeInterval)calculateWorkTime;
-
-- (NSTimeInterval)calculateBreakTime;
+//- (NSTimeInterval)adjustedTimeBalance;
+//- (NSTimeInterval)calculateAdjustedWorkTime;
+//- (NSTimeInterval)calculateAdjustedWorkTime: (NSTimeInterval)workTime andBreakTime:(NSTimeInterval)breakTime;
 
 - (NSDate *)calculateEstimatedFinishDate:(BOOL)adjustBreakTime;
 
-- (Event *)activeEvent;
++ (instancetype)insertSessionWithEstStartDate:(NSDate *)estStartDate andEstFinishDate:(NSDate *)estFinishDate andEstBreakTime:(NSNumber *)estBreakTime andIsManual:(BOOL)isManual andSessionState:(SessionStateType)sessionStateType andStartDate:(NSDate *)startDate;
+
++ (Session *)sessionFromURI:(NSData *)URIData;
+
+//+ (Session *)insertSessionWithEstStartDate:(NSDate *)estStartDate andEstFinishDate:(NSDate *)estFinishDate andEstBreakTime:(NSNumber *)estBreakTime andEstWorkTimeDescription:(NSString *)estWorkTimeDescription andIsManual:(BOOL)isManual andSessionState:(SessionStateType)sessionStateType andWorkStartDate:(NSDate *)workStartDate;
+
+- (Interval *)activeInterval;
 
 @end

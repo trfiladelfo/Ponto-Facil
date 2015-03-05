@@ -13,40 +13,40 @@ static NSString *entityName = @"Event";
 
 @implementation Event (Management)
 
--(EventType)eventType {
-    return (EventType)[[self type] intValue];
+
+- (EventCategoryType)eventCategoryType {
+    return (EventCategoryType)[[self eventType] intValue];
 }
 
--(void)setEventType:(EventType)eventType {
-    [self setType:[NSNumber numberWithInt:eventType]];
+- (void)setEventCategoryType:(EventCategoryType)eventCategoryType {
+    [self setEventType:[NSNumber numberWithInt:eventCategoryType]];
 }
 
-- (NSTimeInterval)eventInterval {
+- (NSString *)shortEstStartDate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
-    if (self.stopDate) {
-        return [self.stopDate timeIntervalSinceDate: self.startDate];
-    }
-    else
-        return [[NSDate date] timeIntervalSinceDate:self.startDate];
-    
+    return [dateFormatter stringFromDate: self.estStartDate];
 }
 
-+ (Event *)insertEventWithSession:(Session *)session andEventType:(EventType)eventType andStartDate:(NSDate *)startDate {
+- (NSNumber *)estWorkTime {
+
+    NSTimeInterval estWorkTime = [self.estFinishDate timeIntervalSinceDate:self.estStartDate] - [self.estBreakTime doubleValue];
     
-    Event *event = [NSEntityDescription insertNewObjectForEntityForName:entityName
-                                                     inManagedObjectContext:Store.defaultManagedObjectContext];
-    event.session = session;
-    event.eventType = eventType;
-    event.startDate = startDate;
-    
-    return event;
+    return [NSNumber numberWithDouble:estWorkTime];
 }
 
-+ (Event *)insertEventWithSession:(Session *)session andEventType:(EventType)eventType andStartDate:(NSDate *)startDate andFinishDate:(NSDate *)finishDate {
++ (NSFetchedResultsController*)fetchedResultsController
+{
+    NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:entityName];
     
-    Event *event = [self insertEventWithSession:session andEventType:eventType andStartDate:startDate];
-    event.stopDate = finishDate;
-    return event;
+    //request.predicate = [NSPredicate predicateWithFormat:@"parent = %@", self];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"estStartDate" ascending:NO]];
+    
+    [request setFetchLimit:50];
+    
+    return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:Store.defaultManagedObjectContext sectionNameKeyPath:@"shortEstStartDate" cacheName:nil];
 }
 
 @end

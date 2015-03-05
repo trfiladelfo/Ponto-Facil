@@ -9,8 +9,7 @@
 #import "ClockViewController.h"
 #import "CircleProgressView.h"
 #import "Session+Management.h"
-#import "Store.h"
-#import "Event+Management.h"
+#import "Interval+Management.h"
 #import "NSDate-Utilities.h"
 #import "CircularButtonView.h"
 #import "ActionButton.h"
@@ -37,25 +36,10 @@
     self.sendBreakTimeNotification = [defaults boolForKey:@"timeOutNotification"];
     self.workTime = [defaults doubleForKey:@"defaultWorkTime"];
     self.minTimeOut = [defaults doubleForKey:@"defaultMinTimeOut"];
-    
-    //Active Session
     NSData *sessionURIData = [defaults objectForKey:@"sessionID"];
     
-    if (sessionURIData) {
-        NSURL *sessionIDURI = [NSKeyedUnarchiver unarchiveObjectWithData:sessionURIData];
-        
-        if (sessionIDURI) {
-            
-            NSManagedObjectID *sessionID = [[[Store defaultManagedObjectContext] persistentStoreCoordinator] managedObjectIDForURIRepresentation:sessionIDURI];
-            
-            if (sessionID) {
-                NSError *error = nil;
-                self.session = (Session *)[[Store defaultManagedObjectContext]
-                                           existingObjectWithID:sessionID
-                                           error:&error];
-            }
-        }
-    }
+    //Active Session
+    self.session = [Session sessionFromURI:sessionURIData];
     
     [self refreshButtons];
     [self refreshStatusView];
@@ -69,15 +53,15 @@
 - (void)refreshButtons {
 
     if (self.session) {
-        if (self.session.sessionState == kSessionStateStart) {
+        if (self.session.sessionStateType == kSessionStateStart) {
             [self.startBreakButton setSelected:true];
             [self.stopButton setEnabled:true];
         }
-        else if (self.session.sessionState == kSessionStatePaused) {
+        else if (self.session.sessionStateType == kSessionStatePaused) {
             [self.startBreakButton setSelected:false];
             [self.stopButton setEnabled:true];
         }
-        else if (self.session.sessionState == kSessionStateStop) {
+        else if (self.session.sessionStateType == kSessionStateStop) {
             //Stopped
             [self.startBreakButton setSelected:false];
             [self.stopButton setEnabled:false];
@@ -97,9 +81,9 @@
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"HH:mm"];
         
-        self.startDateLabel.text = [formatter stringFromDate:self.session.workStartDate == NULL ? self.session.estStartDate : self.session.workStartDate];
-        self.breakTimeLabel.text = [self stringFromTimeInterval:[[self.session.workBreakTime doubleValue] == 0 ? self.session.estBreakTime : self.session.workBreakTime doubleValue]];
-        self.finishDateLabel.text = [formatter stringFromDate:self.session.workFinishDate == NULL ? (self.session.workStartDate == NULL ? self.session.estFinishDate : [self.session calculateEstimatedFinishDate:true]) : self.session.workFinishDate];
+        self.startDateLabel.text = [formatter stringFromDate:self.session.startDate == NULL ? self.session.estStartDate : self.session.startDate];
+        self.breakTimeLabel.text = [self stringFromTimeInterval:[[self.session.breakTime doubleValue] == 0 ? self.session.estBreakTime : self.session.breakTime doubleValue]];
+        self.finishDateLabel.text = [formatter stringFromDate:self.session.finishDate == NULL ? (self.session.startDate == NULL ? self.session.estFinishDate : [self.session calculateEstimatedFinishDate:true]) : self.session.finishDate];
     }
     else {
         NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
@@ -113,16 +97,16 @@
 
     if (_session) {
         
-        if (self.session.sessionState == kSessionStatePaused)
+        if (self.session.sessionStateType == kSessionStatePaused)
         {
             self.clockView.status = @"Intervalo";
             self.clockView.timeLimit = self.minTimeOut;
-            self.clockView.elapsedTime = [self.session.workBreakTime doubleValue];
+            self.clockView.elapsedTime = [self.session.breakTime doubleValue];
             [self.clockView setTintColor:[UIColor colorWithRed:245/255.0 green:166/255.0 blue:35/255.0 alpha:1.0f]];
         }
         else
         {
-            if (self.session.sessionState == kSessionStateStart) {
+            if (self.session.sessionStateType == kSessionStateStart) {
                 self.clockView.status = @"Em andamento";
                 [self.clockView setTintColor:[UIColor colorWithRed:25/255.0 green:187/255.0 blue:155/255.0 alpha:1.0f]];
             }
@@ -149,16 +133,16 @@
 
 - (void)scheduleNotifications {
     
-    if (_session) {
+    if (self.session) {
         
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         
-        if (_session.sessionState == kSessionStateStart) {
+        if (self.session.sessionStateType == kSessionStateStart) {
             NSDate *estFinishDate = [_session calculateEstimatedFinishDate:false];
             [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Seu expediente irá terminar em 15 minutos" andDate:[estFinishDate dateByAddingMinutes:-15]];
             [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Fim do expediente!" andDate:estFinishDate];
         }
-        else if (_session.sessionState == kSessionStatePaused)
+        else if (self.session.sessionStateType == kSessionStatePaused)
         {
             
             NSDate *estBreakFinishDate = [[NSDate date] dateByAddingTimeInterval:[_session.estBreakTime doubleValue]];
@@ -167,7 +151,7 @@
     }
 }
 
-- (void)scheduleNotificationWithID:(NSManagedObjectID *)uuid andState:(SessionState)state andMessage:(NSString *)message andDate:(NSDate *)fireDate {
+- (void)scheduleNotificationWithID:(NSManagedObjectID *)uuid andState:(SessionStateType)state andMessage:(NSString *)message andDate:(NSDate *)fireDate {
     
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     
@@ -199,12 +183,12 @@
     
     if (self.session) {
         
-        if (self.session.sessionState == kSessionStatePaused) {
+        if (self.session.sessionStateType == kSessionStatePaused) {
             
             //Resume
             [self resumeCounter];
         }
-        else if (self.session.sessionState == kSessionStateStart) {
+        else if (self.session.sessionStateType == kSessionStateStart) {
             //Pause
             [self pauseCounter];
         }
@@ -249,15 +233,15 @@
 
 - (void)poolTimer
 {
-    if (_session) {
+    if (self.session) {
         
-        if (_session.sessionState == kSessionStatePaused) {
+        if (self.session.sessionStateType == kSessionStatePaused) {
             
-            self.clockView.elapsedTime = _session.calculateBreakTime;
+            self.clockView.elapsedTime = [self.session.breakTime doubleValue];
         }
-        else if (_session.sessionState == kSessionStateStart)
+        else if (self.session.sessionStateType == kSessionStateStart)
         {
-            self.clockView.elapsedTime = _session.calculateWorkTime;
+            self.clockView.elapsedTime = [self.session.workTime doubleValue];
         }
     }
 }
@@ -275,10 +259,9 @@
         
         NSDate *estFinishDate = [[[startDate dateAtStartOfDay] dateByAddingHours:[[defaultFinishDate substringToIndex:2] intValue]] dateByAddingMinutes:[[defaultFinishDate substringFromIndex:3] intValue]];
         
-        _session = [Session insertSessionWithEstStartDate:estStartDate andEstFinishDate:estFinishDate andEstBreakTime:[NSNumber numberWithDouble:self.minTimeOut] andIsManual:false andSessionState:kSessionStateStart andWorkStartDate:startDate];
+        _session = [Session insertSessionWithEstStartDate:estStartDate andEstFinishDate:estFinishDate andEstBreakTime:[NSNumber numberWithDouble:self.minTimeOut] andIsManual:false andSessionState:kSessionStateStart andStartDate:startDate];
         
-        //Inicío o período de trabalho
-        [Event insertEventWithSession:_session andEventType:kEventTypeWork andStartDate:startDate];
+        [_session addIntervalListObject:[Interval insertIntervalWithStartDate:startDate andfinishDate:nil andIntervalCategoryType:kIntervalTypeWork]];
         
         NSError *error;
         [self.session.managedObjectContext save:&error];
@@ -292,17 +275,17 @@
 
 - (void)pauseCounter {
     
-    if ((_session) && (_session.sessionState == kSessionStateStart)) {
+    if ((_session) && (_session.sessionStateType == kSessionStateStart)) {
 
         NSDate *now = [[NSDate alloc] init];
         
-        if (self.session.activeEvent) {
-            _session.activeEvent.stopDate = now;
+        if (self.session.activeInterval) {
+            _session.activeInterval.finishDate = now;
         }
         
-        _session.sessionState = kSessionStatePaused;
+        _session.sessionStateType = kSessionStatePaused;
         
-        [Event insertEventWithSession:_session andEventType:kEventTypeBreak andStartDate:now];
+        [_session addIntervalListObject:[Interval insertIntervalWithStartDate:now andfinishDate:nil andIntervalCategoryType:kIntervalTypeBreak]];
         
         [self.session.managedObjectContext save:nil];
     }
@@ -310,19 +293,17 @@
 
 - (void)resumeCounter {
     
-    if ((_session) && (_session.sessionState == kSessionStatePaused)) {
+    if ((_session) && (_session.sessionStateType == kSessionStatePaused)) {
         
         NSDate *now = [[NSDate alloc] init];
         
-        if (_session.activeEvent) {
-            _session.activeEvent.stopDate = now;
+        if (_session.activeInterval) {
+            _session.activeInterval.finishDate = now;
         }
         
-        _session.workBreakTime = [NSNumber numberWithDouble:[_session calculateBreakTime]];
+        _session.sessionStateType = kSessionStateStart;
         
-        _session.sessionState = kSessionStateStart;
-        
-        [Event insertEventWithSession:_session andEventType:kEventTypeWork andStartDate:now];
+        [_session addIntervalListObject:[Interval insertIntervalWithStartDate:now andfinishDate:nil andIntervalCategoryType:kIntervalTypeWork]];
         
         [self.session.managedObjectContext save:nil];
     }
@@ -335,16 +316,14 @@
     
     if (_session) {
         
-        if (_session.activeEvent) {
-            _session.activeEvent.stopDate = now;
+        if (_session.activeInterval) {
+            _session.activeInterval.finishDate = now;
         }
         
         //Finaliza a Sessão
-        _session.workFinishDate = now;
-        _session.workTime = [NSNumber numberWithDouble:_session.calculateWorkTime];
-        _session.workBreakTime = [NSNumber numberWithDouble:[_session calculateBreakTime]];
+        _session.finishDate = now;
         //_session.workAdjustedTime = [NSNumber numberWithDouble:_session.calculateAdjustedWorkTime];
-        _session.sessionState = kSessionStateStop;
+        _session.sessionStateType = kSessionStateStop;
         
         [self.session.managedObjectContext save:nil];
         
@@ -358,6 +337,13 @@
     NSInteger hours = (ti / 3600);
     
     return [NSString stringWithFormat:@"%02ld:%02ld", (long)hours, (long)minutes];
+}
+
+#pragma mark - Navigation
+
+- (IBAction)unwindToClockViewController:(UIStoryboardSegue *)unwindSegue
+{
+    
 }
 
 
