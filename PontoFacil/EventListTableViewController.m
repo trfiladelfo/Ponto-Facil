@@ -86,6 +86,17 @@
                 eventCell.eventTimeLabel.text = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:session.startDate], [dateFormatter stringFromDate:session.finishDate]];
             }
             
+            NSString *balanceSignal;
+            
+            if ([session.estWorkTime doubleValue] > [session.workTime doubleValue]) {
+                balanceSignal = @"-";
+            }
+            else {
+                balanceSignal = @"+";
+            }
+            
+            eventCell.eventBalanceLabel.text = [NSString stringWithFormat:@"%@ %@",balanceSignal, [self stringFromTimeInterval:ABS(session.timeBalance)]];
+            
             eventCell.eventTypeText = @"Sessão Normal";
         }
     }
@@ -103,6 +114,14 @@
     return eventCell;
 }
 
+
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
+    NSInteger ti = (NSInteger)interval;
+    NSInteger minutes = (ti / 60) % 60;
+    NSInteger hours = (ti / 3600);
+    
+    return [NSString stringWithFormat:@"%02ld:%02ld", (long)hours, (long)minutes];
+}
 
 /*
 // Override to support conditional editing of the table view.

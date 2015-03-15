@@ -10,6 +10,7 @@
 #import "Event+Management.h"
 #import "Interval+Management.h"
 #import "Store.h"
+#import "NSDate-Utilities.h"
 
 static NSString *entityName = @"Session";
 
@@ -40,6 +41,37 @@ static NSString *entityName = @"Session";
     }
     
     return estFinishDateTime;
+}
+
+- (NSNumber *)calculateBreakTime: (BOOL)inProgress {
+
+    if ([self.intervalList count] > 0) {
+        
+        NSPredicate *intervalTypePredicate = [NSPredicate predicateWithFormat:@"intervalType == %@", [NSNumber numberWithInt:kIntervalTypeBreak]];
+        
+        NSPredicate *finishDatePredicate = [NSPredicate predicateWithFormat:@"finishDate != nil"];
+        
+        NSArray *predicateArray;
+        
+        if (!inProgress) {
+            predicateArray = [NSArray arrayWithObjects:intervalTypePredicate, finishDatePredicate, nil];
+        }
+        else
+            predicateArray = [NSArray arrayWithObjects:intervalTypePredicate, nil];
+        
+        
+        NSCompoundPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
+        
+        NSSet *breakIntervals = [self.intervalList filteredSetUsingPredicate:compoundPredicate];
+        
+        if ([breakIntervals count] > 0) {
+            return [breakIntervals valueForKeyPath:@"@sum.intervalTime"];
+        }
+        else
+            return 0;
+    }
+    else
+        return 0;
 }
 
 #pragma mark - Core Data Methods
@@ -107,20 +139,12 @@ static NSString *entityName = @"Session";
         return 0;
 }
 
+- (NSNumber *)breakTimeInProgress {
+    return [self calculateBreakTime:true];
+}
+
 - (NSNumber *)breakTime {
-    
-    if ([self.intervalList count] > 0) {
-        
-        NSSet *breakIntervals = [self.intervalList filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"intervalType == %@", [NSNumber numberWithInt:kIntervalTypeBreak]]];
-        
-        if ([breakIntervals count] > 0) {
-            return [breakIntervals valueForKeyPath:@"@sum.intervalTime"];
-        }
-        else
-            return 0;
-    }
-    else
-        return 0;
+    return [self calculateBreakTime:false];
 }
 
 - (NSTimeInterval)timeBalance {

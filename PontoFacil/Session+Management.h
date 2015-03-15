@@ -19,6 +19,7 @@ typedef enum {
 @property (nonatomic) SessionStateType sessionStateType;
 @property (nonatomic, assign, readonly) NSNumber *workTime;
 @property (nonatomic, assign, readonly) NSNumber *breakTime;
+@property (nonatomic, assign, readonly) NSNumber *breakTimeInProgress;
 
 - (NSTimeInterval)timeBalance;
 //- (NSTimeInterval)adjustedTimeBalance;

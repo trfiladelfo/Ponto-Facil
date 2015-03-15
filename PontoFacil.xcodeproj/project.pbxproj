@@ -18,6 +18,8 @@
 		87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E8E1A85A96E00AB4977 /* ClockViewController.m */; };
 		87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87147E901A86501000AB4977 /* CircularButtonView.xib */; };
 		87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E941A8652E800AB4977 /* CircularButtonView.m */; };
+		874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 874D0C731AB4E5B000E0A3B1 /* ConfigTableViewController.m */; };
+		874D0C771AB4FEFC00E0A3B1 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 874D0C761AB4FEFC00E0A3B1 /* AboutTableViewController.m */; };
 		87624EA91AA35B5C00CE9FA5 /* Interval+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = 87624EA81AA35B5C00CE9FA5 /* Interval+Management.m */; };
 		87624EBB1AA37BE900CE9FA5 /* Absence.m in Sources */ = {isa = PBXBuildFile; fileRef = 87624EBA1AA37BE900CE9FA5 /* Absence.m */; };
 		87624EBE1AA37BEA00CE9FA5 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 87624EBD1AA37BEA00CE9FA5 /* Event.m */; };
@@ -41,6 +43,7 @@
 		87C683261AA1495200A2C101 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C683251AA1495200A2C101 /* EventListTableViewController.m */; };
 		87C683291AA149AF00A2C101 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C683281AA149AF00A2C101 /* EventTableViewCell.m */; };
 		87C6832B1AA15F2300A2C101 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C6832A1AA15F2300A2C101 /* CoreData.framework */; };
+		8ED11A8A3BCB231EC3D2802E /* libPods-PontoFacil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CEA45DAC44D1EEEE511F27 /* libPods-PontoFacil.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.debug.xcconfig"; sourceTree = "<group>"; };
+		33CEA45DAC44D1EEEE511F27 /* libPods-PontoFacil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PontoFacil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A509C852DCA71143874690E /* Pods-PontoFacil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.release.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.release.xcconfig"; sourceTree = "<group>"; };
 		87147E521A859F6000AB4977 /* PontoFacil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PontoFacil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87147E561A859F6000AB4977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +82,10 @@
 		87147E941A8652E800AB4977 /* CircularButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonView.m; sourceTree = "<group>"; };
 		87297C4F1A870AD2004E9626 /* libPods-PontoFacil-CircularProgressControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil-CircularProgressControl.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil-CircularProgressControl.a"; sourceTree = "<group>"; };
 		87297C501A870AD2004E9626 /* libPods-PontoFacil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil.a"; sourceTree = "<group>"; };
+		874D0C721AB4E5B000E0A3B1 /* ConfigTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTableViewController.h; sourceTree = "<group>"; };
+		874D0C731AB4E5B000E0A3B1 /* ConfigTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTableViewController.m; sourceTree = "<group>"; };
+		874D0C751AB4FEFC00E0A3B1 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
+		874D0C761AB4FEFC00E0A3B1 /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTableViewController.m; sourceTree = "<group>"; };
 		87624EA71AA35B5C00CE9FA5 /* Interval+Management.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Interval+Management.h"; sourceTree = "<group>"; };
 		87624EA81AA35B5C00CE9FA5 /* Interval+Management.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Interval+Management.m"; sourceTree = "<group>"; };
 		87624EB91AA37BE900CE9FA5 /* Absence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Absence.h; sourceTree = "<group>"; };
@@ -127,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87C6832B1AA15F2300A2C101 /* CoreData.framework in Frameworks */,
+				8ED11A8A3BCB231EC3D2802E /* libPods-PontoFacil.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +164,7 @@
 				87C6832A1AA15F2300A2C101 /* CoreData.framework */,
 				87297C4F1A870AD2004E9626 /* libPods-PontoFacil-CircularProgressControl.a */,
 				87297C501A870AD2004E9626 /* libPods-PontoFacil.a */,
+				33CEA45DAC44D1EEEE511F27 /* libPods-PontoFacil.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -255,6 +265,7 @@
 		87147E801A859F9800AB4977 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				874D0C711AB4E55200E0A3B1 /* Config */,
 				87C683231A9FE88900A2C101 /* EventList */,
 				87297C531A883B6A004E9626 /* Schedule */,
 				87147E8C1A85A39000AB4977 /* Clock */,
@@ -338,6 +349,17 @@
 			name = Schedule;
 			sourceTree = "<group>";
 		};
+		874D0C711AB4E55200E0A3B1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				874D0C721AB4E5B000E0A3B1 /* ConfigTableViewController.h */,
+				874D0C731AB4E5B000E0A3B1 /* ConfigTableViewController.m */,
+				874D0C751AB4FEFC00E0A3B1 /* AboutTableViewController.h */,
+				874D0C761AB4FEFC00E0A3B1 /* AboutTableViewController.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		876398EA1A8D922E0002118E /* _AcessoryCircularButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,9 +432,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 87147E781A859F6100AB4977 /* Build configuration list for PBXNativeTarget "PontoFacil" */;
 			buildPhases = (
+				3AF3AC6891B3007B94F6CD47 /* Check Pods Manifest.lock */,
 				87147E4E1A859F6000AB4977 /* Sources */,
 				87147E4F1A859F6000AB4977 /* Frameworks */,
 				87147E501A859F6000AB4977 /* Resources */,
+				4AC873B1D9596ED1165585B2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -502,6 +526,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3AF3AC6891B3007B94F6CD47 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4AC873B1D9596ED1165585B2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		87147E4E1A859F6000AB4977 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -517,7 +574,9 @@
 				87624EC71AA37BEA00CE9FA5 /* Interval.m in Sources */,
 				87147E581A859F6000AB4977 /* main.m in Sources */,
 				87624EC41AA37BEA00CE9FA5 /* Session.m in Sources */,
+				874D0C771AB4FEFC00E0A3B1 /* AboutTableViewController.m in Sources */,
 				87624EC11AA37BEA00CE9FA5 /* Holiday.m in Sources */,
+				874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */,
 				876398EF1A8D9BA00002118E /* AcessoryCircularButtonView.m in Sources */,
 				87C6831F1A9EB5C500A2C101 /* ScheduleViewController.m in Sources */,
 				877081D11A923D2C00541AB3 /* Event+Management.m in Sources */,
@@ -645,6 +704,7 @@
 		};
 		87147E791A859F6100AB4977 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PontoFacil/Info.plist;
@@ -657,6 +717,7 @@
 		};
 		87147E7A1A859F6100AB4977 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A509C852DCA71143874690E /* Pods-PontoFacil.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PontoFacil/Info.plist;

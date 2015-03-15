@@ -57,8 +57,6 @@
     }
     
     [defaults synchronize];
-    
-    application.applicationIconBadgeNumber = 0;
 
     return YES;
 }
@@ -70,28 +68,48 @@
     if (state == UIApplicationStateActive) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lembrete"
                                                         message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:@"OK"
+                                                       delegate:nil cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
     }
     
     // Set icon badge number to zero
     application.applicationIconBadgeNumber = 0;
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-}
 
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+
+    if ([identifier isEqualToString:@"ACTION_ONE"]) {
+        
+        NSLog(@"You chose action 1.");
+    }
+    else if ([identifier isEqualToString:@"ACTION_TWO"]) {
+        
+        NSLog(@"You chose action 2.");
+    }
+    if (completionHandler) {
+        
+        completionHandler();
+    }
+}
+ 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self.persistentStack.managedObjectContext save:nil];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    application.applicationIconBadgeNumber = 0;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    application.applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - Core Data stack

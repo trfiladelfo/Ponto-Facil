@@ -19,8 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *breakTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *finishDateLabel;
 
-@property (strong, nonatomic) IBOutlet ActionButton *startBreakButton;
+@property (strong, nonatomic) IBOutlet ActionButton *startStopButton;
 
-@property (strong, nonatomic) IBOutlet UIButton *stopButton;
+@property (strong, nonatomic) IBOutlet UIButton *pauseResumeButton;
 
 @end
