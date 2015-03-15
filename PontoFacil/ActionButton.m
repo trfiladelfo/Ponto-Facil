@@ -19,8 +19,8 @@
 - (void)setSelected:(BOOL)selected {
     
     if (selected) {
-        self.backgroundColor = [UIColor colorWithRed:245/255.0 green:166/255.0 blue:35/255.0 alpha:1.0f];
-        [self setImage:[UIImage imageNamed:@"Break-Button"] forState:UIControlStateNormal] ;
+        self.backgroundColor = [UIColor colorWithRed:232/255.0 green:125/255.0 blue:88/255.0 alpha:1.0f];
+        [self setImage:[UIImage imageNamed:@"Stop-Button"] forState:UIControlStateNormal] ;
     }
     else {
         self.backgroundColor = [UIColor colorWithRed:25/255.0 green:187/255.0 blue:155/255.0 alpha:1.0f];
