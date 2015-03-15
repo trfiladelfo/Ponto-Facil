@@ -96,7 +96,7 @@
             progress = 1.0f;
         }
         
-        NSLog(@"Percent = %f", progress);
+        //NSLog(@"Percent = %f", progress);
         
         return progress;
     }
