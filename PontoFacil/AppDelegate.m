@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "PersistentStack.h"
 #import "Store.h"
+#import "UIColor+PontoFacil.h"
+#import "UIFont+PontoFacil.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +23,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[UINavigationBar appearance] setBarTintColor:[UIColor navigationHeaderColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor navigationHeaderTitleColor]];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor navigationHeaderTitleColor], NSForegroundColorAttributeName,
+                                                           [UIFont headerTitleFont], NSFontAttributeName, nil]];
+    
+    
+    [[UINavigationBar appearance] setTranslucent:NO];
     
     self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL modelURL:self.modelURL];
     self.managedObjectContext = self.persistentStack.managedObjectContext;

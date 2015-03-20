@@ -219,7 +219,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
             NSDate *estFinishDate = [_session calculateEstimatedFinishDate:true];
             
             //Todo: Notificação de 15 minutos só deve ser reeschedulada se ainda não tiver sido disparada
-            [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Seu expediente irá terminar em 15 minutos" andDate:[estFinishDate dateBySubtractingMinutes:5] andRepeatInterval:false];
+            [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Seu expediente irá terminar em 15 minutos" andDate:[estFinishDate dateBySubtractingMinutes:15] andRepeatInterval:false];
             
             //NSLog(@"1-Notifications count = %i", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
             
@@ -229,6 +229,8 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         {
             
             NSDate *estBreakFinishDate = [[NSDate date] dateByAddingTimeInterval:[_session.estBreakTime doubleValue]];
+            
+            [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:@"O intervalo irá terminar em 10 minutos" andDate:[estBreakFinishDate dateBySubtractingMinutes:10] andRepeatInterval:true];
             
             [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:@"Fim do intervalo!" andDate:estBreakFinishDate andRepeatInterval:true];
         }

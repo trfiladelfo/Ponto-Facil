@@ -18,6 +18,8 @@
 		87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E8E1A85A96E00AB4977 /* ClockViewController.m */; };
 		87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87147E901A86501000AB4977 /* CircularButtonView.xib */; };
 		87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E941A8652E800AB4977 /* CircularButtonView.m */; };
+		872BC37D1ABBB6D800039FEF /* UIColor+PontoFacil.m in Sources */ = {isa = PBXBuildFile; fileRef = 872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */; };
+		872BC3801ABBBFC000039FEF /* UIFont+PontoFacil.m in Sources */ = {isa = PBXBuildFile; fileRef = 872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */; };
 		874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 874D0C731AB4E5B000E0A3B1 /* ConfigTableViewController.m */; };
 		874D0C771AB4FEFC00E0A3B1 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 874D0C761AB4FEFC00E0A3B1 /* AboutTableViewController.m */; };
 		87624EA91AA35B5C00CE9FA5 /* Interval+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = 87624EA81AA35B5C00CE9FA5 /* Interval+Management.m */; };
@@ -82,6 +84,10 @@
 		87147E941A8652E800AB4977 /* CircularButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonView.m; sourceTree = "<group>"; };
 		87297C4F1A870AD2004E9626 /* libPods-PontoFacil-CircularProgressControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil-CircularProgressControl.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil-CircularProgressControl.a"; sourceTree = "<group>"; };
 		87297C501A870AD2004E9626 /* libPods-PontoFacil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil.a"; sourceTree = "<group>"; };
+		872BC37B1ABBB6D800039FEF /* UIColor+PontoFacil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PontoFacil.h"; sourceTree = "<group>"; };
+		872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PontoFacil.m"; sourceTree = "<group>"; };
+		872BC37E1ABBBFC000039FEF /* UIFont+PontoFacil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+PontoFacil.h"; sourceTree = "<group>"; };
+		872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+PontoFacil.m"; sourceTree = "<group>"; };
 		874D0C721AB4E5B000E0A3B1 /* ConfigTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTableViewController.h; sourceTree = "<group>"; };
 		874D0C731AB4E5B000E0A3B1 /* ConfigTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTableViewController.m; sourceTree = "<group>"; };
 		874D0C751AB4FEFC00E0A3B1 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
@@ -279,6 +285,10 @@
 			children = (
 				877081D21A927A3D00541AB3 /* NSDate-Utilities.h */,
 				877081D31A927A3D00541AB3 /* NSDate-Utilities.m */,
+				872BC37B1ABBB6D800039FEF /* UIColor+PontoFacil.h */,
+				872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */,
+				872BC37E1ABBBFC000039FEF /* UIFont+PontoFacil.h */,
+				872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -581,7 +591,9 @@
 				87C6831F1A9EB5C500A2C101 /* ScheduleViewController.m in Sources */,
 				877081D11A923D2C00541AB3 /* Event+Management.m in Sources */,
 				87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */,
+				872BC3801ABBBFC000039FEF /* UIFont+PontoFacil.m in Sources */,
 				87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */,
+				872BC37D1ABBB6D800039FEF /* UIColor+PontoFacil.m in Sources */,
 				877081CE1A922F5900541AB3 /* Session+Management.m in Sources */,
 				87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */,
 				877081D41A927A3D00541AB3 /* NSDate-Utilities.m in Sources */,
@@ -707,11 +719,14 @@
 			baseConfigurationReference = 20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = PontoFacil/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -720,11 +735,14 @@
 			baseConfigurationReference = 4A509C852DCA71143874690E /* Pods-PontoFacil.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = PontoFacil/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
