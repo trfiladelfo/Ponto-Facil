@@ -20,4 +20,10 @@
     return [UIFont fontWithName:@"OpenSans-Extrabold" size:34];
 }
 
++ (UIFont *)eventCellTitleFont {
+    
+    return [UIFont fontWithName:@"HelveticaNeue" size:14];
+}
+
+
 @end

@@ -53,6 +53,14 @@
         [defaults setDouble:minTimeOut forKey:@"defaultMinTimeOut"];
     }
     
+    if (![defaults boolForKey:@"adjustMinTimeOut"]) {
+        [defaults setBool:false forKey:@"adjustMinTimeOut"];
+    };
+    
+    if (![defaults integerForKey:@"toleranceTime"]) {
+        [defaults setInteger:0 forKey:@"toleranceTime"];
+    }
+    
     if (! [defaults objectForKey:@"workTimeNotification"] ) {
         [defaults setBool:true forKey:@"workTimeNotification"];
     }
@@ -72,6 +80,30 @@
     return YES;
 }
 
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    NSLog(@"Notification Settings: %u", notificationSettings.types);
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    
+    if ([identifier isEqualToString:@"AdjustAction"]) {
+        NSLog(@"Ajustar.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"eventListNotification" object:nil];
+    }
+    else if ([identifier isEqualToString:@"SnoozeAction"]) {
+        
+        NSLog(@"Dormir.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"scheduleNewNotification" object:nil];
+    }
+    
+    if (completionHandler) {
+        
+        completionHandler();
+    }
+}
+
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
     UIApplicationState state = [application applicationState];
@@ -88,22 +120,6 @@
     application.applicationIconBadgeNumber = 0;
 }
 
-
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
-
-    if ([identifier isEqualToString:@"ACTION_ONE"]) {
-        
-        NSLog(@"You chose action 1.");
-    }
-    else if ([identifier isEqualToString:@"ACTION_TWO"]) {
-        
-        NSLog(@"You chose action 2.");
-    }
-    if (completionHandler) {
-        
-        completionHandler();
-    }
-}
  
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -111,21 +127,9 @@
     [self.persistentStack.managedObjectContext save:nil];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
 
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    application.applicationIconBadgeNumber = 0;
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    application.applicationIconBadgeNumber = 0;
-}
 
 #pragma mark - Core Data stack
-
-
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }

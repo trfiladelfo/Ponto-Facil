@@ -19,4 +19,12 @@
     return [UIColor whiteColor];
 }
 
++ (UIColor *)eventCellTitleColor {
+    return [UIColor blueColor];
+}
+
++ (UIColor *)weekDateViewColor {
+    return [UIColor colorWithRed:22/255.0 green:98/255.0 blue:128/255.0 alpha:1.0f];
+}
+
 @end

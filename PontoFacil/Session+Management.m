@@ -156,6 +156,25 @@ static NSString *entityName = @"Session";
     return _balance;
 }
 
+- (NSString *)timeBalanceToString {
+
+
+    NSString *balanceSignal;
+    
+    if ([self.estWorkTime doubleValue] > [self.workTime doubleValue]) {
+        balanceSignal = @"-";
+    }
+    else {
+        balanceSignal = @"+";
+    }
+    
+    NSInteger ti = (NSInteger) ABS(self.timeBalance);
+    NSInteger minutes = (ti / 60) % 60;
+    NSInteger hours = (ti / 3600);
+    
+    return [NSString stringWithFormat:@"%@ %02ld:%02ld", balanceSignal, (long)hours, (long)minutes];
+}
+
 /*
 - (NSTimeInterval)adjustedTimeBalance {
     
@@ -179,6 +198,17 @@ static NSString *entityName = @"Session";
     }
     else
         return 0;
+}
+
+- (NSArray *)dateSortedIntervalList {
+
+    NSArray *intervalListArray = [self.intervalList allObjects];
+    
+    NSSortDescriptor *descriptor=[[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:NO];
+    NSArray *descriptors=[NSArray arrayWithObject: descriptor];
+    NSArray *sortedArray =[intervalListArray sortedArrayUsingDescriptors:descriptors];
+    
+    return sortedArray;
 }
 
 @end

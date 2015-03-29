@@ -2,17 +2,14 @@
 //  EventTableViewCell.m
 //  PontoFacil
 //
-//  Created by Carlos Eduardo Arantes Ferreira on 27/02/15.
+//  Created by Carlos Eduardo Arantes Ferreira on 23/03/15.
 //  Copyright (c) 2015 Mobistart. All rights reserved.
 //
 
 #import "EventTableViewCell.h"
-
-@interface EventTableViewCell ()
-
-@property (strong, nonatomic) IBOutlet UILabel *eventTypeLabel;
-
-@end
+#import "Event+Management.h"
+#import "Session+Management.h"
+#import "MSWeekDateView.h"
 
 @implementation EventTableViewCell
 
@@ -20,19 +17,35 @@
     // Initialization code
 }
 
-- (void)setEventTypeText:(NSString *)eventTypeText {
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
 
-    _eventTypeText = eventTypeText;
+    // Configure the view for the selected state
+}
+
+- (void)configureForEvent:(Event *)event {
     
-    NSMutableAttributedString *messageString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", eventTypeText]];
+    self.weekDateView.date = event.estStartDate;
+    
+    if (event.eventCategoryType == kEventTypeSession) {
         
-    [messageString addAttributes:@{
-            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:14],
-            NSForegroundColorAttributeName: [UIColor blueColor]
+        self.eventTypeLabel.text = @"Sessão Normal";
+        Session *session = (Session *)event;
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"HH:mm"];
+        
+        self.startDateLabel.text = [dateFormatter stringFromDate:session.startDate];
+        self.finishDateLabel.text = [dateFormatter stringFromDate:session.startDate];
+        self.intervalTimeLabel.text = @"01:00";
+        self.timeBalanceLabel.text = session.timeBalanceToString;
     }
-    range:NSMakeRange(0, eventTypeText.length)];
-        
-    [self.eventTypeLabel setAttributedText:messageString];
+    else if (event.eventCategoryType == kEventTypeHoliday)
+        self.eventTypeLabel.text = @"Feriado";
+    else if (event.eventCategoryType == kEventTypeAbsence)
+        self.eventTypeLabel.text = @"Ausência";
+    else
+        self.eventTypeLabel.text = @"Outros";
 }
 
 @end

@@ -30,6 +30,13 @@ static NSString *entityName = @"Event";
     return [dateFormatter stringFromDate: self.estStartDate];
 }
 
+- (NSString *)monthYearEstStartDate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM yyyy"];
+    
+    return [dateFormatter stringFromDate: self.estStartDate];
+}
+
 - (NSNumber *)estWorkTime {
 
     NSTimeInterval estWorkTime = [self.estFinishDate timeIntervalSinceDate:self.estStartDate] - [self.estBreakTime doubleValue];
@@ -44,9 +51,9 @@ static NSString *entityName = @"Event";
     //request.predicate = [NSPredicate predicateWithFormat:@"parent = %@", self];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"estStartDate" ascending:NO]];
     
-    [request setFetchLimit:50];
+    [request setFetchLimit:20];
     
-    return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:Store.defaultManagedObjectContext sectionNameKeyPath:@"shortEstStartDate" cacheName:nil];
+    return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:Store.defaultManagedObjectContext sectionNameKeyPath:@"monthYearEstStartDate" cacheName:nil];
 }
 
 @end

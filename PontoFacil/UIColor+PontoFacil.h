@@ -10,7 +10,9 @@
 
 @interface UIColor (PontoFacil)
 
-+(UIColor *) navigationHeaderColor;
-+(UIColor *) navigationHeaderTitleColor;
++ (UIColor *) navigationHeaderColor;
++ (UIColor *) navigationHeaderTitleColor;
++ (UIColor *) eventCellTitleColor;
++ (UIColor *) weekDateViewColor;
 
 @end

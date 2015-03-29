@@ -20,6 +20,9 @@
 
 @property (strong, nonatomic) IBOutlet UISwitch *regularTimeNotificationSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *breakTimeNotificationSwitch;
+
 @property (weak, nonatomic) IBOutlet UISwitch *breakTimeAdjustSwitch;
+@property (strong, nonatomic) IBOutlet UILabel *toleranceTimeLabel;
+@property (strong, nonatomic) IBOutlet UIPickerView *tolerancePicker;
 
 @end

@@ -15,6 +15,7 @@
 #import "CircularButtonView.h"
 #import "ActionButton.h"
 #import <BDKNotifyHUD.h>
+#import "IntervalListTableViewController.h"
 
 @interface ClockViewController () <UIActionSheetDelegate>
 
@@ -41,6 +42,14 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self registerForNotification];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEventListNotification) name:@"eventListNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleScheduleNewNotification) name:@"scheduleNewNotification" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
     //Load Default Values
     NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
     self.sendWorkTimeNotification = [defaults boolForKey:@"workTimeNotification"];
@@ -48,15 +57,8 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     self.workTime = [defaults doubleForKey:@"defaultWorkTime"];
     self.minTimeOut = [defaults doubleForKey:@"defaultMinTimeOut"];
     
-    
-    [self registerForNotification];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-
-    NSData *sessionURIData = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionID"];
-    
     //Active Session
+    NSData *sessionURIData = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionID"];
     self.session = [Session sessionFromURI:sessionURIData];
     
     [self setNotificationTypesAllowed];
@@ -175,38 +177,43 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
 - (void)registerForNotification {
     
-    UIMutableUserNotificationAction *action1;
-    action1 = [[UIMutableUserNotificationAction alloc] init];
-    [action1 setActivationMode:UIUserNotificationActivationModeBackground];
-    [action1 setTitle:@"Action 1"];
-    [action1 setIdentifier:NotificationActionOneIdent];
-    [action1 setDestructive:NO];
-    [action1 setAuthenticationRequired:NO];
+    UIUserNotificationSettings *settings = [[UIApplication sharedApplication] currentUserNotificationSettings];
     
-    UIMutableUserNotificationAction *action2;
-    action2 = [[UIMutableUserNotificationAction alloc] init];
-    [action2 setActivationMode:UIUserNotificationActivationModeBackground];
-    [action2 setTitle:@"Action 2"];
-    [action2 setIdentifier:NotificationActionTwoIdent];
-    [action2 setDestructive:NO];
-    [action2 setAuthenticationRequired:NO];
+    if (settings.types == UIUserNotificationTypeNone) {
+        
+        UIMutableUserNotificationAction *action1;
+        action1 = [[UIMutableUserNotificationAction alloc] init];
+        [action1 setActivationMode:UIUserNotificationActivationModeBackground];
+        [action1 setTitle:@"Action 1"];
+        [action1 setIdentifier:NotificationActionOneIdent];
+        [action1 setDestructive:NO];
+        [action1 setAuthenticationRequired:NO];
+        
+        UIMutableUserNotificationAction *action2;
+        action2 = [[UIMutableUserNotificationAction alloc] init];
+        [action2 setActivationMode:UIUserNotificationActivationModeBackground];
+        [action2 setTitle:@"Action 2"];
+        [action2 setIdentifier:NotificationActionTwoIdent];
+        [action2 setDestructive:NO];
+        [action2 setAuthenticationRequired:NO];
+ 
     
-    UIMutableUserNotificationCategory *actionCategory;
-    actionCategory = [[UIMutableUserNotificationCategory alloc] init];
-    [actionCategory setIdentifier:NotificationCategoryIdent];
-    [actionCategory setActions:@[action1, action2]
-                    forContext:UIUserNotificationActionContextDefault];
-    
-    NSSet *categories = [NSSet setWithObject:actionCategory];
-    UIUserNotificationType types = (UIUserNotificationTypeAlert|
-                                    UIUserNotificationTypeSound|
-                                    UIUserNotificationTypeBadge);
-    
-    UIUserNotificationSettings *settings;
-    settings = [UIUserNotificationSettings settingsForTypes:types
-                                                 categories:categories];
-    
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        UIMutableUserNotificationCategory *actionCategory;
+        actionCategory = [[UIMutableUserNotificationCategory alloc] init];
+        [actionCategory setIdentifier:NotificationCategoryIdent];
+        [actionCategory setActions:@[action1, action2]
+                        forContext:UIUserNotificationActionContextDefault];
+        
+        NSSet *categories = [NSSet setWithObject:actionCategory];
+        UIUserNotificationType types = (UIUserNotificationTypeAlert|
+                                        UIUserNotificationTypeSound|
+                                        UIUserNotificationTypeBadge);
+        UIUserNotificationSettings *newSettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+        
+        
+        // Register the notification settings.
+        [[UIApplication sharedApplication] registerUserNotificationSettings:newSettings];
+    }
 }
 
 - (void)scheduleNotifications {
@@ -291,6 +298,15 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     self.allowNotificationsBadge = (currentSettings.types & UIUserNotificationTypeBadge) != 0;
     self.allowNotificationsAlert = (currentSettings.types & UIUserNotificationTypeAlert) != 0;
 }
+
+- (void)handleEventListNotification {
+    //
+}
+
+- (void)handleScheduleNewNotification {
+    //
+}
+
 
 - (void)notifyHUDMessage {
     
@@ -528,5 +544,18 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+    if ([segue.identifier isEqualToString:@"intervalListSegue"]) {
+        //Passa o evento
+
+        if (self.session) {
+            UINavigationController *navigationController = segue.destinationViewController;
+            IntervalListTableViewController *intervalListTableViewController = (IntervalListTableViewController * )navigationController.topViewController;
+            
+            intervalListTableViewController.session = self.session;
+        }
+    }
+}
 
 @end

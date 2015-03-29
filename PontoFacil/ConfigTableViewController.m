@@ -11,18 +11,20 @@
 
 @interface ConfigTableViewController ()
 
-@property (nonatomic, assign) BOOL showSessionDatePicker;
+//@property (nonatomic, assign) BOOL showSessionDatePicker;
 @property (nonatomic, assign) BOOL showStartDatePicker;
 @property (nonatomic, assign) BOOL showFinishDatePicker;
 @property (nonatomic, assign) BOOL showIntervalDatePicker;
-@property (nonatomic, assign) BOOL showWorkNotification;
-@property (nonatomic, assign) BOOL showBreakNotification;
+//@property (nonatomic, assign) BOOL showWorkNotification;
+//@property (nonatomic, assign) BOOL showBreakNotification;
+@property (nonatomic, assign) BOOL showToleranceDatePicker;
 
 @property (strong, nonatomic) NSMutableArray *hours;
 @property (strong, nonatomic) NSMutableArray *minutes;
 
-@property (nonatomic, assign) NSString *selHour;
-@property (nonatomic, assign) NSString *selMinute;
+@property (nonatomic, strong) NSString *selHour;
+@property (nonatomic, strong) NSString *selMinute;
+@property (nonatomic, assign) int selTolerance;
 
 @end
 
@@ -78,13 +80,13 @@
         [_finishDatePicker setDate:finishDate];
     }
     
-    if ([defaults valueForKey:@"defaultBreakTimer"]) {
-        self.breakTimeLabel.text = [defaults valueForKey:@"defaultBreakTimer"];
+    if ([defaults valueForKey:@"defaultBreakTime"]) {
+        self.breakTimeLabel.text = [defaults valueForKey:@"defaultBreakTime"];
         
         int hour = [[self.breakTimeLabel.text substringToIndex:2] intValue];
         int minute = [[self.breakTimeLabel.text substringFromIndex:3] intValue];
-        _selHour = [NSString stringWithFormat:@"%2i", hour];
-        _selMinute = [NSString stringWithFormat:@"%2i", minute];
+        self.selHour = [NSString stringWithFormat:@"%2i", hour];
+        self.selMinute = [NSString stringWithFormat:@"%2i", minute];
         
         [_timeOutPicker selectRow:hour inComponent:0 animated:false];
         [_timeOutPicker selectRow:minute inComponent:1 animated:false];
@@ -95,14 +97,18 @@
         _selMinute = @"00";
     }
     
+    [self.breakTimeAdjustSwitch setOn:[defaults boolForKey:@"adjustMinTimeOut"]];
+    
+    _selTolerance = (int)[defaults integerForKey:@"toleranceTime"];
+    self.toleranceTimeLabel.text = [NSString stringWithFormat:@"%2i", _selTolerance];
+    
     [self.regularTimeNotificationSwitch setOn:[defaults boolForKey:@"workTimeNotification"]];
     [self.breakTimeNotificationSwitch setOn:[defaults boolForKey:@"timeOutNotification"]];
     
     _showStartDatePicker = false;
     _showFinishDatePicker = false;
     _showIntervalDatePicker = false;
-    _showWorkNotification = false;
-    _showBreakNotification = false;
+    _showToleranceDatePicker = false;
 }
 
 - (void)saveDefaultSessionData {
@@ -120,14 +126,16 @@
     //Grava as configurações
     NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
     [defaults setValue:self.startDateLabel.text forKey:@"defaultStartDate"];
-    [defaults setValue:self.breakTimeLabel.text forKey:@"defaultBreakTimer"];
+    [defaults setValue:self.breakTimeLabel.text forKey:@"defaultBreakTime"];
     [defaults setValue:self.finishDateLabel.text forKey:@"defaultStopDate"];
-    
     [defaults setDouble:breakTimeCount forKey:@"defaultMinTimeOut"];
     [defaults setDouble:workTime forKey:@"defaultWorkTime"];
+    
+    [defaults setBool:self.breakTimeAdjustSwitch.isOn forKey:@"adjustMinTimeOut"];
+    [defaults setInteger:_selTolerance forKey:@"toleranceTime"];
+    
     [defaults setBool:self.regularTimeNotificationSwitch.isOn forKey:@"workTimeNotification"];
     [defaults setBool:self.breakTimeNotificationSwitch.isOn forKey:@"timeOutNotification"];
-    [defaults setBool:self.breakTimeAdjustSwitch.isOn forKey:@"adjustMinTimeOut"];
     [defaults synchronize];
 }
 
@@ -172,16 +180,25 @@
         _showStartDatePicker = !_showStartDatePicker;
         _showFinishDatePicker = false;
         _showIntervalDatePicker = false;
+        _showToleranceDatePicker = false;
         
     }
     else if (indexPath.section == 0 && indexPath.row == 2) {
         _showIntervalDatePicker = !_showIntervalDatePicker;
         _showStartDatePicker = false;
         _showFinishDatePicker = false;
+        _showToleranceDatePicker = false;
     }
     else if (indexPath.section == 0 && indexPath.row == 4) {
         _showFinishDatePicker = !_showFinishDatePicker;
         _showStartDatePicker = false;
+        _showIntervalDatePicker = false;
+        _showToleranceDatePicker = false;
+    }
+    else if (indexPath.section == 1 && indexPath.row == 1) {
+        _showToleranceDatePicker = !_showToleranceDatePicker;
+        _showStartDatePicker = false;
+        _showFinishDatePicker = false;
         _showIntervalDatePicker = false;
     }
     
@@ -224,19 +241,10 @@
             return 0;
         }
     }
-    else if ((indexPath.section == 2) && ((indexPath.row == 1) || (indexPath.row == 2))) {
+    else if (indexPath.section == 1 && indexPath.row == 2) {
         
-        // Finish Date Picker
-        if (_showWorkNotification) {
-            return 150;
-        } else {
-            return 0;
-        }
-    }
-    else if (indexPath.section == 2 && indexPath.row == 4) {
-        
-        // Finish Date Picker
-        if (_showBreakNotification) {
+        // Tolerance Date Picker
+        if (_showToleranceDatePicker) {
             return 150;
         } else {
             return 0;
@@ -253,55 +261,75 @@
 - (NSInteger)numberOfComponentsInPickerView:
 (UIPickerView *)pickerView
 {
-    return 2;
+    if (pickerView.tag == 1) {
+        return 2;
+    }
+    else
+        return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component
 {
-    if (component == 0) {
-        //Horas
-        return [_hours count];
-    }
-    else if (component == 1) {
-        //Minutos
-        return [_minutes count];
+    if (pickerView.tag == 1) {
+        if (component == 0) {
+            //Horas
+            return [_hours count];
+        }
+        else if (component == 1) {
+            //Minutos
+            return [_minutes count];
+        }
+        else
+            return 0;
     }
     else
-        return 0;
+        return [_minutes count];
+    
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component
 {
-    if (component == 0) {
-        //Horas
-        return [_hours objectAtIndex:row];
+    if (pickerView.tag == 1) {
+        if (component == 0) {
+            //Horas
+            return [_hours objectAtIndex:row];
+        }
+        else if (component == 1) {
+            //Minutos
+            return [_minutes objectAtIndex:row];
+        }
+        else
+            return @"";
     }
-    else if (component == 1) {
-        //Minutos
+    else {
         return [_minutes objectAtIndex:row];
     }
-    else
-        return @"";
-    
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
       inComponent:(NSInteger)component
 {
     
-    if (component == 0) {
-        _selHour = [_hours objectAtIndex:row];
-    } else if (component == 1) {
-        _selMinute = [_minutes objectAtIndex:row];
+    if (pickerView.tag == 1) {
+        if (component == 0) {
+            _selHour = [_hours objectAtIndex:row];
+        } else if (component == 1) {
+            _selMinute = [_minutes objectAtIndex:row];
+        }
+        
+        _breakTimeLabel.text = [[NSString alloc] initWithFormat:
+                                  @"%@:%@ ", _selHour, _selMinute];
+    }
+    else
+    {
+        _selTolerance = [[_minutes objectAtIndex:row] intValue];
+        _toleranceTimeLabel.text = [[NSString alloc] initWithFormat:
+                        @"%2i minutos", _selTolerance];
     }
     
-    NSString *resultString = [[NSString alloc] initWithFormat:
-                              @"%@:%@ ", _selHour, _selMinute];
-    
-    _breakTimeLabel.text = resultString;
 }
 
 @end

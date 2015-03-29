@@ -7,13 +7,16 @@
 //
 
 #import "EventListTableViewController.h"
+#import "FetchedResultsControllerDataSource.h"
 #import "Event+Management.h"
-#import "Session+Management.h"
 #import "EventTableViewCell.h"
+#import "EventDetailTableViewController.h"
 
-@interface EventListTableViewController () <NSFetchedResultsControllerDelegate>
+static NSString * const cellIdentifier = @"eventCell";
 
-@property (nonatomic) NSFetchedResultsController *fetchedResultsController;
+@interface EventListTableViewController () <FetchedResultsControllerDataSourceDelegate>
+
+@property (nonatomic, strong) FetchedResultsControllerDataSource *dataSource;
 
 @end
 
@@ -22,164 +25,101 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self setupFetchedResultsController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    NSError *error;
-    if (![self.fetchedResultsController performFetch:&error])
-    {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }
+    [super viewWillAppear:animated];
     
-    [self.tableView reloadData];
+    //Perform Fetch and reload data
+    self.dataSource.paused = NO;
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    
-    return [[self.fetchedResultsController sections] count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (void)viewWillDisappear:(BOOL)animated
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    [super viewWillDisappear:animated];
     
-    return [sectionInfo name];
+    self.dataSource.paused = YES;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     
-    NSInteger count = [sectionInfo numberOfObjects];
+    [super setEditing:editing animated:animated];
     
-    return count;
+    [self.tableView setEditing:editing animated:animated];
+    
+    //self.addButton.enabled = !editing;
 }
 
+#pragma mark - FetchResultsController Delegate
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)setupFetchedResultsController
+{
+    self.dataSource = [[FetchedResultsControllerDataSource alloc] initWithTableView:self.tableView];
     
-    static NSString *cellIdentifier = @"eventCell";
-    EventTableViewCell *eventCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    self.dataSource.fetchedResultsController = [Event fetchedResultsController];
+    self.dataSource.delegate = self;
+    self.dataSource.reuseIdentifier = cellIdentifier;
+    //self.dataSource.sortField = @"displayOrder";
+}
+
+- (void)configureCell:(id)theCell withObject:(id)object
+{
+    EventTableViewCell *cell = theCell;
+    Event *event = object;
+    [cell configureForEvent:event];
+}
+
+- (void)deleteObject:(id)object
+{
+    Event *event = object;
     
-    Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSString* actionName = [NSString stringWithFormat:@"Excluir evento do dia %@", event.estStartDate];
     
-    if (event.eventCategoryType == kEventTypeSession) {
-        if ([event isMemberOfClass:[Session class]]) {
-            Session *session = (Session *)event;
-            
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"HH:mm"];
-            
-            if (!session.finishDate) {
-                eventCell.eventTimeLabel.text = [dateFormatter stringFromDate:session.startDate];
-            }
-            else {
-                eventCell.eventTimeLabel.text = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:session.startDate], [dateFormatter stringFromDate:session.finishDate]];
-            }
-            
-            NSString *balanceSignal;
-            
-            if ([session.estWorkTime doubleValue] > [session.workTime doubleValue]) {
-                balanceSignal = @"-";
-            }
-            else {
-                balanceSignal = @"+";
-            }
-            
-            eventCell.eventBalanceLabel.text = [NSString stringWithFormat:@"%@ %@",balanceSignal, [self stringFromTimeInterval:ABS(session.timeBalance)]];
-            
-            eventCell.eventTypeText = @"Sessão Normal";
-        }
+    // Save Changes
+    NSError *error = nil;
+    [self.managedObjectContext deleteObject:object];
+    [self.managedObjectContext save:&error];
+    
+    if (error) {
+        NSLog(@"Error %@ with user info %@.", error, error.userInfo);
     }
     else {
-        eventCell.eventTimeLabel.text = @"Dia Inteiro";
-        
-        if (event.eventCategoryType == kEventTypeHoliday) {
-            eventCell.eventTypeText = @"Dispensa";
-        }
-        else if (event.eventCategoryType == kEventTypeAbsence) {
-            eventCell.eventTypeText = @"Falta";
-        }
+        [self.undoManager setActionName:actionName];
+        //[self showPopOverActionText:[NSString stringWithFormat:@"Clique aqui para desfazer a ação %@", actionName]];
     }
-    
-    return eventCell;
 }
 
+#pragma mark Undo Manager
 
-- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
-    NSInteger ti = (NSInteger)interval;
-    NSInteger minutes = (ti / 60) % 60;
-    NSInteger hours = (ti / 3600);
-    
-    return [NSString stringWithFormat:@"%02ld:%02ld", (long)hours, (long)minutes];
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
+- (BOOL)canBecomeFirstResponder {
     return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark - Fetched results controller
-
-- (NSFetchedResultsController *)fetchedResultsController
+- (NSUndoManager*)undoManager
 {
-    if (_fetchedResultsController != nil)
-    {
-        return _fetchedResultsController;
-    }
-    
-    _fetchedResultsController = [Event fetchedResultsController];
-    _fetchedResultsController.delegate = self;
-    
-    return _fetchedResultsController;
+    return [self managedObjectContext].undoManager;
+}
+
+- (NSManagedObjectContext *)managedObjectContext {
+    return self.dataSource.fetchedResultsController.managedObjectContext;
+}
+
+#pragma mark Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+     if ([segue.identifier isEqualToString:@"eventDetailSegue"])
+     {
+         EventDetailTableViewController *eventDetailViewController = segue.destinationViewController;
+         
+         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+     
+         eventDetailViewController.session = [self.dataSource.fetchedResultsController objectAtIndexPath:indexPath];
+     }
 }
 
 @end

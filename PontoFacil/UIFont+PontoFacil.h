@@ -12,5 +12,6 @@
 
 + (UIFont *)headerTitleFont;
 + (UIFont *)clockCounterFont;
++ (UIFont *)eventCellTitleFont;
 
 @end

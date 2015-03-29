@@ -36,4 +36,8 @@ typedef enum {
 
 - (Interval *)activeInterval;
 
+- (NSArray *)dateSortedIntervalList;
+
+- (NSString *)timeBalanceToString;
+
 @end
