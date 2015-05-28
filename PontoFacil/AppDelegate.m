@@ -11,6 +11,7 @@
 #import "Store.h"
 #import "UIColor+PontoFacil.h"
 #import "UIFont+PontoFacil.h"
+#import "NSUserDefaults+PontoFacil.h"
 
 @interface AppDelegate ()
 
@@ -36,72 +37,37 @@
     self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL modelURL:self.modelURL];
     self.managedObjectContext = self.persistentStack.managedObjectContext;
     
-    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-    
-    if (! [defaults doubleForKey:@"defaultWorkTime"]) {
-        [defaults setValue:@"09:00" forKey:@"defaultStartDate"];
-        [defaults setValue:@"18:00" forKey:@"defaultStopDate"];
-        
-        NSTimeInterval workTime = 3600 * 8;
-        [defaults setDouble:workTime forKey:@"defaultWorkTime"];
-    }
-    
-    if (! [defaults valueForKey:@"defaultBreakTime"]) {
-        [defaults setValue:@"01:00" forKey:@"defaultBreakTime"];
-        
-        NSTimeInterval minTimeOut = 3600;
-        [defaults setDouble:minTimeOut forKey:@"defaultMinTimeOut"];
-    }
-    
-    if (![defaults boolForKey:@"adjustMinTimeOut"]) {
-        [defaults setBool:false forKey:@"adjustMinTimeOut"];
-    };
-    
-    if (![defaults integerForKey:@"toleranceTime"]) {
-        [defaults setInteger:0 forKey:@"toleranceTime"];
-    }
-    
-    if (! [defaults objectForKey:@"workTimeNotification"] ) {
-        [defaults setBool:true forKey:@"workTimeNotification"];
-    }
-    
-    if (! [defaults objectForKey:@"timeOutNotification"]) {
-        [defaults setBool:true forKey:@"timeOutNotification"];
-    }
-    
-    if (! [defaults doubleForKey:@"minWorkToTimeOut"]) {
-        
-        NSTimeInterval minWorkToTimeOut = 3600 * 6;
-        [defaults setDouble:minWorkToTimeOut forKey:@"minWorkToTimeOut"];
-    }
-    
-    [defaults synchronize];
+    [self loadDefaultUserData];
 
     return YES;
+}
+
+- (void)loadDefaultUserData {
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (!defaults.isLoaded) {
+        defaults.workStartDate = @"09:00";
+        defaults.workFinishDate = @"18:00";
+        defaults.defaultWorkTime = 3600 * 8;
+        
+        defaults.breakStartDate = @"12:00";
+        defaults.breakFinishDate = @"13:00";
+        defaults.defaultBreakTime = 3600;
+        
+        defaults.breakTimeRequired = false;
+        defaults.toleranceTime = 0;
+        defaults.workFinishNotification = true;
+        defaults.breakFinishNotification = true;
+        
+        [defaults synchronize];
+    }
 }
 
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-    NSLog(@"Notification Settings: %u", notificationSettings.types);
-}
-
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
-    
-    if ([identifier isEqualToString:@"AdjustAction"]) {
-        NSLog(@"Ajustar.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"eventListNotification" object:nil];
-    }
-    else if ([identifier isEqualToString:@"SnoozeAction"]) {
-        
-        NSLog(@"Dormir.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"scheduleNewNotification" object:nil];
-    }
-    
-    if (completionHandler) {
-        
-        completionHandler();
-    }
+    //
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {

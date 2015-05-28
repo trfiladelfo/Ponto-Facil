@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ConfigTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface ConfigTableViewController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UILabel *startDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *finishDateLabel;
@@ -16,7 +16,6 @@
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *startDatePicker;
 @property (strong, nonatomic) IBOutlet UIDatePicker *finishDatePicker;
-@property (strong, nonatomic) IBOutlet UIPickerView *timeOutPicker;
 
 @property (strong, nonatomic) IBOutlet UISwitch *regularTimeNotificationSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *breakTimeNotificationSwitch;
@@ -24,5 +23,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *breakTimeAdjustSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *toleranceTimeLabel;
 @property (strong, nonatomic) IBOutlet UIPickerView *tolerancePicker;
+@property (strong, nonatomic) IBOutlet UIView *intervalCellView;
 
 @end

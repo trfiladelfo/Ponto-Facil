@@ -42,14 +42,14 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
     
-    self.intervalStartLabel.text = [dateFormatter stringFromDate:interval.startDate];
+    self.intervalStartLabel.text = [dateFormatter stringFromDate:interval.intervalStart];
     
-    if (interval.finishDate == nil) {
+    if (interval.intervalFinish == nil) {
         self.intervalFinishLabel.text = @"in progress";
     }
     else
     {
-        self.intervalFinishLabel.text = [dateFormatter stringFromDate:interval.finishDate];
+        self.intervalFinishLabel.text = [dateFormatter stringFromDate:interval.intervalFinish];
     }
 }
 

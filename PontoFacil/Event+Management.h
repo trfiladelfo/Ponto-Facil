@@ -9,16 +9,18 @@
 #import "Event.h"
 
 typedef enum {
-    kEventTypeSession = 0,
-    kEventTypeHoliday = 1,
-    kEventTypeAbsence = 2
-} EventCategoryType;
+    kEventTypeNormal = 0,
+    kEventTypeHoliday = 1
+} EventTypeCategory;
 
 @interface Event (Management)
 
-@property (nonatomic) EventCategoryType eventCategoryType;
+@property (nonatomic) EventTypeCategory eventTypeCategory;
 @property (nonatomic, assign, readonly) NSNumber *estWorkTime;
+@property (nonatomic, assign, readonly) NSNumber *estBreakTime;
 
 + (NSFetchedResultsController *)fetchedResultsController;
+
++ (instancetype)insertEventWithEstWorkStart:(NSDate *)estWorkStart andEstWorkFinish:(NSDate *)estWorkFinish andEstBreakStart:(NSDate *)estBreakStart andEstBreakFinish:(NSDate *)estBreakFinish andIsManual:(BOOL)isManual andEventTypeCategory:(EventTypeCategory)eventTypeCategory andEventDescription:(NSString *)eventDescription;
 
 @end

@@ -18,6 +18,7 @@
 		87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E8E1A85A96E00AB4977 /* ClockViewController.m */; };
 		87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87147E901A86501000AB4977 /* CircularButtonView.xib */; };
 		87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E941A8652E800AB4977 /* CircularButtonView.m */; };
+		8720DC931AE6000B00ECE3F6 /* RangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8720DC921AE6000B00ECE3F6 /* RangeSlider.m */; };
 		872BC37D1ABBB6D800039FEF /* UIColor+PontoFacil.m in Sources */ = {isa = PBXBuildFile; fileRef = 872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */; };
 		872BC3801ABBBFC000039FEF /* UIFont+PontoFacil.m in Sources */ = {isa = PBXBuildFile; fileRef = 872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */; };
 		874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 874D0C731AB4E5B000E0A3B1 /* ConfigTableViewController.m */; };
@@ -32,24 +33,30 @@
 		877081D11A923D2C00541AB3 /* Event+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = 877081D01A923D2C00541AB3 /* Event+Management.m */; };
 		877081D41A927A3D00541AB3 /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 877081D31A927A3D00541AB3 /* NSDate-Utilities.m */; };
 		877081D81A92AE2700541AB3 /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 877081D71A92AE2700541AB3 /* ActionButton.m */; };
+		877AE3DD1B14209300A52542 /* NSUserDefaults+PontoFacil.m in Sources */ = {isa = PBXBuildFile; fileRef = 877AE3DC1B14209300A52542 /* NSUserDefaults+PontoFacil.m */; };
+		877AE3E01B15709C00A52542 /* AccordionTableDictionaryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 877AE3DF1B15709C00A52542 /* AccordionTableDictionaryDataSource.m */; };
+		877AE3E41B1697AA00A52542 /* DatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877AE3E31B1697A900A52542 /* DatePickerCell.xib */; };
+		877AE3E71B16986200A52542 /* DatePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 877AE3E61B16986200A52542 /* DatePickerTableViewCell.m */; };
+		877AE3EA1B16B1E300A52542 /* CheckTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877AE3E91B16B1E300A52542 /* CheckTimeCell.xib */; };
+		877AE3ED1B16B3F700A52542 /* CheckTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 877AE3EC1B16B3F700A52542 /* CheckTimeTableViewCell.m */; };
 		878BD94D1AC37F360005DBD4 /* IntervalListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 878BD94C1AC37F360005DBD4 /* IntervalListTableViewController.m */; };
 		878BD9501AC381290005DBD4 /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 878BD94F1AC381290005DBD4 /* ArrayDataSource.m */; };
 		878BD9531AC382D70005DBD4 /* IntervalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 878BD9521AC382D70005DBD4 /* IntervalTableViewCell.m */; };
 		879FA6F11A9D613600221AD1 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879FA6F01A9D613600221AD1 /* CalendarView.xib */; };
-		87B5C6441AC7A7EC004AB6A7 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B5C6431AC7A7EC004AB6A7 /* Session.m */; };
-		87B5C6471AC7A7EF004AB6A7 /* Holiday.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B5C6461AC7A7EF004AB6A7 /* Holiday.m */; };
-		87B5C64A1AC7A7F0004AB6A7 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B5C6491AC7A7F0004AB6A7 /* Interval.m */; };
-		87B5C64D1AC7A7F1004AB6A7 /* Absence.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B5C64C1AC7A7F1004AB6A7 /* Absence.m */; };
-		87B5C6501AC7A7F1004AB6A7 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B5C64F1AC7A7F1004AB6A7 /* Event.m */; };
+		87A727E21ACCBF6B0095764E /* NSString+TimeInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A727E11ACCBF6B0095764E /* NSString+TimeInterval.m */; };
+		87A727E51ACCD9030095764E /* IntervalTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A727E41ACCD9030095764E /* IntervalTableViewHeaderView.xib */; };
+		87A727E81ACCDB090095764E /* IntervalTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A727E71ACCDB090095764E /* IntervalTableViewHeaderView.m */; };
+		87B4FDC21AF5593F008DA605 /* ScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4FDC11AF5593F008DA605 /* ScheduleTableViewController.m */; };
 		87B5C6531AC82F16004AB6A7 /* EventDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B5C6521AC82F16004AB6A7 /* EventDetailTableViewController.m */; };
 		87BC41491A8706F80007768A /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BC41461A8706F80007768A /* CircleProgressView.m */; };
 		87BC414A1A8706F80007768A /* CircleShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BC41481A8706F80007768A /* CircleShapeLayer.m */; };
 		87BD55FF1AC62F00008E0511 /* MSWeekDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BD55FE1AC62F00008E0511 /* MSWeekDateView.m */; };
-		87C6831F1A9EB5C500A2C101 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C6831E1A9EB5C500A2C101 /* ScheduleViewController.m */; };
-		87C683221A9EBAD200A2C101 /* ScheduleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C683211A9EBAD200A2C101 /* ScheduleCollectionViewCell.m */; };
 		87C683261AA1495200A2C101 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C683251AA1495200A2C101 /* EventListTableViewController.m */; };
 		87C6832B1AA15F2300A2C101 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C6832A1AA15F2300A2C101 /* CoreData.framework */; };
 		87CF5F6D1ABDF1BC004D5201 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */; };
+		87DAF9061AF840E400B692C5 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DAF9051AF840E400B692C5 /* Interval.m */; };
+		87DAF90F1AF847B200B692C5 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DAF90E1AF847B200B692C5 /* Event.m */; };
+		87DAF9121AF847B200B692C5 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DAF9111AF847B200B692C5 /* Session.m */; };
 		87FE86A01AC0F30500421959 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE869F1AC0F30500421959 /* EventTableViewCell.m */; };
 		87FE86A31AC2336200421959 /* FetchedResultsControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE86A21AC2336200421959 /* FetchedResultsControllerDataSource.m */; };
 		87FE86A61AC2337F00421959 /* PaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE86A51AC2337F00421959 /* PaddingLabel.m */; };
@@ -90,6 +97,8 @@
 		87147E901A86501000AB4977 /* CircularButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircularButtonView.xib; sourceTree = "<group>"; };
 		87147E931A8652E800AB4977 /* CircularButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularButtonView.h; sourceTree = "<group>"; };
 		87147E941A8652E800AB4977 /* CircularButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonView.m; sourceTree = "<group>"; };
+		8720DC911AE6000B00ECE3F6 /* RangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeSlider.h; sourceTree = "<group>"; };
+		8720DC921AE6000B00ECE3F6 /* RangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeSlider.m; sourceTree = "<group>"; };
 		87297C4F1A870AD2004E9626 /* libPods-PontoFacil-CircularProgressControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil-CircularProgressControl.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil-CircularProgressControl.a"; sourceTree = "<group>"; };
 		87297C501A870AD2004E9626 /* libPods-PontoFacil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil.a"; sourceTree = "<group>"; };
 		872BC37B1ABBB6D800039FEF /* UIColor+PontoFacil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PontoFacil.h"; sourceTree = "<group>"; };
@@ -117,6 +126,16 @@
 		877081D31A927A3D00541AB3 /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
 		877081D61A92AE2700541AB3 /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
 		877081D71A92AE2700541AB3 /* ActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionButton.m; sourceTree = "<group>"; };
+		877AE3DB1B14209300A52542 /* NSUserDefaults+PontoFacil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+PontoFacil.h"; sourceTree = "<group>"; };
+		877AE3DC1B14209300A52542 /* NSUserDefaults+PontoFacil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+PontoFacil.m"; sourceTree = "<group>"; };
+		877AE3DE1B15709C00A52542 /* AccordionTableDictionaryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccordionTableDictionaryDataSource.h; sourceTree = "<group>"; };
+		877AE3DF1B15709C00A52542 /* AccordionTableDictionaryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccordionTableDictionaryDataSource.m; sourceTree = "<group>"; };
+		877AE3E31B1697A900A52542 /* DatePickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerCell.xib; sourceTree = "<group>"; };
+		877AE3E51B16986200A52542 /* DatePickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerTableViewCell.h; sourceTree = "<group>"; };
+		877AE3E61B16986200A52542 /* DatePickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerTableViewCell.m; sourceTree = "<group>"; };
+		877AE3E91B16B1E300A52542 /* CheckTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckTimeCell.xib; sourceTree = "<group>"; };
+		877AE3EB1B16B3F700A52542 /* CheckTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckTimeTableViewCell.h; sourceTree = "<group>"; };
+		877AE3EC1B16B3F700A52542 /* CheckTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckTimeTableViewCell.m; sourceTree = "<group>"; };
 		878BD94B1AC37F360005DBD4 /* IntervalListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalListTableViewController.h; sourceTree = "<group>"; };
 		878BD94C1AC37F360005DBD4 /* IntervalListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalListTableViewController.m; sourceTree = "<group>"; };
 		878BD94E1AC381290005DBD4 /* ArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSource.h; sourceTree = "<group>"; };
@@ -124,16 +143,13 @@
 		878BD9511AC382D70005DBD4 /* IntervalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalTableViewCell.h; sourceTree = "<group>"; };
 		878BD9521AC382D70005DBD4 /* IntervalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalTableViewCell.m; sourceTree = "<group>"; };
 		879FA6F01A9D613600221AD1 /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
-		87B5C6421AC7A7EC004AB6A7 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
-		87B5C6431AC7A7EC004AB6A7 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
-		87B5C6451AC7A7EF004AB6A7 /* Holiday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Holiday.h; sourceTree = "<group>"; };
-		87B5C6461AC7A7EF004AB6A7 /* Holiday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Holiday.m; sourceTree = "<group>"; };
-		87B5C6481AC7A7F0004AB6A7 /* Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interval.h; sourceTree = "<group>"; };
-		87B5C6491AC7A7F0004AB6A7 /* Interval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interval.m; sourceTree = "<group>"; };
-		87B5C64B1AC7A7F1004AB6A7 /* Absence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Absence.h; sourceTree = "<group>"; };
-		87B5C64C1AC7A7F1004AB6A7 /* Absence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Absence.m; sourceTree = "<group>"; };
-		87B5C64E1AC7A7F1004AB6A7 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		87B5C64F1AC7A7F1004AB6A7 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		87A727E01ACCBF6B0095764E /* NSString+TimeInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TimeInterval.h"; sourceTree = "<group>"; };
+		87A727E11ACCBF6B0095764E /* NSString+TimeInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TimeInterval.m"; sourceTree = "<group>"; };
+		87A727E41ACCD9030095764E /* IntervalTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntervalTableViewHeaderView.xib; sourceTree = "<group>"; };
+		87A727E61ACCDB090095764E /* IntervalTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalTableViewHeaderView.h; sourceTree = "<group>"; };
+		87A727E71ACCDB090095764E /* IntervalTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalTableViewHeaderView.m; sourceTree = "<group>"; };
+		87B4FDC01AF5593F008DA605 /* ScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewController.h; sourceTree = "<group>"; };
+		87B4FDC11AF5593F008DA605 /* ScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewController.m; sourceTree = "<group>"; };
 		87B5C6511AC82F16004AB6A7 /* EventDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailTableViewController.h; sourceTree = "<group>"; };
 		87B5C6521AC82F16004AB6A7 /* EventDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailTableViewController.m; sourceTree = "<group>"; };
 		87BC41451A8706F80007768A /* CircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressView.h; sourceTree = "<group>"; };
@@ -142,14 +158,16 @@
 		87BC41481A8706F80007768A /* CircleShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleShapeLayer.m; sourceTree = "<group>"; };
 		87BD55FD1AC62F00008E0511 /* MSWeekDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWeekDateView.h; sourceTree = "<group>"; };
 		87BD55FE1AC62F00008E0511 /* MSWeekDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWeekDateView.m; sourceTree = "<group>"; };
-		87C6831D1A9EB5C500A2C101 /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
-		87C6831E1A9EB5C500A2C101 /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
-		87C683201A9EBAD200A2C101 /* ScheduleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleCollectionViewCell.h; sourceTree = "<group>"; };
-		87C683211A9EBAD200A2C101 /* ScheduleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleCollectionViewCell.m; sourceTree = "<group>"; };
 		87C683241AA1495200A2C101 /* EventListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListTableViewController.h; sourceTree = "<group>"; };
 		87C683251AA1495200A2C101 /* EventListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListTableViewController.m; sourceTree = "<group>"; };
 		87C6832A1AA15F2300A2C101 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		87DAF9041AF840E400B692C5 /* Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interval.h; sourceTree = "<group>"; };
+		87DAF9051AF840E400B692C5 /* Interval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interval.m; sourceTree = "<group>"; };
+		87DAF90D1AF847B200B692C5 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		87DAF90E1AF847B200B692C5 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		87DAF9101AF847B200B692C5 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		87DAF9111AF847B200B692C5 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		87FE869E1AC0F30500421959 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTableViewCell.h; sourceTree = "<group>"; };
 		87FE869F1AC0F30500421959 /* EventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableViewCell.m; sourceTree = "<group>"; };
 		87FE86A11AC2336200421959 /* FetchedResultsControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FetchedResultsControllerDataSource.h; path = ../../DailyTaskManager/DailyTaskManager/FetchedResultsControllerDataSource.h; sourceTree = "<group>"; };
@@ -225,6 +243,7 @@
 				87147E7F1A859F9000AB4977 /* View */,
 				87147E801A859F9800AB4977 /* Controller */,
 				87147E821A85A01C00AB4977 /* Helper */,
+				8720DC8F1AE5FF3D00ECE3F6 /* Library */,
 				87147E831A85A02100AB4977 /* Resources */,
 				87147E551A859F6000AB4977 /* Supporting Files */,
 			);
@@ -281,6 +300,8 @@
 		87147E7F1A859F9000AB4977 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				877AE3E81B16B10A00A52542 /* CheckTimeCell */,
+				877AE3E21B16975500A52542 /* DatePickerCell */,
 				876398EA1A8D922E0002118E /* _AcessoryCircularButton */,
 				87147E921A8652C700AB4977 /* _CircularButton */,
 				879FA6EF1A9D60FE00221AD1 /* CalendarView */,
@@ -295,8 +316,8 @@
 		87147E801A859F9800AB4977 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				87297C531A883B6A004E9626 /* _Schedule */,
 				87147E841A85A05000AB4977 /* AppDelegate */,
+				87297C531A883B6A004E9626 /* Schedule */,
 				87147E8C1A85A39000AB4977 /* Clock */,
 				87C683231A9FE88900A2C101 /* Event */,
 				874D0C711AB4E55200E0A3B1 /* Config */,
@@ -309,14 +330,13 @@
 			isa = PBXGroup;
 			children = (
 				87B5C6411AC6FC4C004AB6A7 /* DataSource */,
+				877AE3E11B15739B00A52542 /* Defaults */,
 				87FE86A41AC2337F00421959 /* PaddingLabel.h */,
 				87FE86A51AC2337F00421959 /* PaddingLabel.m */,
 				877081D21A927A3D00541AB3 /* NSDate-Utilities.h */,
 				877081D31A927A3D00541AB3 /* NSDate-Utilities.m */,
-				872BC37B1ABBB6D800039FEF /* UIColor+PontoFacil.h */,
-				872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */,
-				872BC37E1ABBBFC000039FEF /* UIFont+PontoFacil.h */,
-				872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */,
+				87A727E01ACCBF6B0095764E /* NSString+TimeInterval.h */,
+				87A727E11ACCBF6B0095764E /* NSString+TimeInterval.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -343,16 +363,12 @@
 		87147E8B1A85A2F600AB4977 /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
-				87B5C64E1AC7A7F1004AB6A7 /* Event.h */,
-				87B5C64F1AC7A7F1004AB6A7 /* Event.m */,
-				87B5C64B1AC7A7F1004AB6A7 /* Absence.h */,
-				87B5C64C1AC7A7F1004AB6A7 /* Absence.m */,
-				87B5C6481AC7A7F0004AB6A7 /* Interval.h */,
-				87B5C6491AC7A7F0004AB6A7 /* Interval.m */,
-				87B5C6451AC7A7EF004AB6A7 /* Holiday.h */,
-				87B5C6461AC7A7EF004AB6A7 /* Holiday.m */,
-				87B5C6421AC7A7EC004AB6A7 /* Session.h */,
-				87B5C6431AC7A7EC004AB6A7 /* Session.m */,
+				87DAF9101AF847B200B692C5 /* Session.h */,
+				87DAF9111AF847B200B692C5 /* Session.m */,
+				87DAF90D1AF847B200B692C5 /* Event.h */,
+				87DAF90E1AF847B200B692C5 /* Event.m */,
+				87DAF9041AF840E400B692C5 /* Interval.h */,
+				87DAF9051AF840E400B692C5 /* Interval.m */,
 			);
 			name = "Managed Objects";
 			sourceTree = "<group>";
@@ -376,15 +392,30 @@
 			name = _CircularButton;
 			sourceTree = "<group>";
 		};
-		87297C531A883B6A004E9626 /* _Schedule */ = {
+		8720DC8F1AE5FF3D00ECE3F6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				87C6831D1A9EB5C500A2C101 /* ScheduleViewController.h */,
-				87C6831E1A9EB5C500A2C101 /* ScheduleViewController.m */,
-				87C683201A9EBAD200A2C101 /* ScheduleCollectionViewCell.h */,
-				87C683211A9EBAD200A2C101 /* ScheduleCollectionViewCell.m */,
+				8720DC901AE5FF4E00ECE3F6 /* RangeSlider */,
 			);
-			name = _Schedule;
+			name = Library;
+			sourceTree = "<group>";
+		};
+		8720DC901AE5FF4E00ECE3F6 /* RangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				8720DC911AE6000B00ECE3F6 /* RangeSlider.h */,
+				8720DC921AE6000B00ECE3F6 /* RangeSlider.m */,
+			);
+			name = RangeSlider;
+			sourceTree = "<group>";
+		};
+		87297C531A883B6A004E9626 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				87B4FDC01AF5593F008DA605 /* ScheduleTableViewController.h */,
+				87B4FDC11AF5593F008DA605 /* ScheduleTableViewController.m */,
+			);
+			name = Schedule;
 			sourceTree = "<group>";
 		};
 		874D0C711AB4E55200E0A3B1 /* Config */ = {
@@ -420,6 +451,7 @@
 		876398F11A911A920002118E /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				87A727E31ACCD89E0095764E /* IntervalTableViewHeaderView */,
 				87BD55FC1AC62ED6008E0511 /* WeekDateView */,
 			);
 			name = Events;
@@ -432,6 +464,39 @@
 				877081D71A92AE2700541AB3 /* ActionButton.m */,
 			);
 			name = ActionButton;
+			sourceTree = "<group>";
+		};
+		877AE3E11B15739B00A52542 /* Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				872BC37E1ABBBFC000039FEF /* UIFont+PontoFacil.h */,
+				872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */,
+				872BC37B1ABBB6D800039FEF /* UIColor+PontoFacil.h */,
+				872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */,
+				877AE3DB1B14209300A52542 /* NSUserDefaults+PontoFacil.h */,
+				877AE3DC1B14209300A52542 /* NSUserDefaults+PontoFacil.m */,
+			);
+			name = Defaults;
+			sourceTree = "<group>";
+		};
+		877AE3E21B16975500A52542 /* DatePickerCell */ = {
+			isa = PBXGroup;
+			children = (
+				877AE3E31B1697A900A52542 /* DatePickerCell.xib */,
+				877AE3E51B16986200A52542 /* DatePickerTableViewCell.h */,
+				877AE3E61B16986200A52542 /* DatePickerTableViewCell.m */,
+			);
+			name = DatePickerCell;
+			sourceTree = "<group>";
+		};
+		877AE3E81B16B10A00A52542 /* CheckTimeCell */ = {
+			isa = PBXGroup;
+			children = (
+				877AE3E91B16B1E300A52542 /* CheckTimeCell.xib */,
+				877AE3EB1B16B3F700A52542 /* CheckTimeTableViewCell.h */,
+				877AE3EC1B16B3F700A52542 /* CheckTimeTableViewCell.m */,
+			);
+			name = CheckTimeCell;
 			sourceTree = "<group>";
 		};
 		878BD94A1AC37EF00005DBD4 /* Interval */ = {
@@ -453,6 +518,16 @@
 			name = CalendarView;
 			sourceTree = "<group>";
 		};
+		87A727E31ACCD89E0095764E /* IntervalTableViewHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				87A727E41ACCD9030095764E /* IntervalTableViewHeaderView.xib */,
+				87A727E61ACCDB090095764E /* IntervalTableViewHeaderView.h */,
+				87A727E71ACCDB090095764E /* IntervalTableViewHeaderView.m */,
+			);
+			name = IntervalTableViewHeaderView;
+			sourceTree = "<group>";
+		};
 		87B5C6411AC6FC4C004AB6A7 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +535,8 @@
 				878BD94F1AC381290005DBD4 /* ArrayDataSource.m */,
 				87FE86A11AC2336200421959 /* FetchedResultsControllerDataSource.h */,
 				87FE86A21AC2336200421959 /* FetchedResultsControllerDataSource.m */,
+				877AE3DE1B15709C00A52542 /* AccordionTableDictionaryDataSource.h */,
+				877AE3DF1B15709C00A52542 /* AccordionTableDictionaryDataSource.m */,
 			);
 			name = DataSource;
 			sourceTree = "<group>";
@@ -579,12 +656,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				877AE3EA1B16B1E300A52542 /* CheckTimeCell.xib in Resources */,
 				876398E71A8D88E00002118E /* Open Sans 800.ttf in Resources */,
 				876398E81A8D88E00002118E /* Open Sans regular.ttf in Resources */,
 				876398EC1A8D9B520002118E /* AcessoryCircularButtonView.xib in Resources */,
+				87A727E51ACCD9030095764E /* IntervalTableViewHeaderView.xib in Resources */,
 				87147E641A859F6000AB4977 /* Main.storyboard in Resources */,
 				879FA6F11A9D613600221AD1 /* CalendarView.xib in Resources */,
 				87CF5F6D1ABDF1BC004D5201 /* Localizable.strings in Resources */,
+				877AE3E41B1697AA00A52542 /* DatePickerCell.xib in Resources */,
 				87147E661A859F6000AB4977 /* Images.xcassets in Resources */,
 				87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */,
 			);
@@ -641,34 +721,38 @@
 				87147E5B1A859F6000AB4977 /* AppDelegate.m in Sources */,
 				87C683261AA1495200A2C101 /* EventListTableViewController.m in Sources */,
 				87BC41491A8706F80007768A /* CircleProgressView.m in Sources */,
+				87A727E81ACCDB090095764E /* IntervalTableViewHeaderView.m in Sources */,
 				87BC414A1A8706F80007768A /* CircleShapeLayer.m in Sources */,
 				877081D81A92AE2700541AB3 /* ActionButton.m in Sources */,
 				87147E581A859F6000AB4977 /* main.m in Sources */,
+				87DAF9121AF847B200B692C5 /* Session.m in Sources */,
+				8720DC931AE6000B00ECE3F6 /* RangeSlider.m in Sources */,
+				877AE3E71B16986200A52542 /* DatePickerTableViewCell.m in Sources */,
+				877AE3ED1B16B3F700A52542 /* CheckTimeTableViewCell.m in Sources */,
 				874D0C771AB4FEFC00E0A3B1 /* AboutTableViewController.m in Sources */,
-				87B5C6441AC7A7EC004AB6A7 /* Session.m in Sources */,
 				878BD9531AC382D70005DBD4 /* IntervalTableViewCell.m in Sources */,
 				878BD94D1AC37F360005DBD4 /* IntervalListTableViewController.m in Sources */,
 				874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */,
 				87FE86A01AC0F30500421959 /* EventTableViewCell.m in Sources */,
 				876398EF1A8D9BA00002118E /* AcessoryCircularButtonView.m in Sources */,
-				87B5C6471AC7A7EF004AB6A7 /* Holiday.m in Sources */,
-				87C6831F1A9EB5C500A2C101 /* ScheduleViewController.m in Sources */,
 				878BD9501AC381290005DBD4 /* ArrayDataSource.m in Sources */,
+				87A727E21ACCBF6B0095764E /* NSString+TimeInterval.m in Sources */,
 				877081D11A923D2C00541AB3 /* Event+Management.m in Sources */,
 				87FE86A31AC2336200421959 /* FetchedResultsControllerDataSource.m in Sources */,
 				87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */,
+				87B4FDC21AF5593F008DA605 /* ScheduleTableViewController.m in Sources */,
+				877AE3DD1B14209300A52542 /* NSUserDefaults+PontoFacil.m in Sources */,
 				872BC3801ABBBFC000039FEF /* UIFont+PontoFacil.m in Sources */,
 				87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */,
 				872BC37D1ABBB6D800039FEF /* UIColor+PontoFacil.m in Sources */,
+				87DAF9061AF840E400B692C5 /* Interval.m in Sources */,
 				877081CE1A922F5900541AB3 /* Session+Management.m in Sources */,
 				87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */,
+				87DAF90F1AF847B200B692C5 /* Event.m in Sources */,
 				877081D41A927A3D00541AB3 /* NSDate-Utilities.m in Sources */,
-				87B5C64A1AC7A7F0004AB6A7 /* Interval.m in Sources */,
-				87B5C6501AC7A7F1004AB6A7 /* Event.m in Sources */,
-				87C683221A9EBAD200A2C101 /* ScheduleCollectionViewCell.m in Sources */,
 				87624EA91AA35B5C00CE9FA5 /* Interval+Management.m in Sources */,
+				877AE3E01B15709C00A52542 /* AccordionTableDictionaryDataSource.m in Sources */,
 				87B5C6531AC82F16004AB6A7 /* EventDetailTableViewController.m in Sources */,
-				87B5C64D1AC7A7F1004AB6A7 /* Absence.m in Sources */,
 				87BD55FF1AC62F00008E0511 /* MSWeekDateView.m in Sources */,
 				87147E8A1A85A19A00AB4977 /* Store.m in Sources */,
 				876398F41A911DA00002118E /* DateView.m in Sources */,

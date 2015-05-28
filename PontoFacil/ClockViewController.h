@@ -20,7 +20,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *finishDateLabel;
 
 @property (strong, nonatomic) IBOutlet ActionButton *startStopButton;
-
 @property (strong, nonatomic) IBOutlet UIButton *pauseResumeButton;
+@property (strong, nonatomic) IBOutlet UIButton *reviewButton;
 
 @end

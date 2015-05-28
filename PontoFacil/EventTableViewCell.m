@@ -25,25 +25,23 @@
 
 - (void)configureForEvent:(Event *)event {
     
-    self.weekDateView.date = event.estStartDate;
+    self.weekDateView.date = event.estWorkStart;
     
-    if (event.eventCategoryType == kEventTypeSession) {
+    if (event.eventTypeCategory == kEventTypeNormal) {
         
         self.eventTypeLabel.text = @"Sessão Normal";
-        Session *session = (Session *)event;
+        Session *session = event.session;
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"HH:mm"];
         
         self.startDateLabel.text = [dateFormatter stringFromDate:session.startDate];
-        self.finishDateLabel.text = [dateFormatter stringFromDate:session.startDate];
+        self.finishDateLabel.text = [dateFormatter stringFromDate:session.finishDate];
         self.intervalTimeLabel.text = @"01:00";
         self.timeBalanceLabel.text = session.timeBalanceToString;
     }
-    else if (event.eventCategoryType == kEventTypeHoliday)
+    else if (event.eventTypeCategory == kEventTypeHoliday)
         self.eventTypeLabel.text = @"Feriado";
-    else if (event.eventCategoryType == kEventTypeAbsence)
-        self.eventTypeLabel.text = @"Ausência";
     else
         self.eventTypeLabel.text = @"Outros";
 }

@@ -14,4 +14,8 @@
 
 @property (nonatomic, strong) Session *session;
 
+@property (strong, nonatomic) IBOutlet UILabel *workTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *breakTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *timeBalanceLabel;
+
 @end

@@ -9,12 +9,13 @@
 #import "EventListTableViewController.h"
 #import "FetchedResultsControllerDataSource.h"
 #import "Event+Management.h"
+#import "Session+Management.h"
 #import "EventTableViewCell.h"
 #import "EventDetailTableViewController.h"
 
 static NSString * const cellIdentifier = @"eventCell";
 
-@interface EventListTableViewController () <FetchedResultsControllerDataSourceDelegate>
+@interface EventListTableViewController () <FetchedResultsControllerDataSourceDelegate, UITableViewDelegate>
 
 @property (nonatomic, strong) FetchedResultsControllerDataSource *dataSource;
 
@@ -77,7 +78,7 @@ static NSString * const cellIdentifier = @"eventCell";
 {
     Event *event = object;
     
-    NSString* actionName = [NSString stringWithFormat:@"Excluir evento do dia %@", event.estStartDate];
+    NSString* actionName = [NSString stringWithFormat:@"Excluir evento do dia %@", event.estWorkStart];
     
     // Save Changes
     NSError *error = nil;
@@ -91,6 +92,11 @@ static NSString * const cellIdentifier = @"eventCell";
         [self.undoManager setActionName:actionName];
         //[self showPopOverActionText:[NSString stringWithFormat:@"Clique aqui para desfazer a ação %@", actionName]];
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return true;
 }
 
 #pragma mark Undo Manager

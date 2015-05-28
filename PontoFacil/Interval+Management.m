@@ -23,11 +23,11 @@ static NSString *entityName = @"Interval";
 
 - (NSTimeInterval)intervalTime {
     
-    if (self.finishDate) {
-        return [self.finishDate timeIntervalSinceDate: self.startDate];
+    if (self.intervalFinish) {
+        return [self.intervalFinish timeIntervalSinceDate: self.intervalStart];
     }
     else
-        return [[NSDate date] timeIntervalSinceDate:self.startDate];
+        return [[NSDate date] timeIntervalSinceDate:self.intervalStart];
     
 }
 
@@ -37,8 +37,8 @@ static NSString *entityName = @"Interval";
     Interval *interval = [NSEntityDescription insertNewObjectForEntityForName:entityName
                                                      inManagedObjectContext:Store.defaultManagedObjectContext];
     
-    interval.startDate = startDate;
-    interval.finishDate = finishDate;
+    interval.intervalStart = startDate;
+    interval.intervalFinish = finishDate;
     interval.intervalCategoryType = intervalCategoryType;
     
     return interval;
