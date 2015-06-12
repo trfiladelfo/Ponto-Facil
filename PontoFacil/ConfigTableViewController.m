@@ -8,7 +8,6 @@
 
 #import "ConfigTableViewController.h"
 #import "NSDate-Utilities.h"
-#import "RangeSlider.h"
 
 #define KPICKERHEIGHT 160;
 
@@ -27,7 +26,6 @@
     
     [self loadIntervalDatePicker];
     [self loadDefaultSessionData];
-    [self initRangeSlider];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -87,21 +85,6 @@
     [self.breakTimeNotificationSwitch setOn:[defaults boolForKey:@"timeOutNotification"]];
     
     _showToleranceDatePicker = false;
-}
-
-- (void)initRangeSlider {
-
-
-    // Configure the cell.
-    RangeSlider *slider=  [[RangeSlider alloc] initWithFrame:self.intervalCellView.bounds];
-    slider.minimumValue = 1;
-    slider.selectedMinimumValue = 180;
-    slider.maximumValue = 24*60;
-    slider.selectedMaximumValue = 240;
-    slider.minimumRange = 0;
-    [slider addTarget:self action:@selector(updateIntervalRangeLabel:) forControlEvents:UIControlEventValueChanged];
-    
-    [self.intervalCellView addSubview:slider];
 }
 
 - (void)updateIntervalRangeLabel:(id)sender {

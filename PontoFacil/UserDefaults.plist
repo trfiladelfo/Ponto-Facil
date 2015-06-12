@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>workStartDate</key>
+	<string>09:00</string>
+	<key>workFinishDate</key>
+	<string>18:00</string>
+	<key>breakStartDate</key>
+	<string>12:00</string>
+	<key>breakFinishDate</key>
+	<string>13:00</string>
+	<key>breakTimeRequired</key>
+	<false/>
+	<key>toleranceTime</key>
+	<integer>0</integer>
+	<key>workFinishNotification</key>
+	<true/>
+	<key>breakFinishNotification</key>
+	<true/>
+</dict>
+</plist>

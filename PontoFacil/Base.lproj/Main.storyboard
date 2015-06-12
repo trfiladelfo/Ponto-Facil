@@ -371,7 +371,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <segue destination="aLO-Ms-o3E" kind="presentation" identifier="intervalListSegue" id="RYQ-Xs-QTO"/>
+                                            <action selector="reviewButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Se5-Ab-gb1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytI-H8-LAZ">
@@ -522,7 +522,8 @@
                         <outlet property="pauseResumeButton" destination="ytI-H8-LAZ" id="AWN-Xl-QSL"/>
                         <outlet property="reviewButton" destination="Ynr-zE-hAn" id="l1p-9F-Fsn"/>
                         <outlet property="startDateLabel" destination="xOo-er-dls" id="YXU-X6-X7S"/>
-                        <outlet property="startStopButton" destination="EN3-Pb-K8O" id="jdh-oM-5yf"/>
+                        <outlet property="startStopButton" destination="EN3-Pb-K8O" id="hVH-vo-JYs"/>
+                        <segue destination="aLO-Ms-o3E" kind="presentation" identifier="intervalListSegue" id="vkr-mg-fra"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -746,8 +747,8 @@
         <!--Marcações-->
         <scene sceneID="c5U-KO-MaA">
             <objects>
-                <tableViewController id="DLs-Oc-TlV" customClass="IntervalListTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="10" sectionFooterHeight="10" id="O8Q-ga-5R4">
+                <tableViewController storyboardIdentifier="intervalListTableViewController" id="DLs-Oc-TlV" customClass="IntervalListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="10" sectionFooterHeight="10" id="O8Q-ga-5R4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>

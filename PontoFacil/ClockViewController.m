@@ -17,20 +17,23 @@
 #import "IntervalListTableViewController.h"
 #import "NSString+TimeInterval.h"
 #import "NSUserDefaults+PontoFacil.h"
+#import "UIColor+PontoFacil.h"
+#import "SessionDescriptionFormatter.h"
 
-@interface ClockViewController () <UIActionSheetDelegate>
+@interface ClockViewController ()
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) Session *session;
 @property (nonatomic, assign) BOOL sendWorkTimeNotification;
 @property (nonatomic, assign) BOOL sendBreakTimeNotification;
-@property (nonatomic, assign) NSTimeInterval workTime;
-@property (nonatomic, assign) NSTimeInterval minTimeOut;
 
 @property (nonatomic, assign) BOOL allowNotifications;
 @property (nonatomic, assign) BOOL allowNotificationsSound;
 @property (nonatomic, assign) BOOL allowNotificationsBadge;
 @property (nonatomic, assign) BOOL allowNotificationsAlert;
+@property (nonatomic, assign) NSUserDefaults *userDefaults;
+@property (strong, nonatomic) BDKNotifyHUD *alertViewProvider;
+@property (strong, nonatomic) UIActionSheet *actionSheetProvider;
 
 @end
 
@@ -39,6 +42,37 @@
 NSString * const NotificationCategoryIdent  = @"ACTIONABLE";
 NSString * const NotificationActionOneIdent = @"ACTION_ONE";
 NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
+
+- (NSUserDefaults *)userDefaults
+{
+    if (!_userDefaults) {
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _userDefaults;
+}
+
+- (BDKNotifyHUD *)alertViewProvider {
+
+    if (!_alertViewProvider) {
+        _alertViewProvider = [BDKNotifyHUD notifyHUDWithImage:[UIImage imageNamed:@"Start-Icon"] text:@""];
+        _alertViewProvider.center = CGPointMake(self.view.center.x, self.view.center.y - 20);
+        
+        // Animate it, then get rid of it. These settings last 1 second, takes a half-second fade.
+        [self.view addSubview:_alertViewProvider];
+    }
+    
+    return _alertViewProvider;
+}
+
+- (UIActionSheet *)actionSheetProvider {
+
+    if (!_actionSheetProvider) {
+        _actionSheetProvider = [[UIActionSheet alloc] initWithTitle:@"Deseja realmente finalizar a sessão" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:@"Sim" otherButtonTitles:nil];
+        _actionSheetProvider.tag = 1;
+    }
+    
+    return _actionSheetProvider;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,11 +86,8 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)viewWillAppear:(BOOL)animated {
 
     //Load Default Values
-    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-    self.sendWorkTimeNotification = [defaults workFinishNotification];
-    self.sendBreakTimeNotification = [defaults breakFinishNotification];
-    self.workTime = [defaults defaultWorkTime];
-    self.minTimeOut = [defaults defaultBreakTime];
+    self.sendWorkTimeNotification = [self.userDefaults workFinishNotification];
+    self.sendBreakTimeNotification = [self.userDefaults breakFinishNotification];
     
     [self loadActiveSession];
     [self setNotificationTypesAllowed];
@@ -72,13 +103,13 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)loadActiveSession {
 
     //Active Session
-    NSData *sessionURIData = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionID"];
-    self.session = [Session sessionFromURI:sessionURIData];
+    NSData *sessionURIData = [self.userDefaults activeSessionID];
+    self.session = [[Session alloc] initSessionFromUri:sessionURIData];
     
-    //Se a sessão gravada no User Default não for de hoje e não
+    //Se a sessão não é do dia de hoje e o status está finalizado
     if ((self.session.sessionStateCategory == kSessionStateStop) && (![self.session.event.estWorkStart isToday])) {
         self.session = nil;
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sessionID"];
+        [self.userDefaults setActiveSessionID:nil];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -129,13 +160,12 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         
         self.breakTimeLabel.text = [NSString stringWithTimeInterval:[[self.session.breakTime doubleValue] == 0 ? self.session.event.estBreakTime : self.session.breakTime doubleValue]];
         
-        self.finishDateLabel.text = [formatter stringFromDate:self.session.finishDate == NULL ? (self.session.startDate == NULL ? self.session.event.estWorkFinish : [self.session calculateEstimatedFinishDate:true]) : self.session.finishDate];
+        self.finishDateLabel.text = [formatter stringFromDate:self.session.finishDate == NULL ? (self.session.startDate == NULL ? self.session.event.estWorkFinish : self.session.currentEstWorkFinishDate) : self.session.finishDate];
     }
     else {
-        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-        self.startDateLabel.text = [defaults workStartDate];
-        self.finishDateLabel.text = [defaults workFinishDate];
-        self.breakTimeLabel.text = [NSString stringWithTimeInterval:[defaults defaultBreakTime]];
+        self.startDateLabel.text = [self.userDefaults workStartDate];
+        self.finishDateLabel.text = [self.userDefaults workFinishDate];
+        self.breakTimeLabel.text = [NSString stringWithTimeInterval:[self.userDefaults defaultBreakTime]];
     }
 }
 
@@ -146,33 +176,21 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         if (self.session.sessionStateCategory == kSessionStatePaused)
         {
             self.clockView.status = @"Intervalo";
-            self.clockView.timeLimit = self.minTimeOut;
+            self.clockView.timeLimit = [self.session.event.estBreakTime doubleValue];
             self.clockView.elapsedTime = [self.session.breakTimeInProgress doubleValue];
-            [self.clockView setTintColor:[UIColor colorWithRed:245/255.0 green:166/255.0 blue:35/255.0 alpha:1.0f]];
+            [self.clockView setTintColor:[UIColor clockViewPausedColor]];
         }
         else
         {
             if (self.session.sessionStateCategory == kSessionStateStart) {
                 self.clockView.status = @"Em andamento";
-                [self.clockView setTintColor:[UIColor colorWithRed:25/255.0 green:187/255.0 blue:155/255.0 alpha:1.0f]];
+                [self.clockView setTintColor:[UIColor clockViewInProgressColor]];
             }
             else
             {
-                /*
-                NSString *balanceSignal;
-                
-                if ([_session.estWorkTime doubleValue] > [_session.workTime doubleValue]) {
-                    balanceSignal = @"-";
-                } else {
-                    balanceSignal = @"+";
-                }
-                
-                self.clockView.status = [NSString stringWithFormat:@"%@ %@", balanceSignal, [self stringFromTimeInterval:ABS(self.session.timeBalance)]];
-                */
-                
                 self.clockView.status = @"Finalizada";
                 
-                [self.clockView setTintColor:[UIColor colorWithRed:25/255.0 green:187/255.0 blue:155/255.0 alpha:1.0f]];
+                [self.clockView setTintColor:[UIColor clockViewStopedColor]];
             }
             
             self.clockView.timeLimit = [self.session.event.estWorkTime doubleValue];
@@ -181,11 +199,11 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     }
     else {
     
-        self.clockView.timeLimit = self.workTime;
+        self.clockView.timeLimit = [self.userDefaults defaultWorkTime];
         self.clockView.status = @"Não iniciada";
         self.clockView.elapsedTime = 0;
         
-        [self.clockView setTintColor:[UIColor colorWithRed:25/255.0 green:187/255.0 blue:155/255.0 alpha:1.0f]];
+        [self.clockView setTintColor:[UIColor clockViewNotStartedColor]];
     }
 
 }
@@ -238,14 +256,13 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         
         if (self.session.sessionStateCategory == kSessionStateStart) {
-            NSDate *estFinishDate = [_session calculateEstimatedFinishDate:true];
             
             //Todo: Notificação de 15 minutos só deve ser reeschedulada se ainda não tiver sido disparada
-            [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Seu expediente irá terminar em 15 minutos" andDate:[estFinishDate dateBySubtractingMinutes:15] andRepeatInterval:false];
+            [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Seu expediente irá terminar em 15 minutos" andDate:[_session.currentEstWorkFinishDate dateBySubtractingMinutes:15] andRepeatInterval:false];
             
             //NSLog(@"1-Notifications count = %i", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
             
-            [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Fim do expediente!" andDate:estFinishDate andRepeatInterval:true];
+            [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Fim do expediente!" andDate:_session.currentEstWorkFinishDate andRepeatInterval:true];
         }
         else if (self.session.sessionStateCategory == kSessionStatePaused)
         {
@@ -324,38 +341,9 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
 
 - (void)notifyHUDMessage {
-    
-    if (_session) {
-    
-        NSString *hudMessage;
-        //NSString *balanceSignal;
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"HH:mm"];
-        
-        switch (self.session.sessionStateCategory) {
-            default:
-            case kSessionStateStart:
-                hudMessage = [NSString stringWithFormat:@"Sessão iniciada. Previsão de saída:  %@", [formatter stringFromDate:[_session calculateEstimatedFinishDate:true]]];
-                break;
-            case kSessionStatePaused:
-                hudMessage = [NSString stringWithFormat:@"Em intervalo. Previsão de retorno: %@", [formatter stringFromDate:[[NSDate date] dateByAddingTimeInterval:[_session.event.estBreakTime doubleValue]]]];
-                break;
-            case kSessionStateStop:
-                
-                hudMessage = [NSString stringWithFormat:@"Sessão Finalizada com sucesso. Saldo: %@", [NSString stringWithTimeInterval:self.session.timeBalance]];
-                
-                break;
-        }
-
-        BDKNotifyHUD *hud = [BDKNotifyHUD notifyHUDWithImage:[UIImage imageNamed:@"Start-Icon"] text:hudMessage];
-        hud.center = CGPointMake(self.view.center.x, self.view.center.y - 20);
-        
-        // Animate it, then get rid of it. These settings last 1 second, takes a half-second fade.
-        [self.view addSubview:hud];
-        [hud presentWithDuration:1.0f speed:0.5f inView:self.view completion:^{
-            [hud removeFromSuperview];
-        }];
-    }
+    SessionDescriptionFormatter *sessionFormatter = [[SessionDescriptionFormatter alloc] init];
+    [self.alertViewProvider setText:[sessionFormatter sessionStatusMessageFromSession:self.session]];
+    [self.alertViewProvider presentWithDuration:1.0f speed:0.5f inView:self.view completion:nil];
 }
 
 
@@ -376,10 +364,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     else
     {
         //Stop
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Deseja realmente finalizar a sessão" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:@"Sim" otherButtonTitles:nil];
-        actionSheet.tag = 1;
-        [actionSheet showInView:self.view];
-        
+        [self.actionSheetProvider showInView:self.view];
     }
 }
 
@@ -400,6 +385,11 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     [self refreshStatusView];
     [self refreshClockView];
     [self notifyHUDMessage];
+}
+
+- (IBAction)reviewButtonClick:(id)sender {
+    
+    [self performSegueWithIdentifier:@"intervalListSegue" sender:self];
 }
 
 #pragma mark - Timer Operations
@@ -440,30 +430,15 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 {
     if (!_session)
     {
-        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-        NSString *defaultStartDate = [defaults workStartDate];
-        NSString *defaultFinishDate = [defaults workFinishDate];
-        NSString *defaultBreakStartDate = [defaults breakStartDate];
-        NSString *defaultBreakFinishDate = [defaults breakFinishDate];
-        
-        NSDate *startDate = [NSDate date];
-        
-        NSDate *estWorkStartDate = [[[startDate dateAtStartOfDay] dateByAddingHours:[[defaultStartDate substringToIndex:2] intValue]] dateByAddingMinutes:[[defaultStartDate substringFromIndex:3] intValue]];
-        
-        NSDate *estWorkFinishDate = [[[startDate dateAtStartOfDay] dateByAddingHours:[[defaultFinishDate substringToIndex:2] intValue]] dateByAddingMinutes:[[defaultFinishDate substringFromIndex:3] intValue]];
-        
-        NSDate *estBreakStartDate = [[[startDate dateAtStartOfDay] dateByAddingHours:[[defaultBreakStartDate substringToIndex:2] intValue]] dateByAddingMinutes:[[defaultBreakStartDate substringFromIndex:3] intValue]];
-        
-        NSDate *estBreakFinishDate = [[[startDate dateAtStartOfDay] dateByAddingHours:[[defaultBreakFinishDate substringToIndex:2] intValue]] dateByAddingMinutes:[[defaultBreakFinishDate substringFromIndex:3] intValue]];
-        
-        _session = [Session startSessionWithEstStartDate:estWorkStartDate andEstFinishDate:estWorkFinishDate andEstBreakStartDate:estBreakStartDate andEstBreakFinishDate:estBreakFinishDate];
+        _session = [[Session alloc] init];
+        [_session start];
         
         NSError *error;
         [self.session.managedObjectContext save:&error];
         
         //Salva o ID da sessão ativa
         NSData *sessionURIData = [NSKeyedArchiver archivedDataWithRootObject:self.session.objectID.URIRepresentation];
-        [[NSUserDefaults standardUserDefaults] setObject:sessionURIData forKey:@"sessionID"];
+        [self.userDefaults setActiveSessionID:sessionURIData];
     }
     
 }
@@ -472,9 +447,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     
     if ((_session) && (_session.sessionStateCategory == kSessionStateStart)) {
 
-        [_session finishActiveInterval];
-        [_session setSessionStateCategory:kSessionStatePaused];
-        [_session startInterval:kIntervalTypeBreak];
+        [_session pause];
         [self.session.managedObjectContext save:nil];
     }
 }
@@ -483,31 +456,19 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     
     if ((_session) && (_session.sessionStateCategory == kSessionStatePaused)) {
         
-        [_session finishActiveInterval];
-        [_session setSessionStateCategory:kSessionStateStart];
-        [_session startInterval:kIntervalTypeWork];
+        [_session resume];
         [self.session.managedObjectContext save:nil];
     }
 }
 
 - (void)stopCounter
 {
-    
-    NSDate *now = [NSDate date];
-    
     if (_session) {
         
-        [_session finishActiveInterval];
-        
-        //Finaliza a Sessão
-        _session.finishDate = now;
-        //_session.workAdjustedTime = [NSNumber numberWithDouble:_session.calculateAdjustedWorkTime];
-        _session.sessionStateCategory = kSessionStateStop;
-        
+        [_session stop];
         [self.session.managedObjectContext save:nil];
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         [self stopTimer];
-        
     }
 }
 

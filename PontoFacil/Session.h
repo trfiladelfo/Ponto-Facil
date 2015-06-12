@@ -2,23 +2,25 @@
 //  Session.h
 //  PontoFacil
 //
-//  Created by Carlos Eduardo Arantes Ferreira on 29/03/15.
+//  Created by Carlos Eduardo Arantes Ferreira on 09/06/15.
 //  Copyright (c) 2015 Mobistart. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "Event.h"
 
-@class Interval;
+@class Event, Interval;
 
-@interface Session : Event
+@interface Session : NSManagedObject
 
-@property (nonatomic, retain) NSDate * finishDate;
-@property (nonatomic, retain) NSNumber * isChecked;
-@property (nonatomic, retain) NSNumber * isManual;
-@property (nonatomic, retain) NSNumber * sessionType;
 @property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSDate * finishDate;
+@property (nonatomic, retain) NSDate * currentEstWorkFinishDate;
+@property (nonatomic, retain) NSDate * currentEstBreakFinishDate;
+@property (nonatomic, retain) NSNumber * isChecked;
+@property (nonatomic, retain) NSString * sessionDescription;
+@property (nonatomic, retain) NSNumber * sessionState;
+@property (nonatomic, retain) Event *event;
 @property (nonatomic, retain) NSSet *intervalList;
 @end
 

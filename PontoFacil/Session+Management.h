@@ -18,28 +18,20 @@ typedef enum {
 @interface Session (Management)
 
 @property (nonatomic) SessionStateCategory sessionStateCategory;
+
 @property (nonatomic, assign, readonly) NSNumber *workTime;
 @property (nonatomic, assign, readonly) NSNumber *breakTime;
 @property (nonatomic, assign, readonly) NSNumber *breakTimeInProgress;
+@property (nonatomic, assign, readonly) double timeBalance;
+@property (nonatomic, strong) NSArray *orderedIntervalList;
 
-- (NSTimeInterval)timeBalance;
-//- (NSTimeInterval)adjustedTimeBalance;
-//- (NSTimeInterval)calculateAdjustedWorkTime;
-//- (NSTimeInterval)calculateAdjustedWorkTime: (NSTimeInterval)workTime andBreakTime:(NSTimeInterval)breakTime;
+- (instancetype)init;
+- (instancetype)initSessionFromUri:(NSData *)URIData;
 
-- (NSDate *)calculateEstimatedFinishDate:(BOOL)adjustBreakTime;
-
-+ (instancetype)startSessionWithEstStartDate:(NSDate *)estStartDate andEstFinishDate:(NSDate *)estFinishDate andEstBreakStartDate:(NSDate *)estBreakStartDate andEstBreakFinishDate:(NSDate *)estBreakFinishDate;
-
-+ (Session *)sessionFromURI:(NSData *)URIData;
-
-//- (Interval *)activeInterval;
-
-- (void)startInterval:(IntervalCategoryType)intervalType;
-- (void)finishActiveInterval;
-
-- (NSArray *)dateSortedIntervalList;
-
-- (NSString *)timeBalanceToString;
+//Clock Operations
+- (void)start;
+- (void)stop;
+- (void)pause;
+- (void)resume;
 
 @end

@@ -70,7 +70,7 @@ static NSString * const cellIdentifier = @"intervalCell";
     
     if (self.session) {
     
-        NSArray *intervalArray = [self.session dateSortedIntervalList];
+        NSArray *intervalArray = self.session.orderedIntervalList;
         
         self.dataSource = [[ArrayDataSource alloc] initWithItems:intervalArray
                                                   cellIdentifier:cellIdentifier

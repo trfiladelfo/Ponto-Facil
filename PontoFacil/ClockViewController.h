@@ -11,14 +11,13 @@
 @class CircleProgressView;
 @class ActionButton;
 
-@interface ClockViewController : UIViewController
+@interface ClockViewController : UIViewController <UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet CircleProgressView *clockView;
 
 @property (strong, nonatomic) IBOutlet UILabel *startDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *breakTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *finishDateLabel;
-
 @property (strong, nonatomic) IBOutlet ActionButton *startStopButton;
 @property (strong, nonatomic) IBOutlet UIButton *pauseResumeButton;
 @property (strong, nonatomic) IBOutlet UIButton *reviewButton;

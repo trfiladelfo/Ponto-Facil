@@ -10,6 +10,7 @@
 #import "Event+Management.h"
 #import "Session+Management.h"
 #import "MSWeekDateView.h"
+#import "NSDate-Utilities.h"
 
 @implementation EventTableViewCell
 
@@ -34,11 +35,12 @@
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"HH:mm"];
+        NSDate *today = [[NSDate date] dateAtStartOfDay];
         
         self.startDateLabel.text = [dateFormatter stringFromDate:session.startDate];
         self.finishDateLabel.text = [dateFormatter stringFromDate:session.finishDate];
-        self.intervalTimeLabel.text = @"01:00";
-        self.timeBalanceLabel.text = session.timeBalanceToString;
+        self.intervalTimeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeInterval:[session.breakTime doubleValue] sinceDate:today]];
+        self.timeBalanceLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeInterval:session.timeBalance sinceDate:today]];;
     }
     else if (event.eventTypeCategory == kEventTypeHoliday)
         self.eventTypeLabel.text = @"Feriado";

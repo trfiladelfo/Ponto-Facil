@@ -8,10 +8,39 @@
 
 #import "Event+Management.h"
 #import "Store.h"
+#import "NSUserDefaults+PontoFacil.h"
 
 static NSString *entityName = @"Event";
 
 @implementation Event (Management)
+
+- (instancetype)init {
+
+    Event *_event = [self initWithEntity:[self entity] insertIntoManagedObjectContext:[Store defaultManagedObjectContext]];
+    
+    //Default Values
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm"];
+    [formatter setDefaultDate:[NSDate date]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    _event.estWorkStart = [formatter dateFromString:defaults.workStartDate];
+    _event.estWorkFinish = [formatter dateFromString:defaults.workFinishDate];
+    _event.estBreakStart = [formatter dateFromString:defaults.breakStartDate];
+    _event.estBreakFinish = [formatter dateFromString:defaults.breakFinishDate];
+    _event.eventTypeCategory = kEventTypeNormal;
+    _event.isManual = [NSNumber numberWithBool:false];
+    _event.isAbsence = [NSNumber numberWithBool:false];
+    
+    return _event;
+}
+
+- (NSEntityDescription *)entity {
+
+    return [NSEntityDescription entityForName:entityName inManagedObjectContext:[Store defaultManagedObjectContext]];
+}
 
 
 - (EventTypeCategory)eventTypeCategory {
@@ -58,22 +87,6 @@ static NSString *entityName = @"Event";
     [request setFetchLimit:20];
     
     return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:Store.defaultManagedObjectContext sectionNameKeyPath:@"monthYearEstWorkStartDate" cacheName:nil];
-}
-
-+ (instancetype)insertEventWithEstWorkStart:(NSDate *)estWorkStart andEstWorkFinish:(NSDate *)estWorkFinish andEstBreakStart:(NSDate *)estBreakStart andEstBreakFinish:(NSDate *)estBreakFinish andIsManual:(BOOL)isManual andEventTypeCategory:(EventTypeCategory)eventTypeCategory andEventDescription:(NSString *)eventDescription {
-
-    Event *event = [NSEntityDescription insertNewObjectForEntityForName:entityName
-                                                     inManagedObjectContext:Store.defaultManagedObjectContext];
-    
-    event.estWorkStart = estWorkStart;
-    event.estWorkFinish = estWorkFinish;
-    event.estBreakStart = estBreakStart;
-    event.estBreakFinish = estBreakFinish;
-    event.eventTypeCategory = eventTypeCategory;
-    event.isManual = [NSNumber numberWithBool:isManual];
-    event.eventDescription = eventDescription;
-    
-    return event;
 }
 
 @end

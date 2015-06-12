@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "PersistentStack.h"
-#import "Store.h"
 #import "UIColor+PontoFacil.h"
 #import "UIFont+PontoFacil.h"
 #import "NSUserDefaults+PontoFacil.h"
@@ -36,32 +35,8 @@
     
     self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL modelURL:self.modelURL];
     self.managedObjectContext = self.persistentStack.managedObjectContext;
-    
-    [self loadDefaultUserData];
 
     return YES;
-}
-
-- (void)loadDefaultUserData {
-
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (!defaults.isLoaded) {
-        defaults.workStartDate = @"09:00";
-        defaults.workFinishDate = @"18:00";
-        defaults.defaultWorkTime = 3600 * 8;
-        
-        defaults.breakStartDate = @"12:00";
-        defaults.breakFinishDate = @"13:00";
-        defaults.defaultBreakTime = 3600;
-        
-        defaults.breakTimeRequired = false;
-        defaults.toleranceTime = 0;
-        defaults.workFinishNotification = true;
-        defaults.breakFinishNotification = true;
-        
-        [defaults synchronize];
-    }
 }
 
 

@@ -14,109 +14,21 @@
 
 static NSString *entityName = @"Session";
 
+@interface Session()
+
+@end
+
 @implementation Session (Management)
 
-
-- (SessionStateCategory)sessionStateCategory {
-    return (SessionStateCategory)[[self sessionState] intValue];
+- (instancetype)init {
+    
+    Session *_session = [self initWithEntity:[self entity] insertIntoManagedObjectContext:[Store defaultManagedObjectContext]];
+    _session.event = [[Event alloc] init];
+    
+    return _session;
 }
 
-- (void)setSessionStateCategory:(SessionStateCategory)sessionStateCategory {
-    [self setSessionState:[NSNumber numberWithInt:sessionStateCategory]];
-}
-
-
-- (NSDate *)calculateEstimatedFinishDate: (BOOL)adjustBreakTime {
-    
-    //Calcula a data prevista de saída
-    NSDate *estFinishDateTime = [self.startDate dateByAddingTimeInterval:[self.event.estWorkTime doubleValue]];
-    
-    if  ([self.breakTime doubleValue] > 0) {
-        estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.breakTime doubleValue]];
-    }
-    else {
-        if (adjustBreakTime) {
-            estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.event.estBreakTime doubleValue]];
-        }
-    }
-    
-    return estFinishDateTime;
-}
-
-- (NSNumber *)calculateBreakTime: (BOOL)inProgress {
-
-    if ([self.intervalList count] > 0) {
-        
-        NSPredicate *intervalTypePredicate = [NSPredicate predicateWithFormat:@"intervalType == %@", [NSNumber numberWithInt:kIntervalTypeBreak]];
-        
-        NSPredicate *finishDatePredicate = [NSPredicate predicateWithFormat:@"intervalFinish != nil"];
-        
-        NSArray *predicateArray;
-        
-        if (!inProgress) {
-            predicateArray = [NSArray arrayWithObjects:intervalTypePredicate, finishDatePredicate, nil];
-        }
-        else
-            predicateArray = [NSArray arrayWithObjects:intervalTypePredicate, nil];
-        
-        
-        NSCompoundPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
-        
-        NSSet *breakIntervals = [self.intervalList filteredSetUsingPredicate:compoundPredicate];
-        
-        if ([breakIntervals count] > 0) {
-            return [breakIntervals valueForKeyPath:@"@sum.intervalTime"];
-        }
-        else
-            return 0;
-    }
-    else
-        return 0;
-}
-
-#pragma mark - Core Data Methods
-
-+ (instancetype)startSessionWithEstStartDate:(NSDate *)estStartDate andEstFinishDate:(NSDate *)estFinishDate andEstBreakStartDate:(NSDate *)estBreakStartDate andEstBreakFinishDate:(NSDate *)estBreakFinishDate {
-
-    Event *event = [Event insertEventWithEstWorkStart:estStartDate andEstWorkFinish:estFinishDate andEstBreakStart:estBreakStartDate andEstBreakFinish:estBreakFinishDate andIsManual:false andEventTypeCategory:kEventTypeNormal andEventDescription:nil];
-    
-    NSDate *now = [NSDate date];
-    
-    Session *session = [self insertSessionWithEvent:event andStartDate:now];
-    
-    [session addIntervalListObject:[Interval insertIntervalWithStartDate:now andfinishDate:nil andIntervalCategoryType:kIntervalTypeWork]];
-    
-    return session;
-}
-
-+ (instancetype)insertSessionWithEvent:(Event *)event andStartDate:(NSDate *)startDate {
-
-    return [self insertSessionWithEvent:event andSessionCategory:kSessionStateStart andStartDate:startDate andSessionDescription:@""];
-}
-
-
-+ (instancetype)insertSessionWithEvent:(Event *)event andStartDate:(NSDate *)startDate andFinishDate:(NSDate *)finishDate andSessionDescription:(NSString *)sessionDescription {
-    
-    Session *session = [self insertSessionWithEvent:event andSessionCategory:kSessionStateStop andStartDate:startDate andSessionDescription:sessionDescription];
-    session.finishDate = finishDate;
-    
-    return session;
-}
-
-+ (instancetype)insertSessionWithEvent:(Event *)event andSessionCategory:(SessionStateCategory)sessionCategory andStartDate:(NSDate *)startDate andSessionDescription:(NSString *)sessionDescription {
-
-    Session *session = [NSEntityDescription insertNewObjectForEntityForName:entityName
-                                                     inManagedObjectContext:Store.defaultManagedObjectContext];
-    session.event = event;
-    session.sessionStateCategory = sessionCategory;
-    session.startDate = startDate;
-    session.isChecked = [NSNumber numberWithBool:false];
-    session.sessionDescription = sessionDescription;
-    
-    return session;
-}
-
-+ (Session *)sessionFromURI:(NSData *)URIData {
+- (instancetype)initSessionFromUri:(NSData *)URIData {
 
     if (URIData) {
         NSURL *sessionIDURI = [NSKeyedUnarchiver unarchiveObjectWithData:URIData];
@@ -128,8 +40,8 @@ static NSString *entityName = @"Session";
             if (sessionID) {
                 NSError *error = nil;
                 return (Session *)[[Store defaultManagedObjectContext]
-                                           existingObjectWithID:sessionID
-                                           error:&error];
+                                   existingObjectWithID:sessionID
+                                   error:&error];
             }
         }
     }
@@ -137,35 +49,20 @@ static NSString *entityName = @"Session";
     return nil;
 }
 
-- (Interval *)activeInterval {
+- (NSEntityDescription *)entity {
     
-    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"intervalStart" ascending:NO]];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"intervalFinish = nil"];
-    
-    return [[[self.intervalList filteredSetUsingPredicate:predicate] sortedArrayUsingDescriptors:sortDescriptors] firstObject];
-}
-
-- (void)startInterval:(IntervalCategoryType)intervalType {
-
-    if (!self.activeInterval) {
-        
-        NSDate *now = [NSDate date];
-        
-        [self addIntervalListObject:[Interval insertIntervalWithStartDate:now andfinishDate:nil andIntervalCategoryType:intervalType]];
-    }
-}
-
-- (void)finishActiveInterval {
-    
-    if (self.activeInterval) {
-        
-        NSDate *now = [NSDate date];
-        self.activeInterval.intervalFinish = now;
-    }
+    return [NSEntityDescription entityForName:entityName inManagedObjectContext:[Store defaultManagedObjectContext]];
 }
 
 #pragma mark - Session Attributes
+
+- (SessionStateCategory)sessionStateCategory {
+    return (SessionStateCategory)[[self sessionState] intValue];
+}
+
+- (void)setSessionStateCategory:(SessionStateCategory)sessionStateCategory {
+    [self setSessionState:[NSNumber numberWithInt:sessionStateCategory]];
+}
 
 - (NSNumber *)workTime {
     
@@ -201,8 +98,8 @@ static NSString *entityName = @"Session";
 }
 
 - (NSString *)timeBalanceToString {
-
-
+    
+    
     NSString *balanceSignal;
     
     if ([self.event.estWorkTime doubleValue] > [self.workTime doubleValue]) {
@@ -220,15 +117,15 @@ static NSString *entityName = @"Session";
 }
 
 /*
-- (NSTimeInterval)adjustedTimeBalance {
-    
-    NSTimeInterval _balance = 0;
-    
-    _balance = [self.workAdjustedTime doubleValue] - [self.estWorkTime doubleValue];
-    
-    return _balance;
-}
-*/
+ - (NSTimeInterval)adjustedTimeBalance {
+ 
+ NSTimeInterval _balance = 0;
+ 
+ _balance = [self.workAdjustedTime doubleValue] - [self.estWorkTime doubleValue];
+ 
+ return _balance;
+ }
+ */
 
 - (CGFloat)progress {
     
@@ -244,15 +141,138 @@ static NSString *entityName = @"Session";
         return 0;
 }
 
-- (NSArray *)dateSortedIntervalList {
-
-    NSArray *intervalListArray = [self.intervalList allObjects];
+- (NSArray *)orderedIntervalList {
     
-    NSSortDescriptor *descriptor=[[NSSortDescriptor alloc] initWithKey:@"intervalStart" ascending:NO];
-    NSArray *descriptors=[NSArray arrayWithObject: descriptor];
-    NSArray *sortedArray =[intervalListArray sortedArrayUsingDescriptors:descriptors];
-    
-    return sortedArray;
+    if (self.intervalList) {
+        NSArray *intervalListArray = [self.intervalList allObjects];
+        
+        NSSortDescriptor *descriptor=[[NSSortDescriptor alloc] initWithKey:@"intervalStart" ascending:NO];
+        NSArray *descriptors=[NSArray arrayWithObject: descriptor];
+        NSArray *sortedArray =[intervalListArray sortedArrayUsingDescriptors:descriptors];
+        
+        return sortedArray;
+    }
+    else
+        return nil;
 }
 
+#pragma mark - Private Methods
+
+
+- (NSDate *)calculateEstimatedWorkFinishDate: (BOOL)adjustBreakTime {
+    
+    //Calcula a data prevista de saída
+    NSDate *estFinishDateTime = [self.startDate dateByAddingTimeInterval:[self.event.estWorkTime doubleValue]];
+    
+    if  ([self.breakTime doubleValue] > 0) {
+        estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.breakTime doubleValue]];
+    }
+    else {
+        if (adjustBreakTime) {
+            estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.event.estBreakTime doubleValue]];
+        }
+    }
+    
+    return estFinishDateTime;
+}
+
+- (NSDate *)calculateEstimatedBreakFinishDate {
+    
+    NSDate *estFinishDate = [NSDate date];
+    
+    if (self.event.estBreakTime > self.breakTime) {
+        return [[estFinishDate dateByAddingTimeInterval:[self.event.estBreakTime doubleValue]] dateByAddingTimeInterval:-[self.breakTime doubleValue]];
+    }
+    else
+        return estFinishDate;
+}
+
+- (NSNumber *)calculateBreakTime: (BOOL)inProgress {
+
+    if ([self.intervalList count] > 0) {
+        
+        NSPredicate *intervalTypePredicate = [NSPredicate predicateWithFormat:@"intervalType == %@", [NSNumber numberWithInt:kIntervalTypeBreak]];
+        
+        NSPredicate *finishDatePredicate = [NSPredicate predicateWithFormat:@"intervalFinish != nil"];
+        
+        NSArray *predicateArray;
+        
+        if (!inProgress) {
+            predicateArray = [NSArray arrayWithObjects:intervalTypePredicate, finishDatePredicate, nil];
+        }
+        else
+            predicateArray = [NSArray arrayWithObjects:intervalTypePredicate, nil];
+        
+        
+        NSCompoundPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
+        
+        NSSet *breakIntervals = [self.intervalList filteredSetUsingPredicate:compoundPredicate];
+        
+        if ([breakIntervals count] > 0) {
+            return [breakIntervals valueForKeyPath:@"@sum.intervalTime"];
+        }
+        else
+            return 0;
+    }
+    else
+        return 0;
+}
+
+- (Interval *)activeInterval {
+    
+    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"intervalStart" ascending:NO]];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"intervalFinish = nil"];
+    
+    return [[[self.intervalList filteredSetUsingPredicate:predicate] sortedArrayUsingDescriptors:sortDescriptors] firstObject];
+}
+
+- (void)startInterval:(IntervalCategoryType)intervalType {
+    
+    if (!self.activeInterval) {
+        
+        NSDate *now = [NSDate date];
+        
+        [self addIntervalListObject:[Interval insertIntervalWithStartDate:now andfinishDate:nil andIntervalCategoryType:intervalType]];
+    }
+}
+
+- (void)finishActiveInterval {
+    
+    if (self.activeInterval) {
+        
+        NSDate *now = [NSDate date];
+        self.activeInterval.intervalFinish = now;
+    }
+}
+
+
+#pragma mark - Clock Operations
+
+- (void)start {
+    self.startDate = [NSDate date];
+    self.currentEstWorkFinishDate = [self calculateEstimatedWorkFinishDate:true];
+    [self startInterval:kIntervalTypeWork];
+    [self setSessionStateCategory:kSessionStateStart];
+}
+
+- (void)pause {
+    [self finishActiveInterval];
+    self.currentEstBreakFinishDate = [self calculateEstimatedBreakFinishDate];
+    [self startInterval:kIntervalTypeBreak];
+    [self setSessionStateCategory:kSessionStatePaused];
+}
+
+- (void)resume {
+    self.currentEstWorkFinishDate = [self calculateEstimatedWorkFinishDate:true];
+    [self finishActiveInterval];
+    [self startInterval:kIntervalTypeWork];
+    [self setSessionStateCategory:kSessionStateStart];
+}
+
+- (void)stop {
+    [self finishActiveInterval];
+    self.finishDate = [NSDate date];
+    [self setSessionStateCategory:kSessionStateStop];
+}
 @end

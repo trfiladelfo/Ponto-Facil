@@ -21,6 +21,6 @@ typedef enum {
 
 + (NSFetchedResultsController *)fetchedResultsController;
 
-+ (instancetype)insertEventWithEstWorkStart:(NSDate *)estWorkStart andEstWorkFinish:(NSDate *)estWorkFinish andEstBreakStart:(NSDate *)estBreakStart andEstBreakFinish:(NSDate *)estBreakFinish andIsManual:(BOOL)isManual andEventTypeCategory:(EventTypeCategory)eventTypeCategory andEventDescription:(NSString *)eventDescription;
+-(instancetype)init;
 
 @end
