@@ -7,8 +7,24 @@
 //
 
 #import "NSUserDefaults+PontoFacil.h"
+#import "NSDate-Utilities.h"
 
 @implementation NSUserDefaults (PontoFacil)
+
++ (void)initialize {
+    
+    NSString *defaultsPath = [[NSBundle mainBundle] pathForResource:@"UserDefaults"
+                                                             ofType:@"plist"];
+    
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:defaultsPath];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults registerDefaults:appDefaults];
+    
+    [defaults setIsLoaded:true];
+    
+}
 
 - (BOOL)isLoaded {
     return [self objectForKey:@"isLoaded"] == nil ? false : [[self objectForKey:@"isLoaded"] boolValue];
@@ -21,69 +37,86 @@
 #pragma mark - Timetable
 
 - (void)setWorkStartDate:(NSString *)workStartDate {
-    [self setValue:workStartDate forKey:@"defaultStartDate"];
+    [self setValue:workStartDate forKey:@"workStartDate"];
 }
 
 - (NSString *)workStartDate {
-    return [self objectForKey:@"defaultStartDate"];
+    return [self objectForKey:@"workStartDate"];
 }
 
 - (void)setWorkFinishDate:(NSString *)workFinishDate {
-    [self setValue:workFinishDate forKey:@"defaultStopDate"];
+    [self setValue:workFinishDate forKey:@"workFinishDate"];
 }
 
 - (NSString *)workFinishDate {
-    return [self objectForKey:@"defaultStopDate"];
+    return [self stringForKey:@"workFinishDate"];
 }
 
 - (double)defaultWorkTime {
-    return [self doubleForKey:@"defaultWorkTime"];
-}
-
-- (void)setDefaultWorkTime:(double)defaultWorkTime {
-    [self setDouble:defaultWorkTime forKey:@"defaultWorkTime"];
+    if (self.isLoaded) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"HH:mm"];
+        [formatter setDefaultDate:[NSDate date]];
+        
+        NSDate *workStartDate = [formatter dateFromString:[self workStartDate]];
+        NSDate *workFinishDate = [formatter dateFromString:[self workFinishDate]];
+        
+        return [workFinishDate timeIntervalSinceDate:workStartDate] - self.defaultBreakTime;
+    }
+    else {
+        return 0;
+    };
 }
 
 - (void)setBreakStartDate:(NSString *)breakStartDate {
-    [self setValue:breakStartDate forKey:@"defaultBreakStartDate"];
+    [self setValue:breakStartDate forKey:@"breakStartDate"];
 }
 
 - (NSString *)breakStartDate {
-    return [self objectForKey:@"defaultBreakStartDate"];
+    return [self objectForKey:@"breakStartDate"];
 }
 
 - (void)setBreakFinishDate:(NSString *)breakFinishDate {
-    [self setValue:breakFinishDate forKey:@"defaultBreakStopDate"];
+    [self setValue:breakFinishDate forKey:@"breakFinishDate"];
 }
 
 - (NSString *)breakFinishDate {
-    return [self valueForKey:@"defaultBreakStopDate"];
+    return [self valueForKey:@"breakFinishDate"];
 }
 
 - (double)defaultBreakTime {
-    return [self doubleForKey:@"defaultBreakTime"];
+    if (self.isLoaded) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"HH:mm"];
+        [formatter setDefaultDate:[NSDate date]];
+        
+        NSDate *breakStartDate = [formatter dateFromString:[self breakStartDate]];
+        NSDate *breakFinishDate = [formatter dateFromString:[self breakFinishDate]];
+        
+        return [breakFinishDate timeIntervalSinceDate:breakStartDate];
+    }
+    else {
+        return 0;
+    };
 }
 
-- (void)setDefaultBreakTime:(double)defaultBreakTime {
-    [self setDouble:defaultBreakTime forKey:@"defaultBreakTime"];
-}
 
 #pragma mark - Notifications
 
 - (BOOL)workFinishNotification {
-    return [self boolForKey:@"workTimeNotification"];
+    return [self boolForKey:@"workFinishNotification"];
 }
 
 - (void)setWorkFinishNotification:(BOOL)workFinishNotification {
-    [self setBool:workFinishNotification forKey:@"workTimeNotification"];
+    [self setBool:workFinishNotification forKey:@"workFinishNotification"];
 }
 
 - (BOOL)breakFinishNotification {
-    return [self boolForKey:@"breakTimeNotification"];
+    return [self boolForKey:@"breakFinishNotification"];
 }
 
 - (void)setBreakFinishNotification:(BOOL)breakFinishNotification {
-    [self setBool:breakFinishNotification forKey:@"breakTimeNotification"];
+    [self setBool:breakFinishNotification forKey:@"breakFinishNotification"];
 }
 
 
@@ -103,6 +136,16 @@
 
 - (void)setToleranceTime:(NSInteger)toleranceTime {
     [self setInteger:toleranceTime forKey:@"toleranceTime"];
+}
+
+#pragma mark - active session in Clock View
+
+- (NSData *)activeSessionID {
+    return [self dataForKey:@"activeSessionID"];
+}
+
+- (void)setActiveSessionID:(NSData *)activeSessionID {
+    [self setValue:activeSessionID forKey:@"activeSessionID"];
 }
 
 @end

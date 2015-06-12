@@ -10,6 +10,11 @@
 
 @implementation ActionButton
 
++ (Class)class {
+
+    return [self superclass];
+}
+
 -(void)awakeFromNib {
     [self.layer setMasksToBounds:YES];
     self.layer.cornerRadius = 50.0f;

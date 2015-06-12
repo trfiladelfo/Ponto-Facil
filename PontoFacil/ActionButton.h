@@ -10,5 +10,6 @@
 
 @interface ActionButton : UIButton
 
++ (Class)class;
 
 @end

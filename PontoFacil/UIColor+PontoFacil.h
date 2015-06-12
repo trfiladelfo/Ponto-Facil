@@ -15,4 +15,9 @@
 + (UIColor *) eventCellTitleColor;
 + (UIColor *) weekDateViewColor;
 
++ (UIColor *)clockViewInProgressColor;
++ (UIColor *)clockViewPausedColor;
++ (UIColor *)clockViewStopedColor;
++ (UIColor *)clockViewNotStartedColor;
+
 @end
