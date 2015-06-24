@@ -12,12 +12,12 @@
 
 @property (assign, nonatomic) double initialProgress;
 @property (nonatomic, strong) CAShapeLayer *progressLayer;
-@property (nonatomic, assign) CGRect frame;
 
 @end
 
 @implementation CircleShapeLayer
 
+@dynamic frame;
 @synthesize percent = _percent;
 
 - (instancetype)init {

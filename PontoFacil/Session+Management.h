@@ -23,7 +23,7 @@ typedef enum {
 @property (nonatomic, assign, readonly) NSNumber *breakTime;
 @property (nonatomic, assign, readonly) NSNumber *breakTimeInProgress;
 @property (nonatomic, assign, readonly) double timeBalance;
-@property (nonatomic, strong) NSArray *orderedIntervalList;
+@property (nonatomic, strong, readonly) NSArray *orderedIntervalList;
 
 - (instancetype)init;
 - (instancetype)initSessionFromUri:(NSData *)URIData;

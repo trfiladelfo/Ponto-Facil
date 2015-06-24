@@ -724,6 +724,7 @@
 				TargetAttributes = {
 					87147E511A859F6000AB4977 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = JAH63CX6ST;
 					};
 					87147E6D1A859F6100AB4977 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -1011,6 +1012,8 @@
 			baseConfigurationReference = 20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = PontoFacil/Info.plist;
@@ -1018,6 +1021,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1027,6 +1031,8 @@
 			baseConfigurationReference = 4A509C852DCA71143874690E /* Pods-PontoFacil.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = PontoFacil/Info.plist;
@@ -1034,6 +1040,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

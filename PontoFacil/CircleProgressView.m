@@ -52,7 +52,7 @@
         _progressLabel.numberOfLines = 2;
         _progressLabel.textAlignment = NSTextAlignmentCenter;
         _progressLabel.backgroundColor = [UIColor clearColor];
-        _progressLabel.textColor = [UIColor whiteColor];
+        _progressLabel.textColor = [UIColor blackColor];
         
         [self addSubview:_progressLabel];
     }

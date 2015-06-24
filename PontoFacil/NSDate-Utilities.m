@@ -121,7 +121,7 @@
 	if (components1.weekOfMonth != components2.weekOfMonth) return NO;
 	
 	// Must have a time interval under 1 week. Thanks @aclark
-	return (abs([self timeIntervalSinceDate:aDate]) < D_WEEK);
+	return (fabs([self timeIntervalSinceDate:aDate]) < D_WEEK);
 }
 
 - (BOOL) isThisWeek
