@@ -43,8 +43,8 @@ NSString * const NotificationCategoryIdent  = @"ACTIONABLE";
 NSString * const NotificationActionOneIdent = @"ACTION_ONE";
 NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
-- (NSUserDefaults *)userDefaults
-{
+
+- (NSUserDefaults *)userDefaults {
     if (!_userDefaults) {
         _userDefaults = [NSUserDefaults standardUserDefaults];
     }
@@ -78,9 +78,6 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     [super viewDidLoad];
     
     [self registerForNotification];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEventListNotification) name:@"eventListNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleScheduleNewNotification) name:@"scheduleNewNotification" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -246,7 +243,11 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         
         // Register the notification settings.
         [[UIApplication sharedApplication] registerUserNotificationSettings:newSettings];
+        
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEventListNotification) name:@"eventListNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleScheduleNewNotification) name:@"scheduleNewNotification" object:nil];
 }
 
 - (void)scheduleNotifications {

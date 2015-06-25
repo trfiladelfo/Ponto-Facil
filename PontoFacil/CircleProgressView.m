@@ -76,6 +76,7 @@
     _elapsedTime = elapsedTime;
     self.progressLayer.elapsedTime = elapsedTime;
     self.progressLabel.attributedText = [self formatProgressStringFromTimeInterval:elapsedTime];
+    [self layoutSubviews];
 }
 
 #pragma mark - Private Methods
