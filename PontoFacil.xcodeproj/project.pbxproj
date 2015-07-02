@@ -222,6 +222,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		213EEC6D1B3D01AF006F6B17 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				876398E51A8D888F0002118E /* Open Sans 800.ttf */,
+				876398E61A8D888F0002118E /* Open Sans regular.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		2A49D782D2A1205A55AD0438 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,8 +293,7 @@
 		87147E551A859F6000AB4977 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				876398E51A8D888F0002118E /* Open Sans 800.ttf */,
-				876398E61A8D888F0002118E /* Open Sans regular.ttf */,
+				213EEC6D1B3D01AF006F6B17 /* Fonts */,
 				87ABAAFB1B1BD5BC00060AA0 /* UserDefaults.plist */,
 				87147E561A859F6000AB4977 /* Info.plist */,
 				87147E571A859F6000AB4977 /* main.m */,

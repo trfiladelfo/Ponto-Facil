@@ -17,7 +17,6 @@ static NSString * const pickerCellIdentifier = @"datePickerCell";
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) NSDictionary *items;
 @property (nonatomic, copy) NSString *cellIdentifier;
-@property (nonatomic, copy) TableViewCellConfigureBlock configureCellBlock;
 @property (strong, nonatomic) NSIndexPath *datePickerIndexPath;
 @property (strong, nonatomic) NSIndexPath *datePickerParentIndexPath;
 
@@ -25,15 +24,13 @@ static NSString * const pickerCellIdentifier = @"datePickerCell";
 
 @implementation AccordionTableDictionaryDataSource
 
-- (id)initWithTableView:(UITableView *)tableView andItems:(NSDictionary *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock {
+- (id)initWithTableView:(UITableView *)tableView {
 
     self = [super init];
     if (self) {
         self.tableView = tableView;
         self.tableView.delegate = self;
-        self.items = items;
-        self.cellIdentifier = cellIdentifier;
-        self.configureCellBlock = [configureCellBlock copy];
+        //self.items = items;
     }
     return self;
 }
@@ -42,12 +39,10 @@ static NSString * const pickerCellIdentifier = @"datePickerCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numberOfRows = self.items.count;
+    NSInteger numberOfRows = [self.tableView numberOfRowsInSection:section];
     
     if ([self datePickerIsShown]){
-        
         numberOfRows++;
-        
     }
     
     return numberOfRows;
@@ -67,15 +62,7 @@ static NSString * const pickerCellIdentifier = @"datePickerCell";
         return pickerCell;
         
     } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier
-                                               forIndexPath:indexPath];
-        
-        id title = [[self.items allKeys] objectAtIndex:indexPath.row];
-        id subtitle = [self.items objectForKey:title];
-        
-        self.configureCellBlock(cell, title, subtitle);
-        
-        return cell;
+        return [self.tableView cellForRowAtIndexPath:indexPath];
     }
 }
 

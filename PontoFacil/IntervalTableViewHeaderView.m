@@ -7,6 +7,7 @@
 //
 
 #import "IntervalTableViewHeaderView.h"
+#import "UIColor+PontoFacil.h"
 
 @interface IntervalTableViewHeaderView ()
 
@@ -35,9 +36,17 @@
     //Note That You Must Change @”BNYSharedView’ With Whatever Your Nib Is Named
     [[NSBundle mainBundle] loadNibNamed:@"IntervalTableViewHeaderView" owner:self options:nil];
     
-    self.contentView.layer.cornerRadius = 5.0f;
-    
     [self addSubview: self.contentView];
+    
+    [self.estimatedWorkView setBackgroundColor:[UIColor statusLabelShadowColor]];
+    [self.workView setBackgroundColor:[UIColor statusLabelShadowColor]];
+    [self.timeOutView setBackgroundColor:[UIColor statusLabelShadowColor]];
+    [self.balanceView setBackgroundColor:[UIColor statusLabelShadowColor]];
+    
+    [self.estimatedWorkView.layer setCornerRadius:5.0f];
+    [self.workView.layer setCornerRadius:5.0f];
+    [self.timeOutView.layer setCornerRadius:5.0f];
+    [self.balanceView.layer setCornerRadius:5.0f];
 }
 
 - (void)layoutSubviews {

@@ -7,154 +7,63 @@
 //
 
 #import "ConfigTableViewController.h"
-#import "NSDate-Utilities.h"
+#import "NSUserDefaults+PontoFacil.h"
+#import "NSString+TimeInterval.h"
 
 #define KPICKERHEIGHT 160;
 
 @interface ConfigTableViewController ()
 
-@property (nonatomic, assign) BOOL showToleranceDatePicker;
-@property (strong, nonatomic) NSMutableArray *minutes;
-@property (nonatomic, assign) int selTolerance;
+@property (nonatomic, assign) NSUserDefaults *userDefaults;
 
 @end
 
 @implementation ConfigTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self loadIntervalDatePicker];
-    [self loadDefaultSessionData];
+- (NSUserDefaults *)userDefaults {
+    if (!_userDefaults) {
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _userDefaults;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    [self saveDefaultSessionData];
+- (void)viewDidAppear:(BOOL)animated {
+
+    [self loadDefaultData];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+
+    [self saveDefaultData];
 }
 
 #pragma mark - Private Functions
 
-- (void)loadIntervalDatePicker {
+
+- (void)loadDefaultData {
     
-    if (!_minutes) {
-        _minutes = [NSMutableArray arrayWithCapacity:59];
-    }
-    
-    for (int i = 0; i < 60; i++) {
-        [_minutes insertObject:[NSString stringWithFormat:@"%.2i", i] atIndex:i];
-    }
+    self.workTimeLabel.text = [NSString stringWithTimeInterval:[self.userDefaults defaultWorkTime]];
+    [self.regularTimeNotificationSwitch setOn:[self.userDefaults workFinishNotification]];
+    [self.breakTimeNotificationSwitch setOn:[self.userDefaults breakFinishNotification]];
+    [self.breakTimeAdjustSwitch setOn:[self.userDefaults breakTimeRequired]];
+    self.toleranceTimeLabel.text = [NSString stringWithFormat:@"%2li", [self.userDefaults toleranceTime]];
 }
 
-- (void)loadDefaultSessionData {
-
-    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    
-    if ([defaults stringForKey:@"defaultStartDate"]) {
-        self.startDateLabel.text = [defaults stringForKey:@"defaultStartDate"];
-        self.finishDateLabel.text = [defaults stringForKey:@"defaultStopDate"];
-        
-        NSDate *startDate = [dateFormatter dateFromString:self.startDateLabel.text];
-        NSDate *finishDate = [dateFormatter dateFromString:self.finishDateLabel.text];
-        
-        [_startDatePicker setDate:startDate];
-        [_finishDatePicker setDate:finishDate];
-    }
-    
-    if ([defaults stringForKey:@"defaultBreakTime"]) {
-        self.breakTimeLabel.text = [defaults stringForKey:@"defaultBreakTime"];
-        
-        //int hour = [[self.breakTimeLabel.text substringToIndex:2] intValue];
-        //int minute = [[self.breakTimeLabel.text substringFromIndex:3] intValue];
-        //self.selHour = [NSString stringWithFormat:@"%2i", hour];
-        //self.selMinute = [NSString stringWithFormat:@"%2i", minute];
-        
-        //[_timeOutPicker selectRow:hour inComponent:0 animated:false];
-        //[_timeOutPicker selectRow:minute inComponent:1 animated:false];
-    }
-    
-    
-    [self.breakTimeAdjustSwitch setOn:[defaults boolForKey:@"adjustMinTimeOut"]];
-    
-    _selTolerance = (int)[defaults integerForKey:@"toleranceTime"];
-    self.toleranceTimeLabel.text = [NSString stringWithFormat:@"%2i", _selTolerance];
-    
-    [self.regularTimeNotificationSwitch setOn:[defaults boolForKey:@"workTimeNotification"]];
-    [self.breakTimeNotificationSwitch setOn:[defaults boolForKey:@"timeOutNotification"]];
-    
-    _showToleranceDatePicker = false;
-}
-
-- (void)updateIntervalRangeLabel:(id)sender {
-
-    //
-}
-
-- (void)saveDefaultSessionData {
-    
-    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
-    [dateFormater setDateFormat:@"HH:mm"];
-    
-    NSDate *startDate = [dateFormater dateFromString:self.startDateLabel.text];
-    NSDate *finishDate = [dateFormater dateFromString:self.finishDateLabel.text];
-    NSDate *breakRefDate = [[[[NSDate date] dateAtStartOfDay] dateByAddingHours:[[_breakTimeLabel.text substringToIndex:2] intValue]] dateByAddingMinutes:[[_breakTimeLabel.text substringFromIndex:3] intValue]];
-    NSTimeInterval breakTimeCount = [breakRefDate timeIntervalSinceDate:[[NSDate date] dateAtStartOfDay]];
-    
-    NSTimeInterval workTime = [finishDate timeIntervalSinceDate:startDate] - breakTimeCount;
+- (void)saveDefaultData {
     
     //Grava as configurações
-    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-    [defaults setValue:self.startDateLabel.text forKey:@"defaultStartDate"];
-    [defaults setValue:self.breakTimeLabel.text forKey:@"defaultBreakTime"];
-    [defaults setValue:self.finishDateLabel.text forKey:@"defaultStopDate"];
-    [defaults setDouble:breakTimeCount forKey:@"defaultMinTimeOut"];
-    [defaults setDouble:workTime forKey:@"defaultWorkTime"];
-    
-    [defaults setBool:self.breakTimeAdjustSwitch.isOn forKey:@"adjustMinTimeOut"];
-    [defaults setInteger:_selTolerance forKey:@"toleranceTime"];
-    
-    [defaults setBool:self.regularTimeNotificationSwitch.isOn forKey:@"workTimeNotification"];
-    [defaults setBool:self.breakTimeNotificationSwitch.isOn forKey:@"timeOutNotification"];
-    [defaults synchronize];
+    [self.userDefaults setBreakTimeRequired:self.breakTimeAdjustSwitch.isOn];
+    [self.userDefaults setToleranceTime:0];
+    [self.userDefaults setWorkFinishNotification:self.regularTimeNotificationSwitch.isOn];
+    [self.userDefaults setBreakFinishNotification:self.breakTimeNotificationSwitch.isOn];
+    [self.userDefaults synchronize];
 }
 
 #pragma mark - User Interface
 
-- (IBAction)startDatePickerChanged:(id)sender
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    NSString *pickerDate = [dateFormatter stringFromDate:[_startDatePicker date]];
-    _startDateLabel.text = pickerDate;
-    
-    if ([[_startDatePicker date] isLaterThanDate:[_finishDatePicker date]]) {
-        [_finishDatePicker setDate:[_startDatePicker date]];
-        
-        NSString *finishPickerDate = [dateFormatter stringFromDate:[_finishDatePicker date]];
-        _finishDateLabel.text = finishPickerDate;
-    }
-    
-}
-
-- (IBAction)finishDatePickerChanged:(id)sender
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    NSString *pickerDate = [dateFormatter stringFromDate:[_finishDatePicker date]];
-    _finishDateLabel.text = pickerDate;
-    
-    if ([[_finishDatePicker date] isEarlierThanDate:[_startDatePicker date]]) {
-        [_startDatePicker setDate:[_finishDatePicker date]];
-        
-        NSString *startPickerDate = [dateFormatter stringFromDate:[_startDatePicker date]];
-        _startDateLabel.text = startPickerDate;
-    }
-}
 
 #pragma mark - TableView
-
+/*
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 1 && indexPath.row == 0) {
@@ -187,10 +96,11 @@
         return self.tableView.rowHeight;
     }
 }
-
+*/
 
 #pragma mark - Delegate Methods
 
+/*
 - (NSInteger)numberOfComponentsInPickerView:
 (UIPickerView *)pickerView
 {
@@ -222,5 +132,5 @@ numberOfRowsInComponent:(NSInteger)component
     _toleranceTimeLabel.text = [[NSString alloc] initWithFormat:
                         @"%2i minutos", _selTolerance];
 }
-
+*/
 @end

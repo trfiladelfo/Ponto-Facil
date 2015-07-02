@@ -19,5 +19,6 @@
 + (UIColor *)clockViewPausedColor;
 + (UIColor *)clockViewStopedColor;
 + (UIColor *)clockViewNotStartedColor;
++ (UIColor *)statusLabelShadowColor;
 
 @end

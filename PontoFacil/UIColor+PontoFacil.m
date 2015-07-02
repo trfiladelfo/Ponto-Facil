@@ -43,4 +43,8 @@
     return [UIColor colorWithRed:25/255.0 green:187/255.0 blue:155/255.0 alpha:1.0f];
 }
 
++ (UIColor *)statusLabelShadowColor {
+    return [UIColor colorWithRed:25/255.0 green:187/255.0 blue:155/255.0 alpha:1.0f];
+}
+
 @end

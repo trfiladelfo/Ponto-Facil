@@ -10,12 +10,9 @@
 #import <UIKit/UIKit.h>
 #import "DatePickerTableViewCell.h"
 
-typedef void (^TableViewCellConfigureBlock)(id cell, id title, id subtitle);
 
 @interface AccordionTableDictionaryDataSource : NSObject <UITableViewDataSource, UITableViewDelegate, DatePickerTableViewCellDelegate>
 
-- (id)initWithTableView:(UITableView *)tableView andItems:(NSDictionary *)items
-         cellIdentifier:(NSString *)cellIdentifier
-     configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock;
+- (id)initWithTableView:(UITableView *)tableView;
 
 @end

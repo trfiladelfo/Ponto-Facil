@@ -10,12 +10,8 @@
 
 @interface ConfigTableViewController : UITableViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *startDateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *finishDateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *breakTimeLabel;
 
-@property (strong, nonatomic) IBOutlet UIDatePicker *startDatePicker;
-@property (strong, nonatomic) IBOutlet UIDatePicker *finishDatePicker;
+@property (weak, nonatomic) IBOutlet UILabel *workTimeLabel;
 
 @property (strong, nonatomic) IBOutlet UISwitch *regularTimeNotificationSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *breakTimeNotificationSwitch;
@@ -23,6 +19,5 @@
 @property (weak, nonatomic) IBOutlet UISwitch *breakTimeAdjustSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *toleranceTimeLabel;
 @property (strong, nonatomic) IBOutlet UIPickerView *tolerancePicker;
-@property (strong, nonatomic) IBOutlet UIView *intervalCellView;
 
 @end

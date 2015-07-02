@@ -22,6 +22,8 @@
 @property (nonatomic, assign) BOOL workFinishNotification;
 @property (nonatomic, assign) BOOL breakFinishNotification;
 @property (nonatomic, assign) NSData *activeSessionID;
+@property (nonatomic, assign) NSInteger advanceTimeForWorkNotification;
+@property (nonatomic, assign) NSInteger advanceTimeForBreakNotification;
 
 + (void) initialize;
 

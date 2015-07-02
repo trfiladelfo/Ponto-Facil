@@ -119,6 +119,22 @@
     [self setBool:breakFinishNotification forKey:@"breakFinishNotification"];
 }
 
+- (NSInteger)advanceTimeForWorkNotification {
+    return [self integerForKey:@"advanceTimeForWorkNotification"];
+}
+
+- (void)setAdvanceTimeForWorkNotification:(NSInteger)advanceTimeForWorkNotification {
+    [self setInteger:advanceTimeForWorkNotification forKey:@"advanceTimeForWorkNotification"];
+}
+
+- (NSInteger)advanceTimeForBreakNotification {
+    return [self integerForKey:@"advanceTimeForBreakNotification"];
+}
+
+- (void)setAdvanceTimeForBreakNotification:(NSInteger)advanceTimeForBreakNotification {
+    [self setInteger:advanceTimeForBreakNotification forKey:@"advanceTimeForBreakNotification"];
+}
+
 
 #pragma mark - Time Balance Settings
 

@@ -18,5 +18,9 @@
 	<true/>
 	<key>breakFinishNotification</key>
 	<true/>
+	<key>advanceTimeForWorkNotification</key>
+	<integer>15</integer>
+	<key>advanceTimeForBreakNotification</key>
+	<integer>5</integer>
 </dict>
 </plist>

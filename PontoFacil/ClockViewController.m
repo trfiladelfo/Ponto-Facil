@@ -257,22 +257,32 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         
         if (self.session.sessionStateCategory == kSessionStateStart) {
-            
-            //Todo: Notificação de 15 minutos só deve ser reeschedulada se ainda não tiver sido disparada
-            [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Seu expediente irá terminar em 15 minutos" andDate:[_session.currentEstWorkFinishDate dateBySubtractingMinutes:15] andRepeatInterval:false];
-            
-            //NSLog(@"1-Notifications count = %i", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
-            
-            [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Fim do expediente!" andDate:_session.currentEstWorkFinishDate andRepeatInterval:true];
+            if (self.sendWorkTimeNotification) {
+                //Todo: Notificação de 15 minutos só deve ser reeschedulada se ainda não tiver sido disparada
+                
+                NSInteger advanceTimeForWorkNotification = [self.userDefaults advanceTimeForWorkNotification];
+                
+                if (advanceTimeForWorkNotification > 0) {
+                    [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:[NSString stringWithFormat:@"Seu expediente irá terminar em %i minutos",advanceTimeForWorkNotification] andDate:[_session.currentEstWorkFinishDate dateBySubtractingMinutes:advanceTimeForWorkNotification] andRepeatInterval:false];
+                }
+                
+                //NSLog(@"1-Notifications count = %i", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
+                
+                [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Fim do expediente!" andDate:_session.currentEstWorkFinishDate andRepeatInterval:true];
+            }
         }
         else if (self.session.sessionStateCategory == kSessionStatePaused)
         {
-            
-            NSDate *estBreakFinishDate = [[NSDate date] dateByAddingTimeInterval:[_session.event.estBreakTime doubleValue]];
-            
-            [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:@"O intervalo irá terminar em 10 minutos" andDate:[estBreakFinishDate dateBySubtractingMinutes:10] andRepeatInterval:true];
-            
-            [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:@"Fim do intervalo!" andDate:estBreakFinishDate andRepeatInterval:true];
+            if (self.sendBreakTimeNotification) {
+                NSDate *estBreakFinishDate = [[NSDate date] dateByAddingTimeInterval:[_session.event.estBreakTime doubleValue]];
+                NSInteger advanceTimeForBreakNotification = [self.userDefaults advanceTimeForBreakNotification];
+                
+                if (advanceTimeForBreakNotification > 0) {
+                    [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:[NSString stringWithFormat:@"O intervalo irá terminar em %i minutos", advanceTimeForBreakNotification] andDate:[estBreakFinishDate dateBySubtractingMinutes:advanceTimeForBreakNotification] andRepeatInterval:true];
+                }
+                
+                [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:@"Fim do intervalo!" andDate:estBreakFinishDate andRepeatInterval:true];
+            }
         }
     }
 }

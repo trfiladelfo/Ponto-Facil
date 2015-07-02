@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Specta.h"
 #import "Expecta.h"
-#import "OCMock.h"
 #import "NSUserDefaults+PontoFacil.h"
 
 SpecBegin(NSUserDefaults)
@@ -42,6 +41,14 @@ SpecBegin(NSUserDefaults)
         it(@"should have a valid break finish date", ^{
             NSLog(@"breakFinishDate = %@", [defaults breakFinishDate]);
             expect([dateFormatter dateFromString:[defaults breakFinishDate]]).toNot.beNil();
+        });
+        
+        it(@"should have a valid number for advance time for work notification", ^{
+            expect([defaults advanceTimeForWorkNotification]).to.beGreaterThanOrEqualTo(0);
+        });
+        
+        it(@"should have a valid number for advance time for break notification", ^{
+            expect([defaults advanceTimeForBreakNotification]).to.beGreaterThanOrEqualTo(0);
         });
         
         afterEach(^{

@@ -49,8 +49,9 @@ static NSString * const cellIdentifier = @"intervalCell";
 
 - (void)refreshTimeSummary {
     
+    self.headerViewSummary.esrtimatedWorkTimeLabel.text = [NSString  stringWithTimeInterval:[_session.event.estWorkTime doubleValue] * -1];
     self.headerViewSummary.workTimeLabel.text = [NSString stringWithTimeInterval:[_session.workTime doubleValue]];
-    self.headerViewSummary.breakTimeLabel.text = [NSString stringWithTimeInterval:[_session.breakTimeInProgress doubleValue]];
+    self.headerViewSummary.timeOutLabel.text = [NSString stringWithTimeInterval:[_session.breakTimeInProgress doubleValue]];
     self.headerViewSummary.timeBalanceLabel.text = [NSString stringWithTimeInterval:_session.timeBalance];
 }
 
