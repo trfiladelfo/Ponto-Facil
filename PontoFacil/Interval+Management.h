@@ -18,6 +18,9 @@ typedef enum {
 
 @property (nonatomic) IntervalCategoryType intervalCategoryType;
 
-+ (instancetype)insertIntervalWithStartDate:(NSDate *)startDate andfinishDate:(NSDate *)finishDate andIntervalCategoryType:(IntervalCategoryType)intervalCategoryType;
++ (instancetype)insertIntervalWithStartDate:(NSDate *)startDate andfinishDate:(NSDate *)finishDate andIntervalCategoryType:(IntervalCategoryType)intervalCategoryType andPreviousInterval:(Interval *)previousInterval;
+
+- (void)finish;
+
 
 @end

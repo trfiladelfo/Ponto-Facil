@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21D1564A1B517BAC0028DD67 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D156491B517BAC0028DD67 /* Interval.m */; };
+		21D1564F1B51BC530028DD67 /* IntervalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D1564E1B51BC530028DD67 /* IntervalTableViewCell.xib */; };
+		21E074101B484C43006D3C88 /* TaskCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E0740F1B484C43006D3C88 /* TaskCheckBoxView.m */; };
+		21E074141B484DC4006D3C88 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21E074131B484DC4006D3C88 /* Images.xcassets */; };
+		21E074171B4CBB38006D3C88 /* IntervalDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E074161B4CBB38006D3C88 /* IntervalDetailTableViewController.m */; };
 		61E0A6D4F076A33058087571 /* libPods-PontoFacilTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B02029FCA829C9A053B2823 /* libPods-PontoFacilTests.a */; };
 		87147E581A859F6000AB4977 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E571A859F6000AB4977 /* main.m */; };
 		87147E5B1A859F6000AB4977 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E5A1A859F6000AB4977 /* AppDelegate.m */; };
 		87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87147E5C1A859F6000AB4977 /* PontoFacil.xcdatamodeld */; };
 		87147E641A859F6000AB4977 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87147E621A859F6000AB4977 /* Main.storyboard */; };
-		87147E661A859F6000AB4977 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87147E651A859F6000AB4977 /* Images.xcassets */; };
 		87147E891A85A19A00AB4977 /* PersistentStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E861A85A19A00AB4977 /* PersistentStack.m */; };
 		87147E8A1A85A19A00AB4977 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E881A85A19A00AB4977 /* Store.m */; };
 		87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E8E1A85A96E00AB4977 /* ClockViewController.m */; };
@@ -65,7 +69,6 @@
 		87C732F91B271D720029C2E0 /* SessionDescriptionFormatterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732F81B271D720029C2E0 /* SessionDescriptionFormatterSpec.m */; };
 		87C733001B2757970029C2E0 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732FF1B2757970029C2E0 /* Session.m */; };
 		87CF5F6D1ABDF1BC004D5201 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */; };
-		87DAF9061AF840E400B692C5 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DAF9051AF840E400B692C5 /* Interval.m */; };
 		87DAF90F1AF847B200B692C5 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DAF90E1AF847B200B692C5 /* Event.m */; };
 		87FE86A01AC0F30500421959 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE869F1AC0F30500421959 /* EventTableViewCell.m */; };
 		87FE86A31AC2336200421959 /* FetchedResultsControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE86A21AC2336200421959 /* FetchedResultsControllerDataSource.m */; };
@@ -85,6 +88,14 @@
 
 /* Begin PBXFileReference section */
 		20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.debug.xcconfig"; sourceTree = "<group>"; };
+		21D156481B517BAC0028DD67 /* Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interval.h; sourceTree = "<group>"; };
+		21D156491B517BAC0028DD67 /* Interval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interval.m; sourceTree = "<group>"; };
+		21D1564E1B51BC530028DD67 /* IntervalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntervalTableViewCell.xib; sourceTree = "<group>"; };
+		21E0740E1B484C43006D3C88 /* TaskCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCheckBoxView.h; sourceTree = "<group>"; };
+		21E0740F1B484C43006D3C88 /* TaskCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCheckBoxView.m; sourceTree = "<group>"; };
+		21E074131B484DC4006D3C88 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		21E074151B4CBB38006D3C88 /* IntervalDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalDetailTableViewController.h; sourceTree = "<group>"; };
+		21E074161B4CBB38006D3C88 /* IntervalDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalDetailTableViewController.m; sourceTree = "<group>"; };
 		33CEA45DAC44D1EEEE511F27 /* libPods-PontoFacil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PontoFacil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A509C852DCA71143874690E /* Pods-PontoFacil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.release.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.release.xcconfig"; sourceTree = "<group>"; };
 		7DBECD30E0B5B6C4E945186D /* Pods-PontoFacilTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacilTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacilTests/Pods-PontoFacilTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -95,7 +106,6 @@
 		87147E5A1A859F6000AB4977 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		87147E5D1A859F6000AB4977 /* PontoFacil.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PontoFacil.xcdatamodel; sourceTree = "<group>"; };
 		87147E631A859F6000AB4977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		87147E651A859F6000AB4977 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		87147E6E1A859F6100AB4977 /* PontoFacilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PontoFacilTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87147E731A859F6100AB4977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87147E851A85A19A00AB4977 /* PersistentStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentStack.h; sourceTree = "<group>"; };
@@ -187,8 +197,6 @@
 		87C732FE1B2757970029C2E0 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		87C732FF1B2757970029C2E0 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		87DAF9041AF840E400B692C5 /* Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interval.h; sourceTree = "<group>"; };
-		87DAF9051AF840E400B692C5 /* Interval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interval.m; sourceTree = "<group>"; };
 		87DAF90D1AF847B200B692C5 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		87DAF90E1AF847B200B692C5 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		87FE869E1AC0F30500421959 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTableViewCell.h; sourceTree = "<group>"; };
@@ -229,6 +237,25 @@
 				876398E61A8D888F0002118E /* Open Sans regular.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		21D1564B1B51BADA0028DD67 /* IntervalCell */ = {
+			isa = PBXGroup;
+			children = (
+				878BD9511AC382D70005DBD4 /* IntervalTableViewCell.h */,
+				878BD9521AC382D70005DBD4 /* IntervalTableViewCell.m */,
+				21D1564E1B51BC530028DD67 /* IntervalTableViewCell.xib */,
+			);
+			name = IntervalCell;
+			sourceTree = "<group>";
+		};
+		21E073F41B484B03006D3C88 /* CheckBox */ = {
+			isa = PBXGroup;
+			children = (
+				21E0740E1B484C43006D3C88 /* TaskCheckBoxView.h */,
+				21E0740F1B484C43006D3C88 /* TaskCheckBoxView.m */,
+			);
+			name = CheckBox;
 			sourceTree = "<group>";
 		};
 		2A49D782D2A1205A55AD0438 /* Pods */ = {
@@ -279,7 +306,7 @@
 			children = (
 				87147E591A859F6000AB4977 /* AppDelegate.h */,
 				87147E5A1A859F6000AB4977 /* AppDelegate.m */,
-				87147E651A859F6000AB4977 /* Images.xcassets */,
+				21E074131B484DC4006D3C88 /* Images.xcassets */,
 				87147E7F1A859F9000AB4977 /* views */,
 				87147E801A859F9800AB4977 /* controllers */,
 				87147E7E1A859F8800AB4977 /* models */,
@@ -344,6 +371,8 @@
 		87147E7F1A859F9000AB4977 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				21D1564B1B51BADA0028DD67 /* IntervalCell */,
+				21E073F41B484B03006D3C88 /* CheckBox */,
 				877AE3E81B16B10A00A52542 /* CheckTimeCell */,
 				877AE3E21B16975500A52542 /* DatePickerCell */,
 				876398EA1A8D922E0002118E /* _AcessoryCircularButton */,
@@ -400,8 +429,8 @@
 				87C732FF1B2757970029C2E0 /* Session.m */,
 				87DAF90D1AF847B200B692C5 /* Event.h */,
 				87DAF90E1AF847B200B692C5 /* Event.m */,
-				87DAF9041AF840E400B692C5 /* Interval.h */,
-				87DAF9051AF840E400B692C5 /* Interval.m */,
+				21D156481B517BAC0028DD67 /* Interval.h */,
+				21D156491B517BAC0028DD67 /* Interval.m */,
 			);
 			name = "Managed Objects";
 			sourceTree = "<group>";
@@ -558,8 +587,8 @@
 			children = (
 				878BD94B1AC37F360005DBD4 /* IntervalListTableViewController.h */,
 				878BD94C1AC37F360005DBD4 /* IntervalListTableViewController.m */,
-				878BD9511AC382D70005DBD4 /* IntervalTableViewCell.h */,
-				878BD9521AC382D70005DBD4 /* IntervalTableViewCell.m */,
+				21E074151B4CBB38006D3C88 /* IntervalDetailTableViewController.h */,
+				21E074161B4CBB38006D3C88 /* IntervalDetailTableViewController.m */,
 			);
 			name = Interval;
 			sourceTree = "<group>";
@@ -773,8 +802,9 @@
 				879FA6F11A9D613600221AD1 /* CalendarView.xib in Resources */,
 				87ABAAFC1B1BD5BC00060AA0 /* UserDefaults.plist in Resources */,
 				87CF5F6D1ABDF1BC004D5201 /* Localizable.strings in Resources */,
+				21D1564F1B51BC530028DD67 /* IntervalTableViewCell.xib in Resources */,
+				21E074141B484DC4006D3C88 /* Images.xcassets in Resources */,
 				877AE3E41B1697AA00A52542 /* DatePickerCell.xib in Resources */,
-				87147E661A859F6000AB4977 /* Images.xcassets in Resources */,
 				87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -875,16 +905,17 @@
 				87C733001B2757970029C2E0 /* Session.m in Sources */,
 				876398EF1A8D9BA00002118E /* AcessoryCircularButtonView.m in Sources */,
 				878BD9501AC381290005DBD4 /* ArrayDataSource.m in Sources */,
+				21E074171B4CBB38006D3C88 /* IntervalDetailTableViewController.m in Sources */,
 				87A727E21ACCBF6B0095764E /* NSString+TimeInterval.m in Sources */,
 				877081D11A923D2C00541AB3 /* Event+Management.m in Sources */,
 				87FE86A31AC2336200421959 /* FetchedResultsControllerDataSource.m in Sources */,
+				21E074101B484C43006D3C88 /* TaskCheckBoxView.m in Sources */,
 				87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */,
 				87B4FDC21AF5593F008DA605 /* ScheduleTableViewController.m in Sources */,
 				877AE3DD1B14209300A52542 /* NSUserDefaults+PontoFacil.m in Sources */,
 				872BC3801ABBBFC000039FEF /* UIFont+PontoFacil.m in Sources */,
 				87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */,
 				872BC37D1ABBB6D800039FEF /* UIColor+PontoFacil.m in Sources */,
-				87DAF9061AF840E400B692C5 /* Interval.m in Sources */,
 				877081CE1A922F5900541AB3 /* Session+Management.m in Sources */,
 				87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */,
 				87DAF90F1AF847B200B692C5 /* Event.m in Sources */,
@@ -893,6 +924,7 @@
 				877AE3E01B15709C00A52542 /* AccordionTableDictionaryDataSource.m in Sources */,
 				87B5C6531AC82F16004AB6A7 /* EventDetailTableViewController.m in Sources */,
 				87BD55FF1AC62F00008E0511 /* MSWeekDateView.m in Sources */,
+				21D1564A1B517BAC0028DD67 /* Interval.m in Sources */,
 				87147E8A1A85A19A00AB4977 /* Store.m in Sources */,
 				876398F41A911DA00002118E /* DateView.m in Sources */,
 				87147E891A85A19A00AB4977 /* PersistentStack.m in Sources */,

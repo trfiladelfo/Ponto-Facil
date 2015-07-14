@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class Session;
+@class Event;
 
 @interface ScheduleTableViewController : UITableViewController
 
-@property (nonatomic, strong) Session *session;
+@property (nonatomic, strong) Event *event;
 
 @end

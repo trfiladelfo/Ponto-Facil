@@ -10,7 +10,14 @@
 #import "Event+Management.h"
 #import "Session+Management.h"
 #import "MSWeekDateView.h"
-#import "NSDate-Utilities.h"
+#import "UIColor+PontoFacil.h"
+#import "NSString+TimeInterval.h"
+
+@interface EventTableViewCell ()
+
+@property (nonatomic, retain) NSDateFormatter *formatter;
+
+@end
 
 @implementation EventTableViewCell
 
@@ -24,23 +31,43 @@
     // Configure the view for the selected state
 }
 
+- (NSDateFormatter *)formatter {
+    if (!_formatter) {
+        _formatter = [[NSDateFormatter alloc] init];
+        [_formatter setDateFormat:@"HH:mm"];
+        [_formatter setDefaultDate:[NSDate date]];
+        [_formatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    }
+    
+    return _formatter;
+}
+
+- (void)setEditing:(BOOL)editing {
+
+    NSLog(@"cell editing");
+}
+
 - (void)configureForEvent:(Event *)event {
     
-    self.weekDateView.date = event.estWorkStart;
+    self.weekDateView.backgroundColor = [UIColor weekDateViewColor];
+    self.weekDateView.layer.cornerRadius = 5.0f;
+    
+    [self.formatter setDateFormat:@"EEE"];
+    self.weekEstStartDateLabel.text = [self.formatter stringFromDate:event.estWorkStart];
+    
+    [self.formatter setDateFormat:@"dd"];
+    self.dayEstStartDateLabel.text = [self.formatter stringFromDate:event.estWorkStart];
     
     if (event.eventTypeCategory == kEventTypeNormal) {
         
         self.eventTypeLabel.text = @"Sessão Normal";
         Session *session = event.session;
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"HH:mm"];
-        NSDate *today = [[NSDate date] dateAtStartOfDay];
-        
-        self.startDateLabel.text = [dateFormatter stringFromDate:session.startDate];
-        self.finishDateLabel.text = [dateFormatter stringFromDate:session.finishDate];
-        self.intervalTimeLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeInterval:[session.breakTime doubleValue] sinceDate:today]];
-        self.timeBalanceLabel.text = [dateFormatter stringFromDate:[NSDate dateWithTimeInterval:session.timeBalance sinceDate:today]];;
+        [self.formatter setDateFormat:@"HH:mm"];
+        self.startDateLabel.text = [self.formatter stringFromDate:session.startDate];
+        self.finishDateLabel.text = [self.formatter stringFromDate:session.finishDate];
+        self.intervalTimeLabel.text = [NSString stringWithTimeInterval:[session.breakTime doubleValue]];
+        self.timeBalanceLabel.text = [NSString stringWithTimeInterval:session.timeBalance];
     }
     else if (event.eventTypeCategory == kEventTypeHoliday)
         self.eventTypeLabel.text = @"Feriado";

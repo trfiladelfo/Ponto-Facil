@@ -17,6 +17,7 @@
 // Relative dates from the current date
 + (NSDate *) today;
 + (NSDate *) todayAtTime:(int)hour andMinute:(int)minute;
++ (NSDate *) todayAtTimeFromStringHHMM:(NSString *)shortTime;
 + (NSDate *) dateTomorrow;
 + (NSDate *) dateYesterday;
 + (NSDate *) dateWithDaysFromNow: (NSInteger) days;
@@ -52,6 +53,7 @@
 
 // Adjusting dates
 
+- (NSDate *) dateByUpdateYear:(NSInteger)year andMonth:(NSInteger)month andDay:(NSInteger)day;
 - (NSDate *) dateByAddingDays: (NSInteger) dDays;
 - (NSDate *) dateBySubtractingDays: (NSInteger) dDays;
 - (NSDate *) dateByAddingHours: (NSInteger) dHours;

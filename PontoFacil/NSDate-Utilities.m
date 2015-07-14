@@ -43,7 +43,24 @@
 
 + (NSDate *) todayAtTime:(int)hour andMinute:(int)minute
 {
-    return [[[[NSDate date] dateAtStartOfDay] dateByAddingHours:hour] dateByAddingMinutes:minute];
+    [CURRENT_CALENDAR setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
+    NSDate *newDate = [CURRENT_CALENDAR dateBySettingHour:hour minute:minute second:0 ofDate:[NSDate date] options:0];
+    
+    return newDate;
+}
+
++ (NSDate *) todayAtTimeFromStringHHMM:(NSString *)shortTime
+{
+    
+    if ([shortTime length] == 5) {
+        int hour = [[shortTime substringToIndex:2] intValue];
+        int minute = [[shortTime substringFromIndex:2] intValue];
+        
+        return [self todayAtTime:hour andMinute:minute];
+    }
+    else
+        return nil;
 }
 
 + (NSDate *) dateTomorrow
@@ -83,7 +100,6 @@
 	NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
 	return newDate;		
 }
-
 
 #pragma mark Comparing Dates
 
@@ -225,6 +241,15 @@
 }
 
 #pragma mark Adjusting Dates
+
+- (NSDate *) dateByUpdateYear:(NSInteger)year andMonth:(NSInteger)month andDay:(NSInteger)day
+{
+    NSDateComponents *components = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:self];
+    components.year = year;
+    components.month = month;
+    components.day = day;
+    return [CURRENT_CALENDAR dateFromComponents:components];
+}
 
 - (NSDate *) dateByAddingDays: (NSInteger) dDays
 {

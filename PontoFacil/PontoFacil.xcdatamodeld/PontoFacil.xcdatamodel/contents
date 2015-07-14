@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="13F1066" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="estBreakFinish" attributeType="Date" syncable="YES"/>
         <attribute name="estBreakStart" attributeType="Date" syncable="YES"/>
@@ -15,6 +15,8 @@
         <attribute name="intervalFinish" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="intervalStart" attributeType="Date" syncable="YES"/>
         <attribute name="intervalType" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="nextInterval" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Interval" inverseName="previousInterval" inverseEntity="Interval" syncable="YES"/>
+        <relationship name="previousInterval" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Interval" inverseName="nextInterval" inverseEntity="Interval" syncable="YES"/>
         <relationship name="session" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="intervalList" inverseEntity="Session" syncable="YES"/>
     </entity>
     <entity name="Session" representedClassName="Session" syncable="YES">
@@ -30,7 +32,7 @@
     </entity>
     <elements>
         <element name="Event" positionX="-63" positionY="-18" width="128" height="178"/>
-        <element name="Interval" positionX="-27" positionY="90" width="128" height="103"/>
+        <element name="Interval" positionX="-27" positionY="90" width="128" height="135"/>
         <element name="Session" positionX="-54" positionY="18" width="128" height="180"/>
     </elements>
 </model>

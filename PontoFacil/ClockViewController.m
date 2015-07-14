@@ -32,6 +32,7 @@
 @property (nonatomic, assign) BOOL allowNotificationsBadge;
 @property (nonatomic, assign) BOOL allowNotificationsAlert;
 @property (nonatomic, assign) NSUserDefaults *userDefaults;
+@property (nonatomic, retain) NSDateFormatter *formatter;
 @property (strong, nonatomic) BDKNotifyHUD *alertViewProvider;
 @property (strong, nonatomic) UIActionSheet *actionSheetProvider;
 
@@ -49,6 +50,17 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         _userDefaults = [NSUserDefaults standardUserDefaults];
     }
     return _userDefaults;
+}
+
+- (NSDateFormatter *)formatter {
+    if (!_formatter) {
+        _formatter = [[NSDateFormatter alloc] init];
+        [_formatter setDateFormat:@"HH:mm"];
+        [_formatter setDefaultDate:[NSDate date]];
+        [_formatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    }
+    
+    return _formatter;
 }
 
 - (BDKNotifyHUD *)alertViewProvider {
@@ -150,14 +162,13 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)refreshStatusView {
     
     if (self.session) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"HH:mm"];
+        [self.formatter setDateFormat:@"HH:mm"];
         
-        self.startDateLabel.text = [formatter stringFromDate:self.session.startDate == NULL ? self.session.event.estWorkStart : self.session.startDate];
+        self.startDateLabel.text = [self.formatter stringFromDate:self.session.startDate == NULL ? self.session.event.estWorkStart : self.session.startDate];
         
         self.breakTimeLabel.text = [NSString stringWithTimeInterval:[[self.session.breakTime doubleValue] == 0 ? self.session.event.estBreakTime : self.session.breakTime doubleValue]];
         
-        self.finishDateLabel.text = [formatter stringFromDate:self.session.finishDate == NULL ? (self.session.startDate == NULL ? self.session.event.estWorkFinish : self.session.currentEstWorkFinishDate) : self.session.finishDate];
+        self.finishDateLabel.text = [self.formatter stringFromDate:self.session.finishDate == NULL ? (self.session.startDate == NULL ? self.session.event.estWorkFinish : self.session.currentEstWorkFinishDate) : self.session.finishDate];
     }
     else {
         self.startDateLabel.text = [self.userDefaults workStartDate];
@@ -263,7 +274,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
                 NSInteger advanceTimeForWorkNotification = [self.userDefaults advanceTimeForWorkNotification];
                 
                 if (advanceTimeForWorkNotification > 0) {
-                    [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:[NSString stringWithFormat:@"Seu expediente irá terminar em %i minutos",advanceTimeForWorkNotification] andDate:[_session.currentEstWorkFinishDate dateBySubtractingMinutes:advanceTimeForWorkNotification] andRepeatInterval:false];
+                    [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:[NSString stringWithFormat:@"Seu expediente irá terminar em %li minutos",advanceTimeForWorkNotification] andDate:[_session.currentEstWorkFinishDate dateBySubtractingMinutes:advanceTimeForWorkNotification] andRepeatInterval:false];
                 }
                 
                 //NSLog(@"1-Notifications count = %i", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
@@ -278,7 +289,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
                 NSInteger advanceTimeForBreakNotification = [self.userDefaults advanceTimeForBreakNotification];
                 
                 if (advanceTimeForBreakNotification > 0) {
-                    [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:[NSString stringWithFormat:@"O intervalo irá terminar em %i minutos", advanceTimeForBreakNotification] andDate:[estBreakFinishDate dateBySubtractingMinutes:advanceTimeForBreakNotification] andRepeatInterval:true];
+                    [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:[NSString stringWithFormat:@"O intervalo irá terminar em %li minutos", advanceTimeForBreakNotification] andDate:[estBreakFinishDate dateBySubtractingMinutes:advanceTimeForBreakNotification] andRepeatInterval:true];
                 }
                 
                 [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:@"Fim do intervalo!" andDate:estBreakFinishDate andRepeatInterval:true];
@@ -316,10 +327,8 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
             }
         }
         
-        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-        [formatter setDateFormat:@"MM-dd-yyy hh:mm"];
-        [formatter setTimeZone:[NSTimeZone defaultTimeZone]];
-        NSString *notifDate = [formatter stringFromDate:fireDate];
+        [self.formatter setDateFormat:@"MM-dd-yyy hh:mm"];
+        NSString *notifDate = [self.formatter stringFromDate:fireDate];
         NSLog(@"%s: fire time = %@", __PRETTY_FUNCTION__, notifDate);
         
         // this will schedule the notification to fire at the fire date

@@ -22,8 +22,13 @@ static NSString *entityName = @"Session";
 
 - (instancetype)init {
     
+    return [self initWithEvent:[[Event alloc] init]];
+}
+
+- (instancetype)initWithEvent:(Event *)event {
+    
     Session *_session = [self initWithEntity:[self entity] insertIntoManagedObjectContext:[Store defaultManagedObjectContext]];
-    _session.event = [[Event alloc] init];
+    _session.event = event;
     
     return _session;
 }
@@ -97,25 +102,6 @@ static NSString *entityName = @"Session";
     return _balance;
 }
 
-- (NSString *)timeBalanceToString {
-    
-    
-    NSString *balanceSignal;
-    
-    if ([self.event.estWorkTime doubleValue] > [self.workTime doubleValue]) {
-        balanceSignal = @"-";
-    }
-    else {
-        balanceSignal = @"+";
-    }
-    
-    NSInteger ti = (NSInteger) ABS(self.timeBalance);
-    NSInteger minutes = (ti / 60) % 60;
-    NSInteger hours = (ti / 3600);
-    
-    return [NSString stringWithFormat:@"%@ %02ld:%02ld", balanceSignal, (long)hours, (long)minutes];
-}
-
 /*
  - (NSTimeInterval)adjustedTimeBalance {
  
@@ -141,12 +127,20 @@ static NSString *entityName = @"Session";
         return 0;
 }
 
-- (NSArray *)orderedIntervalList {
+- (NSArray *)ascendingIntervalList {
+    return [self orderedIntervalList:true];
+}
+
+- (NSArray *)descendingIntervalList {
+    return [self orderedIntervalList:false];
+}
+
+- (NSArray *)orderedIntervalList:(BOOL)ascending {
     
     if (self.intervalList) {
         NSArray *intervalListArray = [self.intervalList allObjects];
         
-        NSSortDescriptor *descriptor=[[NSSortDescriptor alloc] initWithKey:@"intervalStart" ascending:NO];
+        NSSortDescriptor *descriptor=[[NSSortDescriptor alloc] initWithKey:@"intervalStart" ascending:ascending];
         NSArray *descriptors=[NSArray arrayWithObject: descriptor];
         NSArray *sortedArray =[intervalListArray sortedArrayUsingDescriptors:descriptors];
         
@@ -229,23 +223,17 @@ static NSString *entityName = @"Session";
 
 - (void)startInterval:(IntervalCategoryType)intervalType {
     
-    if (!self.activeInterval) {
-        
-        NSDate *now = [NSDate date];
-        
-        [self addIntervalListObject:[Interval insertIntervalWithStartDate:now andfinishDate:nil andIntervalCategoryType:intervalType]];
-    }
-}
-
-- (void)finishActiveInterval {
+    Interval *previousInterval = nil;
     
     if (self.activeInterval) {
-        
-        NSDate *now = [NSDate date];
-        self.activeInterval.intervalFinish = now;
+        previousInterval = self.activeInterval;
+        [self.activeInterval finish];
     }
+    
+    NSDate *now = [NSDate date];
+        
+    [self addIntervalListObject:[Interval insertIntervalWithStartDate:now andfinishDate:nil andIntervalCategoryType:intervalType andPreviousInterval:previousInterval]];
 }
-
 
 #pragma mark - Clock Operations
 
@@ -257,7 +245,6 @@ static NSString *entityName = @"Session";
 }
 
 - (void)pause {
-    [self finishActiveInterval];
     self.currentEstBreakFinishDate = [self calculateEstimatedBreakFinishDate];
     [self startInterval:kIntervalTypeBreak];
     [self setSessionStateCategory:kSessionStatePaused];
@@ -265,13 +252,12 @@ static NSString *entityName = @"Session";
 
 - (void)resume {
     self.currentEstWorkFinishDate = [self calculateEstimatedWorkFinishDate:true];
-    [self finishActiveInterval];
     [self startInterval:kIntervalTypeWork];
     [self setSessionStateCategory:kSessionStateStart];
 }
 
 - (void)stop {
-    [self finishActiveInterval];
+    [self.activeInterval finish];
     self.finishDate = [NSDate date];
     [self setSessionStateCategory:kSessionStateStop];
 }

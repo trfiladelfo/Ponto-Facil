@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="intervalCell" rowHeight="50" id="fpw-94-Gr1" customClass="IntervalTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fpw-94-Gr1" id="sk3-dS-D1n">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trabalho" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgR-If-vSI">
+                        <rect key="frame" x="79" y="15" width="62.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NF4-uX-x9E">
+                        <rect key="frame" x="66" y="7" width="1" height="35"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="hqk-mM-oHX"/>
+                            <constraint firstAttribute="width" constant="1" id="pdO-2B-jIe"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKi-Wf-pZu">
+                        <rect key="frame" x="18" y="16" width="36" height="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKU-Kz-rTc">
+                        <rect key="frame" x="313" y="16" width="36" height="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="aKU-Kz-rTc" secondAttribute="trailing" constant="10" id="0PE-qM-lwT"/>
+                    <constraint firstAttribute="centerY" secondItem="bKi-Wf-pZu" secondAttribute="centerY" id="1e7-rr-dzr"/>
+                    <constraint firstItem="SgR-If-vSI" firstAttribute="leading" secondItem="NF4-uX-x9E" secondAttribute="trailing" constant="12" id="55M-YT-Nbk"/>
+                    <constraint firstItem="NF4-uX-x9E" firstAttribute="leading" secondItem="bKi-Wf-pZu" secondAttribute="trailing" constant="12" id="Ljr-Sw-5en"/>
+                    <constraint firstAttribute="centerY" secondItem="NF4-uX-x9E" secondAttribute="centerY" id="LwD-T3-1KK"/>
+                    <constraint firstAttribute="centerY" secondItem="aKU-Kz-rTc" secondAttribute="centerY" id="XJe-Oz-M2H"/>
+                    <constraint firstAttribute="centerY" secondItem="SgR-If-vSI" secondAttribute="centerY" id="fAf-62-bbv"/>
+                    <constraint firstItem="bKi-Wf-pZu" firstAttribute="leading" secondItem="sk3-dS-D1n" secondAttribute="leadingMargin" constant="10" id="sDb-MC-VyC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="intervalFinishLabel" destination="aKU-Kz-rTc" id="eSH-8C-FwX"/>
+                <outlet property="intervalStartLabel" destination="bKi-Wf-pZu" id="Ffn-V2-JrZ"/>
+                <outlet property="intervalTypeLabel" destination="SgR-If-vSI" id="ddn-yi-Mvi"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

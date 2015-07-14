@@ -9,6 +9,7 @@
 #import "ScheduleTableViewController.h"
 #import "DatePickerTableViewCell.h"
 #import "NSUserDefaults+PontoFacil.h"
+#import "Event+Management.h"
 
 static CGFloat kDatePickerRowHeight = 120;
 static NSString * const cellIdentifier = @"timeLabelCell";
@@ -49,7 +50,18 @@ static NSString * const pickerCellIdentifier = @"datePickerCell";
 - (NSMutableArray *)defaultData {
     
     if (!_defaultData) {
-        _defaultData = [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:self.userDefaults.workStartDate , self.userDefaults.workFinishDate, nil], [NSMutableArray arrayWithObjects:self.userDefaults.breakStartDate, self.userDefaults.breakFinishDate, nil], nil];
+        if (self.event) {
+            NSString *estWorkStart = [self.formatter stringFromDate:_event.estWorkStart];
+            NSString *estWorkFinish = [self.formatter stringFromDate:_event.estWorkFinish];
+            NSString *estBreakStart = [self.formatter stringFromDate:_event.estBreakStart];
+            NSString *estBreakFinish = [self.formatter stringFromDate:_event.estBreakFinish];
+            
+            _defaultData = [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:estWorkStart, estWorkFinish, nil], [NSMutableArray arrayWithObjects:estBreakStart, estBreakFinish, nil], nil];
+        }
+        else
+        {
+            _defaultData = [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:self.userDefaults.workStartDate , self.userDefaults.workFinishDate, nil], [NSMutableArray arrayWithObjects:self.userDefaults.breakStartDate, self.userDefaults.breakFinishDate, nil], nil];
+        }
     }
     
     return _defaultData;
@@ -67,6 +79,7 @@ static NSString * const pickerCellIdentifier = @"datePickerCell";
         _formatter = [[NSDateFormatter alloc] init];
         [_formatter setDateFormat:@"HH:mm"];
         [_formatter setDefaultDate:[NSDate date]];
+        [_formatter setTimeZone:[NSTimeZone defaultTimeZone]];
     }
     
     return _formatter;
@@ -81,21 +94,30 @@ static NSString * const pickerCellIdentifier = @"datePickerCell";
 
 - (void)viewWillDisappear:(BOOL)animated {
     
-    [self saveDefaultData];
+    [self saveData];
 }
 
-- (void)saveDefaultData {
+- (void)saveData {
     
     NSString *workStartDate = [self.defaultData[0] objectAtIndex:0];
     NSString *workFinishDate = [self.defaultData[0] objectAtIndex:1];
     NSString *breakStartDate = [self.defaultData[1] objectAtIndex:0];
     NSString *breakFinishDate = [self.defaultData[1] objectAtIndex:1];
     
-    [self.userDefaults setWorkStartDate:workStartDate];
-    [self.userDefaults setWorkFinishDate:workFinishDate];
-    [self.userDefaults setBreakStartDate:breakStartDate];
-    [self.userDefaults setBreakFinishDate:breakFinishDate];
-    [self.userDefaults synchronize];
+    if (self.event) {
+        //Return Changed Event
+        self.event.estWorkStart = [self.formatter dateFromString:workStartDate];
+        self.event.estWorkFinish = [self.formatter dateFromString:workFinishDate];
+        self.event.estBreakStart = [self.formatter dateFromString:breakStartDate];
+        self.event.estBreakFinish = [self.formatter dateFromString:breakFinishDate];
+    }
+    else {
+        [self.userDefaults setWorkStartDate:workStartDate];
+        [self.userDefaults setWorkFinishDate:workFinishDate];
+        [self.userDefaults setBreakStartDate:breakStartDate];
+        [self.userDefaults setBreakFinishDate:breakFinishDate];
+        [self.userDefaults synchronize];
+    }
 }
 
 
@@ -199,6 +221,8 @@ static NSString * const pickerCellIdentifier = @"datePickerCell";
     
     self.datePickerIndexPath = newIndexPath;
 }
+
+#pragma mark DatePickerTableViewCellDelegate
 
 - (void)pickerNewDate:(NSDate *)date {
     

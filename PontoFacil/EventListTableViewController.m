@@ -9,7 +9,6 @@
 #import "EventListTableViewController.h"
 #import "FetchedResultsControllerDataSource.h"
 #import "Event+Management.h"
-#import "Session+Management.h"
 #import "EventTableViewCell.h"
 #import "EventDetailTableViewController.h"
 
@@ -26,7 +25,10 @@ static NSString * const cellIdentifier = @"eventCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.tableView.allowsSelection = false;
+    self.tableView.allowsSelectionDuringEditing = true;
     
     [self setupFetchedResultsController];
 }
@@ -52,8 +54,13 @@ static NSString * const cellIdentifier = @"eventCell";
     
     [self.tableView setEditing:editing animated:animated];
     
-    //self.addButton.enabled = !editing;
+    self.addButton.enabled = !editing;
 }
+
+- (IBAction)addButtonClick:(id)sender {
+    [self performSegueWithIdentifier:@"eventDetailSegue" sender:self];
+}
+
 
 #pragma mark - FetchResultsController Delegate
 
@@ -64,7 +71,6 @@ static NSString * const cellIdentifier = @"eventCell";
     self.dataSource.fetchedResultsController = [Event fetchedResultsController];
     self.dataSource.delegate = self;
     self.dataSource.reuseIdentifier = cellIdentifier;
-    //self.dataSource.sortField = @"displayOrder";
 }
 
 - (void)configureCell:(id)theCell withObject:(id)object
@@ -94,11 +100,6 @@ static NSString * const cellIdentifier = @"eventCell";
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return true;
-}
-
 #pragma mark Undo Manager
 
 - (BOOL)canBecomeFirstResponder {
@@ -115,6 +116,7 @@ static NSString * const cellIdentifier = @"eventCell";
 }
 
 #pragma mark Navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 
@@ -124,7 +126,7 @@ static NSString * const cellIdentifier = @"eventCell";
          
          NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
      
-         eventDetailViewController.session = [self.dataSource.fetchedResultsController objectAtIndexPath:indexPath];
+         eventDetailViewController.event = [self.dataSource.fetchedResultsController objectAtIndexPath:indexPath];
      }
 }
 

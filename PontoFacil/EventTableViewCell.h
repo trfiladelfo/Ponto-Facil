@@ -14,12 +14,13 @@
 @interface EventTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *eventTypeLabel;
-@property (strong, nonatomic) IBOutlet MSWeekDateView *weekDateView;
-
+@property (strong, nonatomic) IBOutlet UIView *weekDateView;
 @property (strong, nonatomic) IBOutlet UILabel *startDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *intervalTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *finishDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeBalanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *weekEstStartDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dayEstStartDateLabel;
 
 
 - (void)configureForEvent:(Event *)event;

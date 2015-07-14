@@ -10,4 +10,6 @@
 
 @interface EventListTableViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+
 @end

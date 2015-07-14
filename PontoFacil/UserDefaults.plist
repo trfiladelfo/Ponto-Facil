@@ -11,7 +11,7 @@
 	<key>breakFinishDate</key>
 	<string>13:00</string>
 	<key>breakTimeRequired</key>
-	<false/>
+	<true/>
 	<key>toleranceTime</key>
 	<integer>0</integer>
 	<key>workFinishNotification</key>

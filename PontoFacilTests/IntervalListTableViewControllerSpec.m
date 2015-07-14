@@ -34,6 +34,20 @@ SpecBegin(IntervalListTableViewController)
             expect(intervalListVC.tableView.delegate).to.equal(intervalListVC);
         });
         
+        it(@"should conform with UITableViewDatasource and Delegate Protocol", ^{
+            expect(intervalListVC).conformTo(@protocol(UITableViewDataSource));
+            expect(intervalListVC).conformTo(@protocol(UITableViewDelegate));
+        });
+        
+        it(@"should respond to UITableViewDatasource required methods", ^{
+            expect(intervalListVC).respondTo(@selector(tableView:numberOfRowsInSection:));
+            expect(intervalListVC).respondTo(@selector(tableView:cellForRowAtIndexPath:));
+        });
+        
+        it(@"should have an expected amount of rows", ^{
+            
+        });
+        
         describe(@"IntervalListTableViewCell", ^{
         
             __block id cell;

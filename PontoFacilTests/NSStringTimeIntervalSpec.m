@@ -20,7 +20,7 @@ SpecBegin(NSStringTimeInterval)
         });
         
         it(@"should format negative values", ^{
-            expect([NSString stringWithTimeInterval:-7200]).to.equal(@"-02:00");
+            expect([NSString stringWithTimeInterval:-7200]).to.equal(@"(02:00)");
         });
     });
 

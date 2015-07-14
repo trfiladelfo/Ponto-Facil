@@ -9,6 +9,7 @@
 #import "Event+Management.h"
 #import "Store.h"
 #import "NSUserDefaults+PontoFacil.h"
+#import "NSDate-Utilities.h"
 
 static NSString *entityName = @"Event";
 
@@ -18,18 +19,12 @@ static NSString *entityName = @"Event";
 
     Event *_event = [self initWithEntity:[self entity] insertIntoManagedObjectContext:[Store defaultManagedObjectContext]];
     
-    //Default Values
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm"];
-    [formatter setDefaultDate:[NSDate date]];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    _event.estWorkStart = [formatter dateFromString:defaults.workStartDate];
-    _event.estWorkFinish = [formatter dateFromString:defaults.workFinishDate];
-    _event.estBreakStart = [formatter dateFromString:defaults.breakStartDate];
-    _event.estBreakFinish = [formatter dateFromString:defaults.breakFinishDate];
+    _event.estWorkStart = [NSDate todayAtTimeFromStringHHMM:[defaults workStartDate]];
+    _event.estWorkFinish = [NSDate todayAtTimeFromStringHHMM:[defaults workFinishDate]];
+    _event.estBreakStart = [NSDate todayAtTimeFromStringHHMM:[defaults breakStartDate]];
+    _event.estBreakFinish = [NSDate todayAtTimeFromStringHHMM:[defaults breakFinishDate]];
     _event.eventTypeCategory = kEventTypeNormal;
     _event.isManual = [NSNumber numberWithBool:false];
     _event.isAbsence = [NSNumber numberWithBool:false];
@@ -75,6 +70,14 @@ static NSString *entityName = @"Event";
 
 - (NSNumber *)estBreakTime {
     return [NSNumber numberWithDouble:[self.estBreakFinish timeIntervalSinceDate:self.estBreakStart]];
+}
+
+- (void)updateEventDate:(NSDate *)newDate {
+    
+    self.estWorkStart = [self.estWorkStart dateByUpdateYear:newDate.year andMonth:newDate.month andDay:newDate.day];
+    self.estWorkFinish = [self.estWorkFinish dateByUpdateYear:newDate.year andMonth:newDate.month andDay:newDate.day];
+    self.estBreakStart = [self.estBreakStart dateByUpdateYear:newDate.year andMonth:newDate.month andDay:newDate.day];
+    self.estBreakFinish = [self.estBreakFinish dateByUpdateYear:newDate.year andMonth:newDate.month andDay:newDate.day];
 }
 
 + (NSFetchedResultsController*)fetchedResultsController

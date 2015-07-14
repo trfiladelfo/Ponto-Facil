@@ -25,8 +25,7 @@ SpecBegin(ClockViewControllerSpec)
         beforeEach(^{
         
             UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *mainTabController = [mainStoryBoard instantiateInitialViewController];
-            clockVC = (ClockViewController *)[mainTabController.viewControllers objectAtIndex:0];
+            clockVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ClockViewController"];
             
             UIView *view = clockVC.view;
             expect(view).toNot.beNil();

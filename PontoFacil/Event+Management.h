@@ -23,4 +23,6 @@ typedef enum {
 
 -(instancetype)init;
 
+- (void)updateEventDate:(NSDate *)newDate;
+
 @end

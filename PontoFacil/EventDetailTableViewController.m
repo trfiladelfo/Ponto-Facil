@@ -7,195 +7,241 @@
 //
 
 #import "EventDetailTableViewController.h"
+#import "Event+Management.h"
 #import "Session+Management.h"
+#import "ScheduleTableViewController.h"
 #import "NSString+TimeInterval.h"
-#import "NSDate-Utilities.h"
+#import "IntervalDetailTableViewController.h"
+#import "IntervalTableViewCell.h"
 #import "NSUserDefaults+PontoFacil.h"
+#import "NSDate-Utilities.h"
 
-#define ROW_HEIGHT 150.0
+static NSInteger kDynamicSectionIndex = 1;
+static CGFloat kDynamicSectionHeight = 50.0;
+static NSString *intervalCellIdentifier = @"intervalCell";
 
 @interface EventDetailTableViewController ()
 
-@property (nonatomic, assign) BOOL showSessionDatePicker;
-@property (nonatomic, assign) BOOL showStartDatePicker;
-@property (nonatomic, assign) BOOL showFinishDatePicker;
-@property (nonatomic, assign) BOOL showIntervalDatePicker;
-
-@property (strong, nonatomic) NSMutableArray *hours;
-@property (strong, nonatomic) NSMutableArray *minutes;
-@property (nonatomic, strong) NSString *selHour;
-@property (nonatomic, strong) NSString *selMinute;
+@property (nonatomic, retain) NSDateFormatter *formatter;
+@property (nonatomic, assign) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) NSArray *intervalArray;
 
 @end
 
 @implementation EventDetailTableViewController
 
+- (NSDateFormatter *)formatter {
+    if (!_formatter) {
+        _formatter = [[NSDateFormatter alloc] init];
+        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EdMMMyyyy" options:0
+                                                                  locale:[NSLocale currentLocale]];
+        [_formatter setDateFormat:formatString];
+        [_formatter setDefaultDate:[NSDate date]];
+        [_formatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    }
+    
+    return _formatter;
+}
+
+- (NSUserDefaults *)userDefaults {
+    if (!_userDefaults) {
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _userDefaults;
+}
+
+- (NSArray *)intervalArray {
+
+    if (!_intervalArray) {
+        if (self.event.session)
+            _intervalArray = self.event.session.ascendingIntervalList;
+    }
+    
+    return _intervalArray;
+}
+
+- (Event *)event {
+
+    if (!_event) {
+        _event = [[Event alloc] init];
+    }
+    
+    return _event;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadIntervalDatePicker];
+    [self.tableView registerNib:[UINib nibWithNibName:@"IntervalTableViewCell" bundle:nil] forCellReuseIdentifier:intervalCellIdentifier];
+    
+    //Habilita o botão de cancelar
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed:)];
+}
 
-    //Alteração
-    if (_session) {
-        
+- (void)viewWillAppear:(BOOL)animated {
+
+    NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
+    
+    [super viewWillAppear:animated]; // clears selection
+    
+    if (selectedRowIndexPath) {
+        [self.tableView reloadData];
+    }
+    else
         [self loadSessionData];
-    }
-    else {
-        //Valores Padrão das configurações
-        [self loadDefaultSessionData];
-        
-        //Habilita o botão de cancelar
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed:)];
-    }
 }
 
 #pragma mark - Private Functions
 
-- (void)loadIntervalDatePicker {
-    
-    if (!_hours) {
-        _hours = [NSMutableArray arrayWithCapacity:7];
-    }
-    
-    if (!_minutes) {
-        _minutes = [NSMutableArray arrayWithCapacity:59];
-    }
-    
-    for (int i = 0; i < 8; i++) {
-        [_hours insertObject:[NSString stringWithFormat:@"%.2i", i] atIndex:i];
-    }
-    
-    for (int i = 0; i < 60; i++) {
-        [_minutes insertObject:[NSString stringWithFormat:@"%.2i", i] atIndex:i];
-    }
-}
 
 - (void)loadSessionData {
-
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EdMMMyyyy" options:0
-                                                              locale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:formatString];
     
-    self.sessionDateLabel.text = [dateFormatter stringFromDate:self.session.startDate];
-    [_sessionDatePicker setDate:self.session.startDate];
+    self.eventDateLabel.text = [self.formatter stringFromDate:self.event.estWorkStart];
+    [self.eventDatePicker setDate:self.event.estWorkStart];
+    self.eventEstWorkTime.text = [NSString stringWithTimeInterval:[self.event.estWorkTime doubleValue]];
+    self.eventDescriptionTextField.text = self.event.eventDescription;
     
-    [dateFormatter setDateFormat:@"HH:mm"];
-    self.startDateLabel.text = [dateFormatter stringFromDate:self.session.startDate];
-    [_startDatePicker setDate:self.session.startDate];
-    self.finishDateLabel.text = [dateFormatter stringFromDate:self.session.finishDate];
-    [_finishDatePicker setDate:self.session.finishDate];
-    self.breakTimeLabel.text = [NSString stringWithTimeInterval:[self.session.breakTime doubleValue]];
-    //[_breakTimePicker selectRow:hour inComponent:0 animated:false];
-    //[_breakTimePicker selectRow:minute inComponent:1 animated:false];
+    if (!self.event.session) {
+        self.event.session = [[Session alloc] initWithEvent:self.event];
+        self.event.session.intervalList = [self loadDefaultIntervalList];
+    }
     
 }
 
-- (void)loadDefaultSessionData {
-    
-    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+- (NSSet *)loadDefaultIntervalList {
 
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EdMMMyyyy" options:0
-                                                              locale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:formatString];
+    [self.formatter setDateFormat:@"HH:mm"];
+    NSDate *workStartDate = [self.formatter dateFromString:[self.userDefaults workStartDate]];
+    NSDate *workFinishDate = [self.formatter dateFromString:[self.userDefaults workFinishDate]];
+    NSDate *breakStartDate = [self.formatter dateFromString:[self.userDefaults breakStartDate]];
+    NSDate *breakFinishDate = [self.formatter dateFromString:[self.userDefaults breakFinishDate]];
+    [self.formatter setDateFormat:@"EdMMMyyyy"];
     
-    NSDate *now = [NSDate date];
-    self.sessionDateLabel.text = [dateFormatter stringFromDate:now];
-    [_sessionDatePicker setDate:now];
+    Interval *interval1 = [Interval insertIntervalWithStartDate:workStartDate andfinishDate:breakStartDate andIntervalCategoryType:kIntervalTypeWork andPreviousInterval:nil];
+    Interval *interval2 = [Interval insertIntervalWithStartDate:breakStartDate andfinishDate:breakFinishDate andIntervalCategoryType:kIntervalTypeBreak andPreviousInterval:interval1];
+    Interval *interval3 = [Interval insertIntervalWithStartDate:breakFinishDate andfinishDate:workFinishDate andIntervalCategoryType:kIntervalTypeWork andPreviousInterval:nil];
     
-    [dateFormatter setDateFormat:@"HH:mm"];
+    NSSet *defaultIntervalList = [[NSSet alloc] initWithObjects:interval1, interval2, interval3, nil];
     
-    if (defaults.isLoaded) {
-        self.startDateLabel.text = [defaults workStartDate];
-        self.finishDateLabel.text = [defaults workFinishDate];
-        
-        NSDate *startDate = [dateFormatter dateFromString:self.startDateLabel.text];
-        NSDate *finishDate = [dateFormatter dateFromString:self.finishDateLabel.text];
-        
-        [_startDatePicker setDate:startDate];
-        [_finishDatePicker setDate:finishDate];
-    
-        self.breakTimeLabel.text = [NSString stringWithTimeInterval:[defaults defaultBreakTime]];
-        
-        int hour = [[self.breakTimeLabel.text substringToIndex:2] intValue];
-        int minute = [[self.breakTimeLabel.text substringFromIndex:3] intValue];
-        self.selHour = [NSString stringWithFormat:@"%2i", hour];
-        self.selMinute = [NSString stringWithFormat:@"%2i", minute];
-        
-        [_breakTimePicker selectRow:hour inComponent:0 animated:false];
-        [_breakTimePicker selectRow:minute inComponent:1 animated:false];
-    }
-    else
-    {
-        _selHour = @"00";
-        _selMinute = @"00";
-    }
-    
-    _showSessionDatePicker = false;
-    _showStartDatePicker = false;
-    _showFinishDatePicker = false;
-    _showIntervalDatePicker = false;
-
+    return defaultIntervalList;
 }
+
 
 #pragma mark - User Interface
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
-    [self dismissViewControllerAnimated:TRUE completion:nil];
+    if (self.event) {
+        [self.event.managedObjectContext rollback];
+    }
+
+    if (self.navigationController) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else {
+        [self dismissViewControllerAnimated:TRUE completion:nil];
+    }
 }
 
 - (IBAction)saveButtonPressed:(id)sender
 {
+    
+    [self.event updateEventDate:self.eventDatePicker.date];
+    
+    self.event.eventDescription = self.eventDescriptionTextField.text;
+    
+    if (self.event.session) {
+        NSDate *minStartDate = [self.event.session.intervalList valueForKeyPath:@"@min.intervalStart"];
+        NSDate *maxFinishDate = [self.event.session.intervalList valueForKeyPath:@"@max.intervalFinish"];
+        
+        self.event.session.startDate = minStartDate;
+        self.event.session.finishDate = maxFinishDate;
+    }
 
+    NSError *error;
+    [self.event.managedObjectContext save:&error];
+    
+    if (self.navigationController) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else
+        [self dismissViewControllerAnimated:TRUE completion:nil];
 }
+
+#pragma mark UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 4;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == kDynamicSectionIndex) {
+        return [self.intervalArray count];
+    }
+    else
+        return [super tableView:self.tableView numberOfRowsInSection:section];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == kDynamicSectionIndex) {
+        IntervalTableViewCell *intervalCell = [tableView dequeueReusableCellWithIdentifier:intervalCellIdentifier];
+        
+        Interval *interval = [self.intervalArray objectAtIndex:indexPath.row];
+        
+        [intervalCell configureForInterval:interval];
+        
+        return intervalCell;
+    }
+    else {
+        return [super tableView:self.tableView cellForRowAtIndexPath:indexPath];
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    return [super tableView:self.tableView titleForHeaderInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (indexPath.section == kDynamicSectionIndex) {
+        return kDynamicSectionHeight;
+    }
+    else
+        return [super tableView:self.tableView heightForRowAtIndexPath:indexPath];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == kDynamicSectionIndex) {
+        IntervalTableViewCell *intervalCell = [tableView dequeueReusableCellWithIdentifier:intervalCellIdentifier];
+        return intervalCell.indentationLevel;
+    }
+    else
+        return [super tableView:self.tableView indentationLevelForRowAtIndexPath:indexPath];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (indexPath.section == kDynamicSectionIndex) {
+        [self performSegueWithIdentifier:@"eventDetailToIntervalDetailSegue" sender:indexPath];
+    }
+    
+}
+
 
 #pragma mark - User Interface
 
-- (IBAction)sessionDatePickerChanged:(id)sender
+- (IBAction)eventDatePickerChanged:(id)sender
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EdMMMyyyy" options:0
-                                                              locale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:formatString];
-    
-    NSString *pickerDate = [dateFormatter stringFromDate:[_sessionDatePicker date]];
-    _sessionDateLabel.text = pickerDate;
+    NSString *pickerDate = [self.formatter stringFromDate:[self.eventDatePicker date]];
+    self.eventDateLabel.text = pickerDate;
 
 }
 
-
-- (IBAction)startDatePickerChanged:(id)sender
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    NSString *pickerDate = [dateFormatter stringFromDate:[_startDatePicker date]];
-    _startDateLabel.text = pickerDate;
-    
-    if ([[_startDatePicker date] isLaterThanDate:[_finishDatePicker date]]) {
-        [_finishDatePicker setDate:[_startDatePicker date]];
-        
-        NSString *finishPickerDate = [dateFormatter stringFromDate:[_finishDatePicker date]];
-        _finishDateLabel.text = finishPickerDate;
-    }
-    
-}
-
-- (IBAction)finishDatePickerChanged:(id)sender
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    NSString *pickerDate = [dateFormatter stringFromDate:[_finishDatePicker date]];
-    _finishDateLabel.text = pickerDate;
-    
-    if ([[_finishDatePicker date] isEarlierThanDate:[_startDatePicker date]]) {
-        [_startDatePicker setDate:[_finishDatePicker date]];
-        
-        NSString *startPickerDate = [dateFormatter stringFromDate:[_startDatePicker date]];
-        _startDateLabel.text = startPickerDate;
-    }
-}
 
 /*
 - (IBAction)saveButtonPressed:(id)sender
@@ -276,149 +322,27 @@
 }
 */
 
+#pragma mark Navigation
 
-#pragma mark - TableView
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        _showSessionDatePicker = !_showSessionDatePicker;
-        _showStartDatePicker = false;
-        _showFinishDatePicker = false;
-        _showIntervalDatePicker = false;
-        
-    }
-    else if (indexPath.section == 1 && indexPath.row == 0) {
-        _showStartDatePicker = !_showStartDatePicker;
-        _showSessionDatePicker = false;
-        _showFinishDatePicker = false;
-        _showIntervalDatePicker = false;
-    }
-    else if (indexPath.section == 1 && indexPath.row == 2) {
-        _showIntervalDatePicker = !_showIntervalDatePicker;
-        _showSessionDatePicker = false;
-        _showStartDatePicker = false;
-        _showFinishDatePicker = false;
-    }
-    else if (indexPath.section == 1 && indexPath.row == 4) {
-        _showFinishDatePicker = !_showFinishDatePicker;
-        _showSessionDatePicker = false;
-        _showStartDatePicker = false;
-        _showIntervalDatePicker = false;
-    }
-    
-    [UIView animateWithDuration:0.6 animations:^{
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:1 inSection:0],[NSIndexPath indexPathForItem:1 inSection:1], [NSIndexPath indexPathForItem:3 inSection:1], [NSIndexPath indexPathForItem:5 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
-        
-        //Move o scroll até a posição da linha que foi selecionada
-        [tableView scrollToRowAtIndexPath:indexPath
-                         atScrollPosition:UITableViewScrollPositionTop
-                                 animated:YES];
-    }];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0 && indexPath.row == 1)
+    if ([segue.identifier isEqualToString:@"eventDetailToScheduleSegue"])
     {
-        if (_showSessionDatePicker) {
-            return ROW_HEIGHT;
-        } else {
-            return 0;
-        }
+        ScheduleTableViewController *scheduleTableViewController = segue.destinationViewController;
+        
+        scheduleTableViewController.event = self.event;
     }
-    else if (indexPath.section == 1 && indexPath.row == 1)
+    else if ([segue.identifier isEqualToString:@"eventDetailToIntervalDetailSegue"])
     {
-        // Start Date Picker
-        if (_showStartDatePicker) {
-            return ROW_HEIGHT;
-        } else {
-            return 0;
-        }
-    }
-    else if (indexPath.section == 1 && indexPath.row == 3) {
+        IntervalDetailTableViewController *intervalDetailTableViewController = segue.destinationViewController;
         
-        // Finish Date Picker
-        if (_showIntervalDatePicker) {
-            return ROW_HEIGHT;
-        } else {
-            return 0;
+        if ([sender isKindOfClass:([NSIndexPath class])]) {
+            NSIndexPath *indexPath = (NSIndexPath *)sender;
+            Interval *interval = [self.intervalArray objectAtIndex:indexPath.row];
+            intervalDetailTableViewController.interval = interval;
         }
-    }
-    else if (indexPath.section == 1 && indexPath.row == 5) {
-        
-        // Interal Date Picker
-        if (_showFinishDatePicker) {
-            return 150;
-        } else {
-            return 0;
-        }
-    }
-    else {
-        return self.tableView.rowHeight;
     }
 }
-
-- (NSInteger)numberOfComponentsInPickerView:
-(UIPickerView *)pickerView
-{
-    if (pickerView.tag == 1) {
-        return 2;
-    }
-    
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
-{
-    if (pickerView.tag == 1) {
-        if (component == 0) {
-            //Horas
-            return [_hours count];
-        }
-        else if (component == 1) {
-            //Minutos
-            return [_minutes count];
-        }
-    }
-    
-    return 0;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component
-{
-    if (pickerView.tag == 1) {
-        if (component == 0) {
-            //Horas
-            return [_hours objectAtIndex:row];
-        }
-        else if (component == 1) {
-            //Minutos
-            return [_minutes objectAtIndex:row];
-        }
-    }
-    
-    return @"";
-}
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
-      inComponent:(NSInteger)component
-{
-    if (pickerView.tag == 1) {
-        if (component == 0) {
-            _selHour = [_hours objectAtIndex:row];
-        } else if (component == 1) {
-            _selMinute = [_minutes objectAtIndex:row];
-        }
-        
-        _breakTimeLabel.text = [[NSString alloc] initWithFormat:
-                                @"%@:%@ ", _selHour, _selMinute];
-    }
-}
-
 
 @end
