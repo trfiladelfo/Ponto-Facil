@@ -14,6 +14,7 @@
 #import "NSString+TimeInterval.h"
 #import "IntervalTableViewHeaderView.h"
 #import "IntervalDetailTableViewController.h"
+#import "LocalNotificationManager.h"
 
 static NSString * const cellIdentifier = @"intervalCell";
 
@@ -21,10 +22,19 @@ static NSString * const cellIdentifier = @"intervalCell";
 
 @property (nonatomic, strong) ArrayDataSource *dataSource;
 @property (nonatomic, strong) IntervalTableViewHeaderView *headerViewSummary;
+@property (nonatomic, retain) LocalNotificationManager *notificationManager;
 
 @end
 
 @implementation IntervalListTableViewController
+
+- (LocalNotificationManager *)notificationManager {
+    if (!_notificationManager) {
+        _notificationManager = [[LocalNotificationManager alloc] init];
+    }
+    
+    return _notificationManager;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,11 +68,14 @@ static NSString * const cellIdentifier = @"intervalCell";
     
     if (self.session) {
         
-        NSDate *minStartDate = [self.session.intervalList valueForKeyPath:@"@min.intervalStart"];
-        NSDate *maxFinishDate = [self.session.intervalList valueForKeyPath:@"@max.intervalFinish"];
+        [self.session update];
         
-        self.session.startDate = minStartDate;
-        self.session.finishDate = maxFinishDate;
+        if ([self.session isStarted]) {
+            [self.notificationManager scheduleNotificationsFromType:kLocalNotificationTypeWork withFireDate:[self.session currentEstWorkFinishDate]];
+        }
+        else if ([self.session isPaused]) {
+            [self.notificationManager scheduleNotificationsFromType:kLocalNotificationTypeBreak withFireDate:[self.session currentEstBreakFinishDate]];
+        }
         
         NSError *error;
         [self.session.managedObjectContext save:&error];

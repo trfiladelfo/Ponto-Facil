@@ -46,7 +46,7 @@
     [self.regularTimeNotificationSwitch setOn:[self.userDefaults workFinishNotification]];
     [self.breakTimeNotificationSwitch setOn:[self.userDefaults breakFinishNotification]];
     [self.breakTimeAdjustSwitch setOn:[self.userDefaults breakTimeRequired]];
-    self.toleranceTimeLabel.text = [self.userDefaults toleranceTime] == 0 ? @"Nenhuma" : [NSString stringWithFormat:@"%2li minutos", [self.userDefaults toleranceTime]];
+    self.toleranceTimeLabel.text = [self.userDefaults toleranceTime] == 0 ? @"Nenhuma" : [NSString stringWithFormat:@"%2i minutos", (int)[self.userDefaults toleranceTime]];
 }
 
 - (void)saveDefaultData {

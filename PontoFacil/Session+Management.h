@@ -35,6 +35,10 @@ typedef enum {
 - (void)stop;
 - (void)pause;
 - (void)resume;
+- (void)update;
 
+- (BOOL)isStarted;
+- (BOOL)isPaused;
+- (BOOL)isStoped;
 
 @end

@@ -152,6 +152,17 @@ static NSString *entityName = @"Session";
 
 #pragma mark - Private Methods
 
+- (BOOL)isStarted {
+    return self.sessionStateCategory == kSessionStateStart;
+}
+
+- (BOOL)isPaused {
+    return self.sessionStateCategory == kSessionStatePaused;
+}
+
+- (BOOL)isStoped {
+    return self.sessionStateCategory == kSessionStateStop;
+}
 
 - (NSDate *)calculateEstimatedWorkFinishDate: (BOOL)adjustBreakTime {
     
@@ -261,4 +272,14 @@ static NSString *entityName = @"Session";
     self.finishDate = [NSDate date];
     [self setSessionStateCategory:kSessionStateStop];
 }
+
+- (void)update {
+
+    self.startDate = [self.intervalList valueForKeyPath:@"@min.intervalStart"];
+    
+    if ([self isStoped]) {
+        self.finishDate = [self.intervalList valueForKeyPath:@"@max.intervalFinish"];
+    }
+}
+
 @end

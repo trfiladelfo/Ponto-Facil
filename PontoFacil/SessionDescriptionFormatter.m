@@ -26,19 +26,21 @@
 
 - (NSString *)sessionStatusMessageFromSession:(Session *)session {
     
-    switch (session.sessionStateCategory) {
-        
-        default:
-        case kSessionStateStart:
+    if (session) {
+        if ([session isStarted]) {
             return [NSString stringWithFormat:@"Sessão iniciada. Previsão de saída: %@", [self.dateFormatter stringFromDate:session.currentEstWorkFinishDate]];
-            break;
-        case kSessionStatePaused:
+        }
+        else if ([session isPaused])
+        {
             return [NSString stringWithFormat:@"Em intervalo. Previsão de retorno: %@", [self.dateFormatter stringFromDate:session.currentEstBreakFinishDate]];
-            break;
-        case kSessionStateStop:
+        }
+        else
+        {
             return [NSString stringWithFormat:@"Sessão Finalizada com sucesso. Saldo: %@", [NSString stringWithTimeInterval:session.timeBalance]];
-            break;
+        }
     }
+    else
+        return @"";
 }
 
 @end

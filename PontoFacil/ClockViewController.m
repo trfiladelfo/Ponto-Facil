@@ -10,39 +10,32 @@
 #import "CircleProgressView.h"
 #import "Session+Management.h"
 #import "Event+Management.h"
-#import "NSDate-Utilities.h"
 #import "CircularButtonView.h"
 #import "ActionButton.h"
 #import <BDKNotifyHUD.h>
 #import "IntervalListTableViewController.h"
 #import "NSString+TimeInterval.h"
+#import "NSDate-Utilities.h"
 #import "NSUserDefaults+PontoFacil.h"
 #import "UIColor+PontoFacil.h"
 #import "SessionDescriptionFormatter.h"
+#import "LocalNotificationManager.h"
 
 @interface ClockViewController ()
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) Session *session;
-@property (nonatomic, assign) BOOL sendWorkTimeNotification;
-@property (nonatomic, assign) BOOL sendBreakTimeNotification;
 
-@property (nonatomic, assign) BOOL allowNotifications;
-@property (nonatomic, assign) BOOL allowNotificationsSound;
-@property (nonatomic, assign) BOOL allowNotificationsBadge;
-@property (nonatomic, assign) BOOL allowNotificationsAlert;
 @property (nonatomic, assign) NSUserDefaults *userDefaults;
 @property (nonatomic, retain) NSDateFormatter *formatter;
+@property (nonatomic, retain) LocalNotificationManager *notificationManager;
+
 @property (strong, nonatomic) BDKNotifyHUD *alertViewProvider;
 @property (strong, nonatomic) UIActionSheet *actionSheetProvider;
 
 @end
 
 @implementation ClockViewController
-
-NSString * const NotificationCategoryIdent  = @"ACTIONABLE";
-NSString * const NotificationActionOneIdent = @"ACTION_ONE";
-NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
 
 - (NSUserDefaults *)userDefaults {
@@ -61,6 +54,14 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     }
     
     return _formatter;
+}
+
+- (LocalNotificationManager *)notificationManager {
+    if (!_notificationManager) {
+        _notificationManager = [[LocalNotificationManager alloc] init];
+    }
+    
+    return _notificationManager;
 }
 
 - (BDKNotifyHUD *)alertViewProvider {
@@ -89,17 +90,11 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self registerForNotification];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
-    //Load Default Values
-    self.sendWorkTimeNotification = [self.userDefaults workFinishNotification];
-    self.sendBreakTimeNotification = [self.userDefaults breakFinishNotification];
     
     [self loadActiveSession];
-    [self setNotificationTypesAllowed];
     [self refreshButtons];
     [self refreshStatusView];
     [self refreshClockView];
@@ -116,7 +111,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     self.session = [[Session alloc] initSessionFromUri:sessionURIData];
     
     //Se a sessão não é do dia de hoje e o status está finalizado
-    if ((self.session.sessionStateCategory == kSessionStateStop) && (![self.session.event.estWorkStart isToday])) {
+    if (([self.session isStoped]) && (![self.session.event.estWorkStart isToday])) {
         self.session = nil;
         [self.userDefaults setActiveSessionID:nil];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -126,19 +121,19 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)refreshButtons {
 
     if (self.session) {
-        if (self.session.sessionStateCategory == kSessionStateStart) {
+        if ([self.session isStarted]) {
             [self.startStopButton setEnabled:true];
             [self.pauseResumeButton setEnabled:true];
             [self.startStopButton setSelected:true];
             [self.pauseResumeButton setSelected:false];
         }
-        else if (self.session.sessionStateCategory == kSessionStatePaused) {
+        else if ([self.session isPaused]) {
             [self.startStopButton setEnabled:true];
             [self.pauseResumeButton setEnabled:true];
             [self.startStopButton setSelected:true];
             [self.pauseResumeButton setSelected:true];
         }
-        else if (self.session.sessionStateCategory == kSessionStateStop) {
+        else if ([self.session isStoped]) {
             //Stopped
             [self.startStopButton setEnabled:false];
             [self.pauseResumeButton setEnabled:false];
@@ -181,7 +176,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
     if (_session) {
         
-        if (self.session.sessionStateCategory == kSessionStatePaused)
+        if ([self.session isPaused])
         {
             self.clockView.status = @"Intervalo";
             self.clockView.timeLimit = [self.session.event.estBreakTime doubleValue];
@@ -190,7 +185,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         }
         else
         {
-            if (self.session.sessionStateCategory == kSessionStateStart) {
+            if ([self.session isStarted]) {
                 self.clockView.status = @"Em andamento";
                 [self.clockView setTintColor:[UIColor clockViewInProgressColor]];
             }
@@ -216,149 +211,6 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
 }
 
-- (void)registerForNotification {
-    
-    UIUserNotificationSettings *settings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-    
-    if (settings.types == UIUserNotificationTypeNone) {
-        
-        UIMutableUserNotificationAction *action1;
-        action1 = [[UIMutableUserNotificationAction alloc] init];
-        [action1 setActivationMode:UIUserNotificationActivationModeBackground];
-        [action1 setTitle:@"Action 1"];
-        [action1 setIdentifier:NotificationActionOneIdent];
-        [action1 setDestructive:NO];
-        [action1 setAuthenticationRequired:NO];
-        
-        UIMutableUserNotificationAction *action2;
-        action2 = [[UIMutableUserNotificationAction alloc] init];
-        [action2 setActivationMode:UIUserNotificationActivationModeBackground];
-        [action2 setTitle:@"Action 2"];
-        [action2 setIdentifier:NotificationActionTwoIdent];
-        [action2 setDestructive:NO];
-        [action2 setAuthenticationRequired:NO];
- 
-    
-        UIMutableUserNotificationCategory *actionCategory;
-        actionCategory = [[UIMutableUserNotificationCategory alloc] init];
-        [actionCategory setIdentifier:NotificationCategoryIdent];
-        [actionCategory setActions:@[action1, action2]
-                        forContext:UIUserNotificationActionContextDefault];
-        
-        NSSet *categories = [NSSet setWithObject:actionCategory];
-        UIUserNotificationType types = (UIUserNotificationTypeAlert|
-                                        UIUserNotificationTypeSound|
-                                        UIUserNotificationTypeBadge);
-        UIUserNotificationSettings *newSettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
-        
-        
-        // Register the notification settings.
-        [[UIApplication sharedApplication] registerUserNotificationSettings:newSettings];
-        
-    }
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEventListNotification) name:@"eventListNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleScheduleNewNotification) name:@"scheduleNewNotification" object:nil];
-}
-
-- (void)scheduleNotifications {
-    
-    if (self.session) {
-        
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
-        
-        if (self.session.sessionStateCategory == kSessionStateStart) {
-            if (self.sendWorkTimeNotification) {
-                //Todo: Notificação de 15 minutos só deve ser reeschedulada se ainda não tiver sido disparada
-                
-                NSInteger advanceTimeForWorkNotification = [self.userDefaults advanceTimeForWorkNotification];
-                
-                if (advanceTimeForWorkNotification > 0) {
-                    [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:[NSString stringWithFormat:@"Seu expediente irá terminar em %li minutos",advanceTimeForWorkNotification] andDate:[_session.currentEstWorkFinishDate dateBySubtractingMinutes:advanceTimeForWorkNotification] andRepeatInterval:false];
-                }
-                
-                //NSLog(@"1-Notifications count = %i", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
-                
-                [self scheduleNotificationWithID:_session.objectID andState:kSessionStateStart andMessage:@"Fim do expediente!" andDate:_session.currentEstWorkFinishDate andRepeatInterval:true];
-            }
-        }
-        else if (self.session.sessionStateCategory == kSessionStatePaused)
-        {
-            if (self.sendBreakTimeNotification) {
-                NSDate *estBreakFinishDate = [[NSDate date] dateByAddingTimeInterval:[_session.event.estBreakTime doubleValue]];
-                NSInteger advanceTimeForBreakNotification = [self.userDefaults advanceTimeForBreakNotification];
-                
-                if (advanceTimeForBreakNotification > 0) {
-                    [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:[NSString stringWithFormat:@"O intervalo irá terminar em %li minutos", advanceTimeForBreakNotification] andDate:[estBreakFinishDate dateBySubtractingMinutes:advanceTimeForBreakNotification] andRepeatInterval:true];
-                }
-                
-                [self scheduleNotificationWithID:_session.objectID andState:kSessionStatePaused andMessage:@"Fim do intervalo!" andDate:estBreakFinishDate andRepeatInterval:true];
-            }
-        }
-    }
-}
-
-- (void)scheduleNotificationWithID:(NSManagedObjectID *)uuid andState:(SessionStateCategory)state andMessage:(NSString *)message andDate:(NSDate *)fireDate andRepeatInterval:(BOOL)repeatInterval {
-    
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    
-    if (notification)
-    {
-        if (self.allowNotifications) {
-            
-            notification.fireDate = fireDate;
-            notification.timeZone = [NSTimeZone defaultTimeZone];
-            notification.category = @"timerActionsReminder";
-            
-            //BUG
-            //if (repeatInterval) {
-            //    notification.repeatInterval = NSCalendarUnitMinute * 5;
-            //}
-            
-            if (self.allowNotificationsAlert) {
-                notification.alertBody = message;
-                notification.alertAction = @"OK";
-            }
-            if (self.allowNotificationsBadge) {
-                notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-            }
-            if (self.allowNotificationsSound) {
-                notification.soundName = UILocalNotificationDefaultSoundName;
-            }
-        }
-        
-        [self.formatter setDateFormat:@"MM-dd-yyy hh:mm"];
-        NSString *notifDate = [self.formatter stringFromDate:fireDate];
-        NSLog(@"%s: fire time = %@", __PRETTY_FUNCTION__, notifDate);
-        
-        // this will schedule the notification to fire at the fire date
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-        // this will fire the notification right away, it will still also fire at the date we set
-        //[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-    }
-
-}
-
-- (void)setNotificationTypesAllowed
-{
-    NSLog(@"%s:", __PRETTY_FUNCTION__);
-    // get the current notification settings
-    UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-    
-    self.allowNotifications = (currentSettings.types != UIUserNotificationTypeNone);
-    self.allowNotificationsSound = (currentSettings.types & UIUserNotificationTypeSound) != 0;
-    self.allowNotificationsBadge = (currentSettings.types & UIUserNotificationTypeBadge) != 0;
-    self.allowNotificationsAlert = (currentSettings.types & UIUserNotificationTypeAlert) != 0;
-}
-
-- (void)handleEventListNotification {
-    //
-}
-
-- (void)handleScheduleNewNotification {
-    //
-}
-
 
 - (void)notifyHUDMessage {
     SessionDescriptionFormatter *sessionFormatter = [[SessionDescriptionFormatter alloc] init];
@@ -366,6 +218,16 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     [self.alertViewProvider presentWithDuration:1.0f speed:0.5f inView:self.view completion:nil];
 }
 
+- (void)scheduleNotifications {
+    if (self.session) {
+        if ([self.session isStarted]) {
+            [self.notificationManager scheduleNotificationsFromType:kLocalNotificationTypeWork withFireDate:[self.session currentEstWorkFinishDate]];
+        }
+        else if ([self.session isPaused]) {
+            [self.notificationManager scheduleNotificationsFromType:kLocalNotificationTypeBreak withFireDate:[self.session currentEstBreakFinishDate]];
+        }
+    }
+}
 
 #pragma mark - User Interface
 
@@ -392,7 +254,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
     if (self.session) {
     
-        if (self.session.sessionStateCategory == kSessionStatePaused) {
+        if ([self.session isPaused]) {
             [self resumeCounter];
         }
         else {
@@ -435,11 +297,11 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 {
     if (self.session) {
         
-        if (self.session.sessionStateCategory == kSessionStatePaused) {
+        if ([self.session isPaused]) {
             
             self.clockView.elapsedTime = [self.session.breakTimeInProgress doubleValue];
         }
-        else if (self.session.sessionStateCategory == kSessionStateStart)
+        else if ([self.session isStarted])
         {
             self.clockView.elapsedTime = [self.session.workTime doubleValue];
         }
@@ -465,7 +327,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
 - (void)pauseCounter {
     
-    if ((_session) && (_session.sessionStateCategory == kSessionStateStart)) {
+    if ((_session) && ([_session isStarted])) {
 
         [_session pause];
         [self.session.managedObjectContext save:nil];
@@ -474,7 +336,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
 
 - (void)resumeCounter {
     
-    if ((_session) && (_session.sessionStateCategory == kSessionStatePaused)) {
+    if ((_session) && ([_session isPaused])) {
         
         [_session resume];
         [self.session.managedObjectContext save:nil];
@@ -487,7 +349,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
         
         [_session stop];
         [self.session.managedObjectContext save:nil];
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        [self.notificationManager clearNotifications];
         [self stopTimer];
     }
 }
@@ -499,7 +361,7 @@ NSString * const NotificationActionTwoIdent = @"ACTION_TWO";
     //Finalizar a sessão
     if ((actionSheet.tag == 1) && (buttonIndex == actionSheet.destructiveButtonIndex)) {
         [self stopCounter];
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        [self.notificationManager clearNotifications];
         [self refreshButtons];
         [self refreshStatusView];
         [self refreshClockView];

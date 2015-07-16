@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2191D05B1B56048A002805AA /* LocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D05A1B56048A002805AA /* LocalNotificationManager.m */; };
 		21D1564A1B517BAC0028DD67 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D156491B517BAC0028DD67 /* Interval.m */; };
 		21D1564F1B51BC530028DD67 /* IntervalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D1564E1B51BC530028DD67 /* IntervalTableViewCell.xib */; };
 		21E074101B484C43006D3C88 /* TaskCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E0740F1B484C43006D3C88 /* TaskCheckBoxView.m */; };
@@ -88,6 +89,8 @@
 
 /* Begin PBXFileReference section */
 		20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.debug.xcconfig"; sourceTree = "<group>"; };
+		2191D0591B56048A002805AA /* LocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotificationManager.h; sourceTree = "<group>"; };
+		2191D05A1B56048A002805AA /* LocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotificationManager.m; sourceTree = "<group>"; };
 		21D156481B517BAC0028DD67 /* Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interval.h; sourceTree = "<group>"; };
 		21D156491B517BAC0028DD67 /* Interval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interval.m; sourceTree = "<group>"; };
 		21D1564E1B51BC530028DD67 /* IntervalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntervalTableViewCell.xib; sourceTree = "<group>"; };
@@ -411,6 +414,8 @@
 				877081D31A927A3D00541AB3 /* NSDate-Utilities.m */,
 				87A727E01ACCBF6B0095764E /* NSString+TimeInterval.h */,
 				87A727E11ACCBF6B0095764E /* NSString+TimeInterval.m */,
+				2191D0591B56048A002805AA /* LocalNotificationManager.h */,
+				2191D05A1B56048A002805AA /* LocalNotificationManager.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -898,6 +903,7 @@
 				877AE3ED1B16B3F700A52542 /* CheckTimeTableViewCell.m in Sources */,
 				874D0C771AB4FEFC00E0A3B1 /* AboutTableViewController.m in Sources */,
 				878BD9531AC382D70005DBD4 /* IntervalTableViewCell.m in Sources */,
+				2191D05B1B56048A002805AA /* LocalNotificationManager.m in Sources */,
 				87C732F61B271AA90029C2E0 /* SessionDescriptionFormatter.m in Sources */,
 				878BD94D1AC37F360005DBD4 /* IntervalListTableViewController.m in Sources */,
 				874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */,
