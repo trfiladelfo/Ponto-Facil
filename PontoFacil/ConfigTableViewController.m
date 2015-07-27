@@ -53,50 +53,12 @@
     
     //Grava as configurações
     [self.userDefaults setBreakTimeRequired:self.breakTimeAdjustSwitch.isOn];
-    [self.userDefaults setToleranceTime:0];
+    //[self.userDefaults setToleranceTime:0];
     [self.userDefaults setWorkFinishNotification:self.regularTimeNotificationSwitch.isOn];
     [self.userDefaults setBreakFinishNotification:self.breakTimeNotificationSwitch.isOn];
     [self.userDefaults synchronize];
 }
 
-#pragma mark - User Interface
-
-
-#pragma mark - TableView
-/*
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 1 && indexPath.row == 0) {
-        _showToleranceDatePicker = !_showToleranceDatePicker;
-    }
-    
-    [UIView animateWithDuration:0.6 animations:^{
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
-        
-        //Move o scroll até a posição da linha que foi selecionada
-        [tableView scrollToRowAtIndexPath:indexPath
-                         atScrollPosition:UITableViewScrollPositionTop
-                                 animated:YES];
-    }];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 1 && indexPath.row == 1) {
-        
-        // Tolerance Date Picker
-        if (_showToleranceDatePicker) {
-            return KPICKERHEIGHT;
-        } else {
-            return 0;
-        }
-    }
-    else {
-        return self.tableView.rowHeight;
-    }
-}
-*/
 
 #pragma mark - Delegate Methods
 

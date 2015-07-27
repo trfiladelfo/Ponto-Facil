@@ -7,7 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		211E3DDA1B6082FF0055EB50 /* Overview.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E3DD91B6082FF0055EB50 /* Overview.m */; };
 		2191D05B1B56048A002805AA /* LocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D05A1B56048A002805AA /* LocalNotificationManager.m */; };
+		2191D0641B59DAB8002805AA /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D0631B59DAB8002805AA /* OverviewViewController.m */; };
+		2191D06E1B59FBFB002805AA /* JBBaseChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D0671B59FBFB002805AA /* JBBaseChartViewController.m */; };
+		2191D0711B59FBFB002805AA /* JBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D06D1B59FBFB002805AA /* JBBaseViewController.m */; };
+		2191D0771B5A0025002805AA /* JBChartInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D0761B5A0025002805AA /* JBChartInformationView.m */; };
+		2191D07A1B5A08C0002805AA /* JBChartHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D0791B5A08C0002805AA /* JBChartHeaderView.m */; };
+		2191D07D1B5A08E9002805AA /* JBLineChartFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D07C1B5A08E9002805AA /* JBLineChartFooterView.m */; };
+		21CCD0471B5A1F7E00273A2E /* JBChartTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CCD0461B5A1F7E00273A2E /* JBChartTooltipView.m */; };
+		21CCD04A1B5A213800273A2E /* JBChartTooltipTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CCD0491B5A213800273A2E /* JBChartTooltipTipView.m */; };
 		21D1564A1B517BAC0028DD67 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D156491B517BAC0028DD67 /* Interval.m */; };
 		21D1564F1B51BC530028DD67 /* IntervalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D1564E1B51BC530028DD67 /* IntervalTableViewCell.xib */; };
 		21E074101B484C43006D3C88 /* TaskCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E0740F1B484C43006D3C88 /* TaskCheckBoxView.m */; };
@@ -23,8 +32,6 @@
 		87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E8E1A85A96E00AB4977 /* ClockViewController.m */; };
 		87147E911A86501000AB4977 /* CircularButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87147E901A86501000AB4977 /* CircularButtonView.xib */; };
 		87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E941A8652E800AB4977 /* CircularButtonView.m */; };
-		872BC37D1ABBB6D800039FEF /* UIColor+PontoFacil.m in Sources */ = {isa = PBXBuildFile; fileRef = 872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */; };
-		872BC3801ABBBFC000039FEF /* UIFont+PontoFacil.m in Sources */ = {isa = PBXBuildFile; fileRef = 872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */; };
 		874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 874D0C731AB4E5B000E0A3B1 /* ConfigTableViewController.m */; };
 		874D0C771AB4FEFC00E0A3B1 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 874D0C761AB4FEFC00E0A3B1 /* AboutTableViewController.m */; };
 		87624EA91AA35B5C00CE9FA5 /* Interval+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = 87624EA81AA35B5C00CE9FA5 /* Interval+Management.m */; };
@@ -89,8 +96,31 @@
 
 /* Begin PBXFileReference section */
 		20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.debug.xcconfig"; sourceTree = "<group>"; };
+		211E3DD81B6082FF0055EB50 /* Overview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overview.h; sourceTree = "<group>"; };
+		211E3DD91B6082FF0055EB50 /* Overview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Overview.m; sourceTree = "<group>"; };
 		2191D0591B56048A002805AA /* LocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotificationManager.h; sourceTree = "<group>"; };
 		2191D05A1B56048A002805AA /* LocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotificationManager.m; sourceTree = "<group>"; };
+		2191D05C1B58A397002805AA /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		2191D05D1B58A4EB002805AA /* FontConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FontConstants.h; sourceTree = "<group>"; };
+		2191D05E1B58A614002805AA /* ColorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorConstants.h; sourceTree = "<group>"; };
+		2191D05F1B58AA12002805AA /* StringConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringConstants.h; sourceTree = "<group>"; };
+		2191D0601B58AAE8002805AA /* PontoFacil-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PontoFacil-Prefix.pch"; sourceTree = "<group>"; };
+		2191D0621B59DAB8002805AA /* OverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewViewController.h; sourceTree = "<group>"; };
+		2191D0631B59DAB8002805AA /* OverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewViewController.m; sourceTree = "<group>"; };
+		2191D0661B59FBFB002805AA /* JBBaseChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBBaseChartViewController.h; sourceTree = "<group>"; };
+		2191D0671B59FBFB002805AA /* JBBaseChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBBaseChartViewController.m; sourceTree = "<group>"; };
+		2191D06C1B59FBFB002805AA /* JBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBBaseViewController.h; sourceTree = "<group>"; };
+		2191D06D1B59FBFB002805AA /* JBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBBaseViewController.m; sourceTree = "<group>"; };
+		2191D0751B5A0025002805AA /* JBChartInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChartInformationView.h; sourceTree = "<group>"; };
+		2191D0761B5A0025002805AA /* JBChartInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartInformationView.m; sourceTree = "<group>"; };
+		2191D0781B5A08C0002805AA /* JBChartHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChartHeaderView.h; sourceTree = "<group>"; };
+		2191D0791B5A08C0002805AA /* JBChartHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartHeaderView.m; sourceTree = "<group>"; };
+		2191D07B1B5A08E9002805AA /* JBLineChartFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBLineChartFooterView.h; sourceTree = "<group>"; };
+		2191D07C1B5A08E9002805AA /* JBLineChartFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBLineChartFooterView.m; sourceTree = "<group>"; };
+		21CCD0451B5A1F7E00273A2E /* JBChartTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChartTooltipView.h; sourceTree = "<group>"; };
+		21CCD0461B5A1F7E00273A2E /* JBChartTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartTooltipView.m; sourceTree = "<group>"; };
+		21CCD0481B5A213800273A2E /* JBChartTooltipTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChartTooltipTipView.h; sourceTree = "<group>"; };
+		21CCD0491B5A213800273A2E /* JBChartTooltipTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartTooltipTipView.m; sourceTree = "<group>"; };
 		21D156481B517BAC0028DD67 /* Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interval.h; sourceTree = "<group>"; };
 		21D156491B517BAC0028DD67 /* Interval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interval.m; sourceTree = "<group>"; };
 		21D1564E1B51BC530028DD67 /* IntervalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntervalTableViewCell.xib; sourceTree = "<group>"; };
@@ -122,10 +152,6 @@
 		87147E941A8652E800AB4977 /* CircularButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonView.m; sourceTree = "<group>"; };
 		87297C4F1A870AD2004E9626 /* libPods-PontoFacil-CircularProgressControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil-CircularProgressControl.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil-CircularProgressControl.a"; sourceTree = "<group>"; };
 		87297C501A870AD2004E9626 /* libPods-PontoFacil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacil.a"; path = "Pods/build/Debug-iphoneos/libPods-PontoFacil.a"; sourceTree = "<group>"; };
-		872BC37B1ABBB6D800039FEF /* UIColor+PontoFacil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PontoFacil.h"; sourceTree = "<group>"; };
-		872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PontoFacil.m"; sourceTree = "<group>"; };
-		872BC37E1ABBBFC000039FEF /* UIFont+PontoFacil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+PontoFacil.h"; sourceTree = "<group>"; };
-		872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+PontoFacil.m"; sourceTree = "<group>"; };
 		874D0C721AB4E5B000E0A3B1 /* ConfigTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTableViewController.h; sourceTree = "<group>"; };
 		874D0C731AB4E5B000E0A3B1 /* ConfigTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTableViewController.m; sourceTree = "<group>"; };
 		874D0C751AB4FEFC00E0A3B1 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
@@ -196,7 +222,6 @@
 		87C732F41B271AA90029C2E0 /* SessionDescriptionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionDescriptionFormatter.h; sourceTree = "<group>"; };
 		87C732F51B271AA90029C2E0 /* SessionDescriptionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDescriptionFormatter.m; sourceTree = "<group>"; };
 		87C732F81B271D720029C2E0 /* SessionDescriptionFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDescriptionFormatterSpec.m; sourceTree = "<group>"; };
-		87C732FA1B274FF70029C2E0 /* SessionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionProtocol.h; sourceTree = "<group>"; };
 		87C732FE1B2757970029C2E0 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		87C732FF1B2757970029C2E0 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -240,6 +265,44 @@
 				876398E61A8D888F0002118E /* Open Sans regular.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		2191D0611B59DA04002805AA /* Overview */ = {
+			isa = PBXGroup;
+			children = (
+				2191D0621B59DAB8002805AA /* OverviewViewController.h */,
+				2191D0631B59DAB8002805AA /* OverviewViewController.m */,
+			);
+			name = Overview;
+			sourceTree = "<group>";
+		};
+		2191D0651B59FBA9002805AA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2191D0661B59FBFB002805AA /* JBBaseChartViewController.h */,
+				2191D0671B59FBFB002805AA /* JBBaseChartViewController.m */,
+				2191D06C1B59FBFB002805AA /* JBBaseViewController.h */,
+				2191D06D1B59FBFB002805AA /* JBBaseViewController.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		2191D0721B59FF47002805AA /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				2191D0651B59FBA9002805AA /* Base */,
+				21CCD0451B5A1F7E00273A2E /* JBChartTooltipView.h */,
+				21CCD0461B5A1F7E00273A2E /* JBChartTooltipView.m */,
+				21CCD0481B5A213800273A2E /* JBChartTooltipTipView.h */,
+				21CCD0491B5A213800273A2E /* JBChartTooltipTipView.m */,
+				2191D07B1B5A08E9002805AA /* JBLineChartFooterView.h */,
+				2191D07C1B5A08E9002805AA /* JBLineChartFooterView.m */,
+				2191D0781B5A08C0002805AA /* JBChartHeaderView.h */,
+				2191D0791B5A08C0002805AA /* JBChartHeaderView.m */,
+				2191D0751B5A0025002805AA /* JBChartInformationView.h */,
+				2191D0761B5A0025002805AA /* JBChartInformationView.m */,
+			);
+			name = Chart;
 			sourceTree = "<group>";
 		};
 		21D1564B1B51BADA0028DD67 /* IntervalCell */ = {
@@ -328,6 +391,7 @@
 				87147E561A859F6000AB4977 /* Info.plist */,
 				87147E571A859F6000AB4977 /* main.m */,
 				87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */,
+				2191D0601B58AAE8002805AA /* PontoFacil-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -367,6 +431,8 @@
 				877081D01A923D2C00541AB3 /* Event+Management.m */,
 				87624EA71AA35B5C00CE9FA5 /* Interval+Management.h */,
 				87624EA81AA35B5C00CE9FA5 /* Interval+Management.m */,
+				211E3DD81B6082FF0055EB50 /* Overview.h */,
+				211E3DD91B6082FF0055EB50 /* Overview.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -374,6 +440,7 @@
 		87147E7F1A859F9000AB4977 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				2191D0721B59FF47002805AA /* Chart */,
 				21D1564B1B51BADA0028DD67 /* IntervalCell */,
 				21E073F41B484B03006D3C88 /* CheckBox */,
 				877AE3E81B16B10A00A52542 /* CheckTimeCell */,
@@ -392,12 +459,13 @@
 		87147E801A859F9800AB4977 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2191D0611B59DA04002805AA /* Overview */,
 				87147E841A85A05000AB4977 /* AppDelegate */,
-				87297C531A883B6A004E9626 /* Schedule */,
 				87147E8C1A85A39000AB4977 /* Clock */,
+				878BD94A1AC37EF00005DBD4 /* Interval */,
 				87C683231A9FE88900A2C101 /* Event */,
 				874D0C711AB4E55200E0A3B1 /* Config */,
-				878BD94A1AC37EF00005DBD4 /* Interval */,
+				87297C531A883B6A004E9626 /* Schedule */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -405,9 +473,11 @@
 		87147E821A85A01C00AB4977 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				877AE3E11B15739B00A52542 /* Constants */,
 				87B5C6411AC6FC4C004AB6A7 /* DataSource */,
-				877AE3E11B15739B00A52542 /* Defaults */,
 				87C732F71B271D050029C2E0 /* Formatter */,
+				877AE3DB1B14209300A52542 /* NSUserDefaults+PontoFacil.h */,
+				877AE3DC1B14209300A52542 /* NSUserDefaults+PontoFacil.m */,
 				87FE86A41AC2337F00421959 /* PaddingLabel.h */,
 				87FE86A51AC2337F00421959 /* PaddingLabel.m */,
 				877081D21A927A3D00541AB3 /* NSDate-Utilities.h */,
@@ -516,17 +586,15 @@
 			name = ActionButton;
 			sourceTree = "<group>";
 		};
-		877AE3E11B15739B00A52542 /* Defaults */ = {
+		877AE3E11B15739B00A52542 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				872BC37E1ABBBFC000039FEF /* UIFont+PontoFacil.h */,
-				872BC37F1ABBBFC000039FEF /* UIFont+PontoFacil.m */,
-				872BC37B1ABBB6D800039FEF /* UIColor+PontoFacil.h */,
-				872BC37C1ABBB6D800039FEF /* UIColor+PontoFacil.m */,
-				877AE3DB1B14209300A52542 /* NSUserDefaults+PontoFacil.h */,
-				877AE3DC1B14209300A52542 /* NSUserDefaults+PontoFacil.m */,
+				2191D05C1B58A397002805AA /* Constants.h */,
+				2191D05D1B58A4EB002805AA /* FontConstants.h */,
+				2191D05E1B58A614002805AA /* ColorConstants.h */,
+				2191D05F1B58AA12002805AA /* StringConstants.h */,
 			);
-			name = Defaults;
+			name = Constants;
 			sourceTree = "<group>";
 		};
 		877AE3E21B16975500A52542 /* DatePickerCell */ = {
@@ -662,7 +730,6 @@
 			isa = PBXGroup;
 			children = (
 				87ABAAF91B1BCE7F00060AA0 /* SessionSpec.m */,
-				87C732FA1B274FF70029C2E0 /* SessionProtocol.h */,
 			);
 			name = Session;
 			sourceTree = "<group>";
@@ -891,10 +958,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2191D07A1B5A08C0002805AA /* JBChartHeaderView.m in Sources */,
 				87FE86A61AC2337F00421959 /* PaddingLabel.m in Sources */,
+				2191D0641B59DAB8002805AA /* OverviewViewController.m in Sources */,
 				87147E5B1A859F6000AB4977 /* AppDelegate.m in Sources */,
 				87C683261AA1495200A2C101 /* EventListTableViewController.m in Sources */,
 				87BC41491A8706F80007768A /* CircleProgressView.m in Sources */,
+				211E3DDA1B6082FF0055EB50 /* Overview.m in Sources */,
+				2191D0711B59FBFB002805AA /* JBBaseViewController.m in Sources */,
 				87A727E81ACCDB090095764E /* IntervalTableViewHeaderView.m in Sources */,
 				87BC414A1A8706F80007768A /* CircleShapeLayer.m in Sources */,
 				877081D81A92AE2700541AB3 /* ActionButton.m in Sources */,
@@ -909,6 +980,7 @@
 				874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */,
 				87FE86A01AC0F30500421959 /* EventTableViewCell.m in Sources */,
 				87C733001B2757970029C2E0 /* Session.m in Sources */,
+				2191D07D1B5A08E9002805AA /* JBLineChartFooterView.m in Sources */,
 				876398EF1A8D9BA00002118E /* AcessoryCircularButtonView.m in Sources */,
 				878BD9501AC381290005DBD4 /* ArrayDataSource.m in Sources */,
 				21E074171B4CBB38006D3C88 /* IntervalDetailTableViewController.m in Sources */,
@@ -916,12 +988,14 @@
 				877081D11A923D2C00541AB3 /* Event+Management.m in Sources */,
 				87FE86A31AC2336200421959 /* FetchedResultsControllerDataSource.m in Sources */,
 				21E074101B484C43006D3C88 /* TaskCheckBoxView.m in Sources */,
+				2191D0771B5A0025002805AA /* JBChartInformationView.m in Sources */,
 				87147E951A8652E800AB4977 /* CircularButtonView.m in Sources */,
+				21CCD04A1B5A213800273A2E /* JBChartTooltipTipView.m in Sources */,
 				87B4FDC21AF5593F008DA605 /* ScheduleTableViewController.m in Sources */,
 				877AE3DD1B14209300A52542 /* NSUserDefaults+PontoFacil.m in Sources */,
-				872BC3801ABBBFC000039FEF /* UIFont+PontoFacil.m in Sources */,
+				21CCD0471B5A1F7E00273A2E /* JBChartTooltipView.m in Sources */,
 				87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */,
-				872BC37D1ABBB6D800039FEF /* UIColor+PontoFacil.m in Sources */,
+				2191D06E1B59FBFB002805AA /* JBBaseChartViewController.m in Sources */,
 				877081CE1A922F5900541AB3 /* Session+Management.m in Sources */,
 				87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */,
 				87DAF90F1AF847B200B692C5 /* Event.m in Sources */,
@@ -1058,10 +1132,11 @@
 			baseConfigurationReference = 20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PontoFacil/PontoFacil-Prefix.pch";
 				INFOPLIST_FILE = PontoFacil/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1077,10 +1152,11 @@
 			baseConfigurationReference = 4A509C852DCA71143874690E /* Pods-PontoFacil.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PontoFacil/PontoFacil-Prefix.pch";
 				INFOPLIST_FILE = PontoFacil/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -7,7 +7,6 @@
 //
 
 #import "IntervalTableViewHeaderView.h"
-#import "UIColor+PontoFacil.h"
 
 @interface IntervalTableViewHeaderView ()
 
@@ -38,10 +37,10 @@
     
     [self addSubview: self.contentView];
     
-    [self.estimatedWorkView setBackgroundColor:[UIColor statusLabelShadowColor]];
-    [self.workView setBackgroundColor:[UIColor statusLabelShadowColor]];
-    [self.timeOutView setBackgroundColor:[UIColor statusLabelShadowColor]];
-    [self.balanceView setBackgroundColor:[UIColor statusLabelShadowColor]];
+    [self.estimatedWorkView setBackgroundColor:kPFColorStatusLabelShadow];
+    [self.workView setBackgroundColor:kPFColorStatusLabelShadow];
+    [self.timeOutView setBackgroundColor:kPFColorStatusLabelShadow];
+    [self.balanceView setBackgroundColor:kPFColorStatusLabelShadow];
     
     [self.estimatedWorkView.layer setCornerRadius:5.0f];
     [self.workView.layer setCornerRadius:5.0f];

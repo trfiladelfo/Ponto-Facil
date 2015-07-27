@@ -17,7 +17,6 @@
 #import "NSString+TimeInterval.h"
 #import "NSDate-Utilities.h"
 #import "NSUserDefaults+PontoFacil.h"
-#import "UIColor+PontoFacil.h"
 #import "SessionDescriptionFormatter.h"
 #import "LocalNotificationManager.h"
 
@@ -89,7 +88,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.blueBarView setBackgroundColor:kPFColorClockViewBlueView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -181,19 +180,19 @@
             self.clockView.status = @"Intervalo";
             self.clockView.timeLimit = [self.session.event.estBreakTime doubleValue];
             self.clockView.elapsedTime = [self.session.breakTimeInProgress doubleValue];
-            [self.clockView setTintColor:[UIColor clockViewPausedColor]];
+            [self.clockView setTintColor:kPFColorClockViewPaused];
         }
         else
         {
             if ([self.session isStarted]) {
                 self.clockView.status = @"Em andamento";
-                [self.clockView setTintColor:[UIColor clockViewInProgressColor]];
+                [self.clockView setTintColor:kPFColorClockViewInProgress];
             }
             else
             {
                 self.clockView.status = @"Finalizada";
                 
-                [self.clockView setTintColor:[UIColor clockViewStopedColor]];
+                [self.clockView setTintColor:kPFColorClockViewStoped];
             }
             
             self.clockView.timeLimit = [self.session.event.estWorkTime doubleValue];
@@ -206,7 +205,7 @@
         self.clockView.status = @"Não iniciada";
         self.clockView.elapsedTime = 0;
         
-        [self.clockView setTintColor:[UIColor clockViewNotStartedColor]];
+        [self.clockView setTintColor:kPFColorClockViewNotStarted];
     }
 
 }
@@ -224,6 +223,7 @@
             [self.notificationManager scheduleNotificationsFromType:kLocalNotificationTypeWork withFireDate:[self.session currentEstWorkFinishDate]];
         }
         else if ([self.session isPaused]) {
+            
             [self.notificationManager scheduleNotificationsFromType:kLocalNotificationTypeBreak withFireDate:[self.session currentEstBreakFinishDate]];
         }
     }

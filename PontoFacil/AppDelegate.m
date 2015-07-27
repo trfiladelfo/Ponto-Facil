@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 #import "PersistentStack.h"
-#import "UIColor+PontoFacil.h"
-#import "UIFont+PontoFacil.h"
 #import "NSUserDefaults+PontoFacil.h"
 
 @interface AppDelegate ()
@@ -23,12 +21,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [[UINavigationBar appearance] setBarTintColor:[UIColor navigationHeaderColor]];
-    [[UINavigationBar appearance] setTintColor:[UIColor navigationHeaderTitleColor]];
+    [[UINavigationBar appearance] setBarTintColor:kPFColorNavigationBar];
+    [[UINavigationBar appearance] setTintColor:kPFColorNavigationTitle];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor navigationHeaderTitleColor], NSForegroundColorAttributeName,
-                                                           [UIFont headerTitleFont], NSFontAttributeName, nil]];
+                                                           kPFColorNavigationTitle, NSForegroundColorAttributeName,
+                                                           kPFFontHeaderTitle, NSFontAttributeName, nil]];
     
     
     [[UINavigationBar appearance] setTranslucent:NO];
@@ -38,7 +36,6 @@
 
     return YES;
 }
-
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
@@ -68,6 +65,12 @@
     [self.persistentStack.managedObjectContext save:nil];
 }
 
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // Set icon badge number to zero
+    application.applicationIconBadgeNumber = 0;
+}
 
 
 #pragma mark - Core Data stack

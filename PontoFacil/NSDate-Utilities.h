@@ -72,7 +72,8 @@
 - (NSInteger) daysAfterDate: (NSDate *) aDate;
 - (NSInteger) daysBeforeDate: (NSDate *) aDate;
 - (NSInteger) distanceInDaysToDate:(NSDate *)anotherDate;
-- (int) workingDaysInMonth;
+- (int) businessDaysInMonth;
+- (int) weekendDaysInMonth;
 
 
 // Decomposing dates

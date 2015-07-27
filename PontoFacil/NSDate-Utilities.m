@@ -15,6 +15,11 @@
 #define DATE_COMPONENTS (NSCalendarUnitYear| NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekOfYear |  NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal)
 #define CURRENT_CALENDAR [NSCalendar currentCalendar]
 
+typedef enum {
+    kDayTypeWeekDay = 0,
+    kDayTypeWeekend = 1
+} dayTypeCategory;
+
 @implementation NSDate (Utilities)
 
 #pragma mark Relative Dates
@@ -376,8 +381,15 @@
     return components.day;
 }
 
-- (int)workingDaysInMonth {
+- (int)businessDaysInMonth {
+    return [self findDayTypeInMonth:kDayTypeWeekDay];
+}
 
+- (int)weekendDaysInMonth {
+    return [self findDayTypeInMonth:kDayTypeWeekend];
+}
+
+- (int)findDayTypeInMonth: (dayTypeCategory)dayType {
     int count = 0;
     
     // Set the incremental interval for each interaction.
@@ -390,14 +402,17 @@
     // Iterate from fromDate until toDate
     while ([dayOneInCurrentMonth isSameMonthAsDate:currentDate]) {
         
-        if ([currentDate isTypicallyWorkday]) {
+        if ((dayType == kDayTypeWeekDay) && ([currentDate isTypicallyWorkday])) {
+            count++;
+        }
+        else if ((dayType == kDayTypeWeekend) && ([currentDate isTypicallyWeekend])) {
             count++;
         }
         
         // "Increment" currentDate by one day.
         currentDate = [CURRENT_CALENDAR dateByAddingComponents:oneDay
-                                                toDate:currentDate
-                                               options:0];
+                                                        toDate:currentDate
+                                                       options:0];
     }
     
     return count;

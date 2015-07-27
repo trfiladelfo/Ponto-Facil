@@ -8,21 +8,23 @@
 
 #import "Event.h"
 
-typedef enum {
-    kEventTypeNormal = 0,
-    kEventTypeHoliday = 1
-} EventTypeCategory;
-
 @interface Event (Management)
 
-@property (nonatomic) EventTypeCategory eventTypeCategory;
 @property (nonatomic, assign, readonly) NSNumber *estWorkTime;
 @property (nonatomic, assign, readonly) NSNumber *estBreakTime;
+@property (nonatomic) int totalSoma;
 
 + (NSFetchedResultsController *)fetchedResultsController;
++ (NSFetchedResultsController*)sortedFetchedResultsController:(BOOL)ascending;
++ (NSFetchedResultsController*)sortedFetchedResultsController:(BOOL)ascending fromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
++ (NSArray *)sortedEventListFromDate:(NSDate *)fromDate ToDate:(NSDate *)toDate;
 
--(instancetype)init;
+-(instancetype)initSessionEvent;
+-(instancetype)initHolidayEvent;
+-(instancetype)initAbsenceEvent;
 
 - (void)updateEventDate:(NSDate *)newDate;
+
+- (BOOL)isHoliday;
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "MSWeekDateView.h"
-#import "UIColor+PontoFacil.h"
 
 @interface MSWeekDateView ()
 
@@ -41,7 +40,7 @@
 - (void)setupViews
 {
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.backgroundColor = [UIColor weekDateViewColor];
+    self.backgroundColor = kPFColorWeekDateView;
     self.layer.cornerRadius = 5.0f;
 }
 

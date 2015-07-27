@@ -11,10 +11,19 @@
 #import "Interval+Management.h"
 #import "Store.h"
 #import "NSDate-Utilities.h"
+#import "NSUserDefaults+PontoFacil.h"
 
 static NSString *entityName = @"Session";
 
+typedef enum {
+    kSessionStateStart = 0,
+    kSessionStateStop = 1,
+    kSessionStatePaused = 2
+} SessionStateCategory;
+
 @interface Session()
+
+@property (nonatomic) SessionStateCategory sessionStateCategory;
 
 @end
 
@@ -22,7 +31,7 @@ static NSString *entityName = @"Session";
 
 - (instancetype)init {
     
-    return [self initWithEvent:[[Event alloc] init]];
+    return [self initWithEvent:[[Event alloc] initSessionEvent]];
 }
 
 - (instancetype)initWithEvent:(Event *)event {
@@ -169,13 +178,16 @@ static NSString *entityName = @"Session";
     //Calcula a data prevista de saída
     NSDate *estFinishDateTime = [self.startDate dateByAddingTimeInterval:[self.event.estWorkTime doubleValue]];
     
-    if  ([self.breakTime doubleValue] > 0) {
-        estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.breakTime doubleValue]];
-    }
-    else {
-        if (adjustBreakTime) {
+    if (adjustBreakTime) {
+        if  ([self.breakTime doubleValue] > [self.event.estBreakTime doubleValue]) {
+            estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.breakTime doubleValue]];
+        }
+        else {
             estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.event.estBreakTime doubleValue]];
         }
+    }
+    else {
+        estFinishDateTime = [estFinishDateTime dateByAddingTimeInterval:[self.breakTime doubleValue]];
     }
     
     return estFinishDateTime;
@@ -185,7 +197,7 @@ static NSString *entityName = @"Session";
     
     NSDate *estFinishDate = [NSDate date];
     
-    if (self.event.estBreakTime > self.breakTime) {
+    if ([self.event.estBreakTime doubleValue] > [self.breakTime doubleValue]) {
         return [[estFinishDate dateByAddingTimeInterval:[self.event.estBreakTime doubleValue]] dateByAddingTimeInterval:-[self.breakTime doubleValue]];
     }
     else
@@ -250,7 +262,7 @@ static NSString *entityName = @"Session";
 
 - (void)start {
     self.startDate = [NSDate date];
-    self.currentEstWorkFinishDate = [self calculateEstimatedWorkFinishDate:true];
+    self.currentEstWorkFinishDate = [self calculateEstimatedWorkFinishDate:[[NSUserDefaults standardUserDefaults] breakTimeRequired]];
     [self startInterval:kIntervalTypeWork];
     [self setSessionStateCategory:kSessionStateStart];
 }
@@ -262,7 +274,7 @@ static NSString *entityName = @"Session";
 }
 
 - (void)resume {
-    self.currentEstWorkFinishDate = [self calculateEstimatedWorkFinishDate:true];
+    self.currentEstWorkFinishDate = [self calculateEstimatedWorkFinishDate:[[NSUserDefaults standardUserDefaults] breakTimeRequired]];
     [self startInterval:kIntervalTypeWork];
     [self setSessionStateCategory:kSessionStateStart];
 }
@@ -277,6 +289,14 @@ static NSString *entityName = @"Session";
 
     self.startDate = [self.intervalList valueForKeyPath:@"@min.intervalStart"];
     
+    if ([self isStarted])
+    {
+        self.currentEstWorkFinishDate = [self calculateEstimatedWorkFinishDate:true];
+    }
+    else if ([self isPaused])
+    {
+        self.currentEstBreakFinishDate = [self calculateEstimatedBreakFinishDate];
+    }
     if ([self isStoped]) {
         self.finishDate = [self.intervalList valueForKeyPath:@"@max.intervalFinish"];
     }

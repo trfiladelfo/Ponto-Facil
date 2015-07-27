@@ -27,8 +27,8 @@ static NSString * const cellIdentifier = @"eventCell";
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.tableView.allowsSelection = false;
-    self.tableView.allowsSelectionDuringEditing = true;
+    //self.tableView.allowsSelection = false;
+    //self.tableView.allowsSelectionDuringEditing = true;
     
     [self setupFetchedResultsController];
 }

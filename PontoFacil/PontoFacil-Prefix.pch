@@ -1,0 +1,20 @@
+//
+//  PontoFacil-Prefix.pch
+//  PontoFacil
+//
+//  Created by Carlos Eduardo Arantes Ferreira on 17/07/15.
+//  Copyright (c) 2015 Mobistart. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
+#import "Constants.h"

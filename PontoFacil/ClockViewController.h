@@ -21,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet ActionButton *startStopButton;
 @property (strong, nonatomic) IBOutlet UIButton *pauseResumeButton;
 @property (strong, nonatomic) IBOutlet UIButton *reviewButton;
+@property (weak, nonatomic) IBOutlet UIView *blueBarView;
 
 @end

@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) Event *event;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *eventTypeSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *eventDateLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *eventDatePicker;
 @property (weak, nonatomic) IBOutlet UITextField *eventDescriptionTextField;

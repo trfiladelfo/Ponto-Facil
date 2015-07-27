@@ -15,6 +15,18 @@
 #import "NSDate-Utilities.h"
 #import "Event+Management.h"
 
+@protocol SessionProtocol <NSObject>
+
+@property (nonatomic, retain) NSDate * currentEstWorkFinishDate;
+@property (nonatomic, retain) NSDate * currentEstBreakFinishDate;
+@property (nonatomic, assign, readonly) double timeBalance;
+@property (nonatomic, retain) NSDate * finishDate;
+@property (nonatomic, retain) NSDate * startDate;
+
+@property (nonatomic) SessionStateCategory sessionStateCategory;
+
+@end
+
 SpecBegin(Session)
 
     describe(@"Session", ^{
@@ -74,6 +86,8 @@ SpecBegin(Session)
             it(@"should have a running status", ^{
                 expect(session.sessionState).to.equal(kSessionStateStart);
             });
+            
+            
         });
         
         describe(@"when it is paused", ^{

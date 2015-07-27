@@ -16,15 +16,23 @@
 #import "NSUserDefaults+PontoFacil.h"
 #import "NSDate-Utilities.h"
 
-static NSInteger kDynamicSectionIndex = 1;
+static NSInteger kTableViewSectionCount = 5;
+static NSInteger kDynamicSectionIndex = 2;
 static CGFloat kDynamicSectionHeight = 50.0;
 static NSString *intervalCellIdentifier = @"intervalCell";
+
+typedef NS_ENUM(NSInteger, EventTypeControllerCategory) {
+    kEventTypeCategorySession = 0,
+    kEventTypeCategoryAbsence = 1,
+    kEventTypeCategoryHoliday = 2
+};
 
 @interface EventDetailTableViewController ()
 
 @property (nonatomic, retain) NSDateFormatter *formatter;
 @property (nonatomic, assign) NSUserDefaults *userDefaults;
 @property (nonatomic, strong) NSArray *intervalArray;
+@property (nonatomic) EventTypeControllerCategory eventCategory;
 
 @end
 
@@ -33,9 +41,8 @@ static NSString *intervalCellIdentifier = @"intervalCell";
 - (NSDateFormatter *)formatter {
     if (!_formatter) {
         _formatter = [[NSDateFormatter alloc] init];
-        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EdMMMyyyy" options:0
-                                                                  locale:[NSLocale currentLocale]];
-        [_formatter setDateFormat:formatString];
+        [_formatter setDateStyle:NSDateFormatterLongStyle];
+        [_formatter setTimeStyle:NSDateFormatterNoStyle];
         [_formatter setDefaultDate:[NSDate date]];
         [_formatter setTimeZone:[NSTimeZone defaultTimeZone]];
     }
@@ -52,21 +59,43 @@ static NSString *intervalCellIdentifier = @"intervalCell";
 
 - (NSArray *)intervalArray {
 
-    if (!_intervalArray) {
-        if (self.event.session)
-            _intervalArray = self.event.session.ascendingIntervalList;
+    if (self.event.session) {
+        _intervalArray = self.event.session.ascendingIntervalList;
     }
-    
+    else {
+        _intervalArray = [[NSArray alloc] init];
+    }
     return _intervalArray;
 }
 
 - (Event *)event {
 
     if (!_event) {
-        _event = [[Event alloc] init];
+        
+        switch (self.eventCategory) {
+            case kEventTypeCategorySession:
+            default:
+                _event = [[Event alloc] initSessionEvent];
+                break;
+            case kEventTypeCategoryAbsence:
+                _event = [[Event alloc] initAbsenceEvent];
+                break;
+            case kEventTypeCategoryHoliday:
+                _event = [[Event alloc] initHolidayEvent];
+                break;
+        }
+        
     }
     
     return _event;
+}
+
+- (EventTypeControllerCategory)eventCategory {
+    if (!_eventCategory) {
+        _eventCategory = kEventTypeCategorySession;
+    }
+    
+    return _eventCategory;
 }
 
 - (void)viewDidLoad {
@@ -87,25 +116,26 @@ static NSString *intervalCellIdentifier = @"intervalCell";
     if (selectedRowIndexPath) {
         [self.tableView reloadData];
     }
-    else
-        [self loadSessionData];
+    else {
+        self.eventDateLabel.text = [self.formatter stringFromDate:self.event.estWorkStart];
+        [self.eventDatePicker setDate:self.event.estWorkStart];
+        self.eventEstWorkTime.text = [NSString stringWithTimeInterval:[self.event.estWorkTime doubleValue]];
+        self.eventDescriptionTextField.text = self.event.eventDescription;
+        
+        if (self.eventCategory == kEventTypeCategorySession) {
+            [self loadSessionData];
+        }
+    }
 }
 
 #pragma mark - Private Functions
 
 
 - (void)loadSessionData {
-    
-    self.eventDateLabel.text = [self.formatter stringFromDate:self.event.estWorkStart];
-    [self.eventDatePicker setDate:self.event.estWorkStart];
-    self.eventEstWorkTime.text = [NSString stringWithTimeInterval:[self.event.estWorkTime doubleValue]];
-    self.eventDescriptionTextField.text = self.event.eventDescription;
-    
     if (!self.event.session) {
         self.event.session = [[Session alloc] initWithEvent:self.event];
         self.event.session.intervalList = [self loadDefaultIntervalList];
     }
-    
 }
 
 - (NSSet *)loadDefaultIntervalList {
@@ -115,7 +145,8 @@ static NSString *intervalCellIdentifier = @"intervalCell";
     NSDate *workFinishDate = [self.formatter dateFromString:[self.userDefaults workFinishDate]];
     NSDate *breakStartDate = [self.formatter dateFromString:[self.userDefaults breakStartDate]];
     NSDate *breakFinishDate = [self.formatter dateFromString:[self.userDefaults breakFinishDate]];
-    [self.formatter setDateFormat:@"EdMMMyyyy"];
+    [self.formatter setDateStyle:NSDateFormatterLongStyle];
+    [self.formatter setTimeStyle:NSDateFormatterNoStyle];
     
     Interval *interval1 = [Interval insertIntervalWithStartDate:workStartDate andfinishDate:breakStartDate andIntervalCategoryType:kIntervalTypeWork andPreviousInterval:nil];
     Interval *interval2 = [Interval insertIntervalWithStartDate:breakStartDate andfinishDate:breakFinishDate andIntervalCategoryType:kIntervalTypeBreak andPreviousInterval:interval1];
@@ -128,6 +159,27 @@ static NSString *intervalCellIdentifier = @"intervalCell";
 
 
 #pragma mark - User Interface
+
+- (IBAction)eventTypeSegmentedControlerChanged:(id)sender {
+
+    self.eventCategory = [self.eventTypeSegmentedControl selectedSegmentIndex];
+    
+    switch (self.eventCategory) {
+        case kEventTypeCategorySession:
+        default:
+            [self loadSessionData];
+            break;
+        case kEventTypeCategoryAbsence:
+            self.event.session = nil;
+            self.event.isAbsence = [NSNumber numberWithBool:true];
+            break;
+        case kEventTypeCategoryHoliday:
+            //
+            break;
+    }
+    
+    [self.tableView reloadData];
+}
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
@@ -172,7 +224,7 @@ static NSString *intervalCellIdentifier = @"intervalCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 4;
+    return kTableViewSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -242,85 +294,6 @@ static NSString *intervalCellIdentifier = @"intervalCell";
 
 }
 
-
-/*
-- (IBAction)saveButtonPressed:(id)sender
-{
-    
-    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EdMMMyyyy" options:0
-                                                              locale:[NSLocale currentLocale]];
-    [dateFormater setDateFormat:formatString];
-    
-    NSDate *sessionDate = [[dateFormater dateFromString:_sessionDateLabel.text] dateAtStartOfDay];
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    [comps setDay:sessionDate.day];
-    [comps setMonth:sessionDate.month];
-    [comps setYear:sessionDate.year];
-    
-    [comps setHour:9];
-    [comps setMinute:0];
-    [comps setSecond:0];
-    NSDate *estStartDate = [[NSCalendar currentCalendar] dateFromComponents:comps];
-    
-    [comps setHour:18];
-    [comps setMinute:0];
-    [comps setSecond:0];
-    NSDate *estFinishDate = [[NSCalendar currentCalendar] dateFromComponents:comps];
-
-    [comps setHour:1];
-    [comps setMinute:0];
-    [comps setSecond:0];
-    NSDate *estbreakDateTime = [[NSCalendar currentCalendar] dateFromComponents:comps];
-    NSTimeInterval estBreakTime = [estbreakDateTime timeIntervalSinceDate:[sessionDate dateAtStartOfDay]];
-    
-    //Inclusão
-    if (!_session) {
-            
-        _session = [Session insertSessionWithEstStartDate:estStartDate andEstFinishDate:estFinishDate andEstBreakTime:estBreakTime andIsManual:true andSessionState:kSessionStateStop andStartDate:<#(NSDate *)#>];
-    }
-    else {
-            
-        [comps setHour:[[_startDateLabel.text substringToIndex:2] intValue]];
-        [comps setMinute:[[_startDateLabel.text substringFromIndex:3] intValue]];
-        [comps setSecond:0];
-        NSDate *startDate = [[NSCalendar currentCalendar] dateFromComponents:comps];
-        
-        [comps setHour:[[_finishDateLabel.text substringToIndex:2] intValue]];
-        [comps setMinute:[[_finishDateLabel.text substringFromIndex:3] intValue]];
-        [comps setSecond:0];
-        NSDate *finishDate = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            
-        [comps setHour:[[_breakTimeLabel.text substringToIndex:2] intValue]];
-        [comps setMinute:[[_breakTimeLabel.text substringFromIndex:3] intValue]];
-        [comps setSecond:0];
-        NSDate *breakDateTime = [[NSCalendar currentCalendar] dateFromComponents:comps];
-        NSTimeInterval breakTime = [breakDateTime timeIntervalSinceDate:[sessionDate dateAtStartOfDay]];
-        
-        double workTime = [finishDate timeIntervalSinceDate:startDate] - breakTime;
-        
-        _session.startDate = startDate;
-        _session.finishDate = finishDate;
-        //_session.workTime = [NSNumber numberWithDouble:workTime];
-        //_session.workAdjustedTime = [NSNumber numberWithDouble:[_session calculateAdjustedWorkTime:workTime andBreakTime:breakTime]];
-        //_session.workBreakTime = [NSNumber numberWithDouble:breakTime];
-    }
-        
-    _session.sessionStateCategory = kSessionStateStop;
-    _session.isManual = [NSNumber numberWithBool:true];
-    
-    NSError *error;
-    [self.session.managedObjectContext save:&error];
-    
-    if (self.presentingViewController) {
-        [self.presentingViewController dismissViewControllerAnimated:TRUE completion:nil];
-    }
-    else {
-        [self.navigationController popViewControllerAnimated:TRUE];
-    }
-    
-}
-*/
 
 #pragma mark Navigation
 
