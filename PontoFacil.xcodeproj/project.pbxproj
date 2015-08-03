@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		211E3DDA1B6082FF0055EB50 /* Overview.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E3DD91B6082FF0055EB50 /* Overview.m */; };
+		2127C6601B6D5DC8008DAD01 /* JBBarChartFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127C65F1B6D5DC8008DAD01 /* JBBarChartFooterView.m */; };
+		2127C6631B6E6D08008DAD01 /* SessionDescriptionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127C6611B6E6D08008DAD01 /* SessionDescriptionFormatter.m */; };
 		2191D05B1B56048A002805AA /* LocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D05A1B56048A002805AA /* LocalNotificationManager.m */; };
 		2191D0641B59DAB8002805AA /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D0631B59DAB8002805AA /* OverviewViewController.m */; };
 		2191D06E1B59FBFB002805AA /* JBBaseChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D0671B59FBFB002805AA /* JBBaseChartViewController.m */; };
@@ -73,7 +75,6 @@
 		87C732EB1B226CCC0029C2E0 /* NSStringTimeIntervalSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732EA1B226CCC0029C2E0 /* NSStringTimeIntervalSpec.m */; };
 		87C732EF1B236C910029C2E0 /* ClockViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732EE1B236C910029C2E0 /* ClockViewControllerSpec.m */; };
 		87C732F21B23C5EC0029C2E0 /* UIButton+Specs.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732F11B23C5EC0029C2E0 /* UIButton+Specs.m */; };
-		87C732F61B271AA90029C2E0 /* SessionDescriptionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732F51B271AA90029C2E0 /* SessionDescriptionFormatter.m */; };
 		87C732F91B271D720029C2E0 /* SessionDescriptionFormatterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732F81B271D720029C2E0 /* SessionDescriptionFormatterSpec.m */; };
 		87C733001B2757970029C2E0 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732FF1B2757970029C2E0 /* Session.m */; };
 		87CF5F6D1ABDF1BC004D5201 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */; };
@@ -98,6 +99,10 @@
 		20DE4301FD08EBBF6C9DB4BF /* Pods-PontoFacil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacil.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacil/Pods-PontoFacil.debug.xcconfig"; sourceTree = "<group>"; };
 		211E3DD81B6082FF0055EB50 /* Overview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overview.h; sourceTree = "<group>"; };
 		211E3DD91B6082FF0055EB50 /* Overview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Overview.m; sourceTree = "<group>"; };
+		2127C65E1B6D5DC8008DAD01 /* JBBarChartFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBBarChartFooterView.h; sourceTree = "<group>"; };
+		2127C65F1B6D5DC8008DAD01 /* JBBarChartFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBBarChartFooterView.m; sourceTree = "<group>"; };
+		2127C6611B6E6D08008DAD01 /* SessionDescriptionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDescriptionFormatter.m; sourceTree = "<group>"; };
+		2127C6621B6E6D08008DAD01 /* SessionDescriptionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionDescriptionFormatter.h; sourceTree = "<group>"; };
 		2191D0591B56048A002805AA /* LocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotificationManager.h; sourceTree = "<group>"; };
 		2191D05A1B56048A002805AA /* LocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotificationManager.m; sourceTree = "<group>"; };
 		2191D05C1B58A397002805AA /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -219,8 +224,6 @@
 		87C732EE1B236C910029C2E0 /* ClockViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockViewControllerSpec.m; sourceTree = "<group>"; };
 		87C732F01B23C5EC0029C2E0 /* UIButton+Specs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Specs.h"; sourceTree = "<group>"; };
 		87C732F11B23C5EC0029C2E0 /* UIButton+Specs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Specs.m"; sourceTree = "<group>"; };
-		87C732F41B271AA90029C2E0 /* SessionDescriptionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionDescriptionFormatter.h; sourceTree = "<group>"; };
-		87C732F51B271AA90029C2E0 /* SessionDescriptionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDescriptionFormatter.m; sourceTree = "<group>"; };
 		87C732F81B271D720029C2E0 /* SessionDescriptionFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDescriptionFormatterSpec.m; sourceTree = "<group>"; };
 		87C732FE1B2757970029C2E0 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		87C732FF1B2757970029C2E0 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
@@ -229,10 +232,10 @@
 		87DAF90E1AF847B200B692C5 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		87FE869E1AC0F30500421959 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTableViewCell.h; sourceTree = "<group>"; };
 		87FE869F1AC0F30500421959 /* EventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableViewCell.m; sourceTree = "<group>"; };
-		87FE86A11AC2336200421959 /* FetchedResultsControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FetchedResultsControllerDataSource.h; path = ../../DailyTaskManager/DailyTaskManager/FetchedResultsControllerDataSource.h; sourceTree = "<group>"; };
-		87FE86A21AC2336200421959 /* FetchedResultsControllerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FetchedResultsControllerDataSource.m; path = ../../DailyTaskManager/DailyTaskManager/FetchedResultsControllerDataSource.m; sourceTree = "<group>"; };
-		87FE86A41AC2337F00421959 /* PaddingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaddingLabel.h; path = ../../DailyTaskManager/DailyTaskManager/PaddingLabel.h; sourceTree = "<group>"; };
-		87FE86A51AC2337F00421959 /* PaddingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaddingLabel.m; path = ../../DailyTaskManager/DailyTaskManager/PaddingLabel.m; sourceTree = "<group>"; };
+		87FE86A11AC2336200421959 /* FetchedResultsControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FetchedResultsControllerDataSource.h; path = ../../../../DailyTaskManager/DailyTaskManager/FetchedResultsControllerDataSource.h; sourceTree = "<group>"; };
+		87FE86A21AC2336200421959 /* FetchedResultsControllerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FetchedResultsControllerDataSource.m; path = ../../../../DailyTaskManager/DailyTaskManager/FetchedResultsControllerDataSource.m; sourceTree = "<group>"; };
+		87FE86A41AC2337F00421959 /* PaddingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaddingLabel.h; path = ../../../DailyTaskManager/DailyTaskManager/PaddingLabel.h; sourceTree = "<group>"; };
+		87FE86A51AC2337F00421959 /* PaddingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaddingLabel.m; path = ../../../DailyTaskManager/DailyTaskManager/PaddingLabel.m; sourceTree = "<group>"; };
 		8B02029FCA829C9A053B2823 /* libPods-PontoFacilTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PontoFacilTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B181F1A9712B897CF2EA6353 /* Pods-PontoFacilTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacilTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacilTests/Pods-PontoFacilTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -264,7 +267,7 @@
 				876398E51A8D888F0002118E /* Open Sans 800.ttf */,
 				876398E61A8D888F0002118E /* Open Sans regular.ttf */,
 			);
-			name = Fonts;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		2191D0611B59DA04002805AA /* Overview */ = {
@@ -273,7 +276,7 @@
 				2191D0621B59DAB8002805AA /* OverviewViewController.h */,
 				2191D0631B59DAB8002805AA /* OverviewViewController.m */,
 			);
-			name = Overview;
+			path = Overview;
 			sourceTree = "<group>";
 		};
 		2191D0651B59FBA9002805AA /* Base */ = {
@@ -284,13 +287,15 @@
 				2191D06C1B59FBFB002805AA /* JBBaseViewController.h */,
 				2191D06D1B59FBFB002805AA /* JBBaseViewController.m */,
 			);
-			name = Base;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		2191D0721B59FF47002805AA /* Chart */ = {
 			isa = PBXGroup;
 			children = (
 				2191D0651B59FBA9002805AA /* Base */,
+				2127C65E1B6D5DC8008DAD01 /* JBBarChartFooterView.h */,
+				2127C65F1B6D5DC8008DAD01 /* JBBarChartFooterView.m */,
 				21CCD0451B5A1F7E00273A2E /* JBChartTooltipView.h */,
 				21CCD0461B5A1F7E00273A2E /* JBChartTooltipView.m */,
 				21CCD0481B5A213800273A2E /* JBChartTooltipTipView.h */,
@@ -302,7 +307,7 @@
 				2191D0751B5A0025002805AA /* JBChartInformationView.h */,
 				2191D0761B5A0025002805AA /* JBChartInformationView.m */,
 			);
-			name = Chart;
+			path = Chart;
 			sourceTree = "<group>";
 		};
 		21D1564B1B51BADA0028DD67 /* IntervalCell */ = {
@@ -312,7 +317,7 @@
 				878BD9521AC382D70005DBD4 /* IntervalTableViewCell.m */,
 				21D1564E1B51BC530028DD67 /* IntervalTableViewCell.xib */,
 			);
-			name = IntervalCell;
+			path = IntervalCell;
 			sourceTree = "<group>";
 		};
 		21E073F41B484B03006D3C88 /* CheckBox */ = {
@@ -321,7 +326,7 @@
 				21E0740E1B484C43006D3C88 /* TaskCheckBoxView.h */,
 				21E0740F1B484C43006D3C88 /* TaskCheckBoxView.m */,
 			);
-			name = CheckBox;
+			path = CheckBox;
 			sourceTree = "<group>";
 		};
 		2A49D782D2A1205A55AD0438 /* Pods */ = {
@@ -393,7 +398,7 @@
 				87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */,
 				2191D0601B58AAE8002805AA /* PontoFacil-Prefix.pch */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		87147E711A859F6100AB4977 /* PontoFacilTests */ = {
@@ -413,7 +418,7 @@
 			children = (
 				87147E731A859F6100AB4977 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		87147E7E1A859F8800AB4977 /* models */ = {
@@ -434,7 +439,7 @@
 				211E3DD81B6082FF0055EB50 /* Overview.h */,
 				211E3DD91B6082FF0055EB50 /* Overview.m */,
 			);
-			name = models;
+			path = models;
 			sourceTree = "<group>";
 		};
 		87147E7F1A859F9000AB4977 /* views */ = {
@@ -453,21 +458,20 @@
 				876398F01A911A790002118E /* Date */,
 				876398F11A911A920002118E /* Events */,
 			);
-			name = views;
+			path = views;
 			sourceTree = "<group>";
 		};
 		87147E801A859F9800AB4977 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
 				2191D0611B59DA04002805AA /* Overview */,
-				87147E841A85A05000AB4977 /* AppDelegate */,
 				87147E8C1A85A39000AB4977 /* Clock */,
 				878BD94A1AC37EF00005DBD4 /* Interval */,
 				87C683231A9FE88900A2C101 /* Event */,
 				874D0C711AB4E55200E0A3B1 /* Config */,
 				87297C531A883B6A004E9626 /* Schedule */,
 			);
-			name = controllers;
+			path = controllers;
 			sourceTree = "<group>";
 		};
 		87147E821A85A01C00AB4977 /* utils */ = {
@@ -475,7 +479,6 @@
 			children = (
 				877AE3E11B15739B00A52542 /* Constants */,
 				87B5C6411AC6FC4C004AB6A7 /* DataSource */,
-				87C732F71B271D050029C2E0 /* Formatter */,
 				877AE3DB1B14209300A52542 /* NSUserDefaults+PontoFacil.h */,
 				877AE3DC1B14209300A52542 /* NSUserDefaults+PontoFacil.m */,
 				87FE86A41AC2337F00421959 /* PaddingLabel.h */,
@@ -487,14 +490,7 @@
 				2191D0591B56048A002805AA /* LocalNotificationManager.h */,
 				2191D05A1B56048A002805AA /* LocalNotificationManager.m */,
 			);
-			name = utils;
-			sourceTree = "<group>";
-		};
-		87147E841A85A05000AB4977 /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = AppDelegate;
+			path = utils;
 			sourceTree = "<group>";
 		};
 		87147E8B1A85A2F600AB4977 /* Managed Objects */ = {
@@ -507,16 +503,18 @@
 				21D156481B517BAC0028DD67 /* Interval.h */,
 				21D156491B517BAC0028DD67 /* Interval.m */,
 			);
-			name = "Managed Objects";
+			path = "Managed Objects";
 			sourceTree = "<group>";
 		};
 		87147E8C1A85A39000AB4977 /* Clock */ = {
 			isa = PBXGroup;
 			children = (
+				2127C6611B6E6D08008DAD01 /* SessionDescriptionFormatter.m */,
+				2127C6621B6E6D08008DAD01 /* SessionDescriptionFormatter.h */,
 				87147E8D1A85A96E00AB4977 /* ClockViewController.h */,
 				87147E8E1A85A96E00AB4977 /* ClockViewController.m */,
 			);
-			name = Clock;
+			path = Clock;
 			sourceTree = "<group>";
 		};
 		87147E921A8652C700AB4977 /* _CircularButton */ = {
@@ -526,7 +524,7 @@
 				87147E931A8652E800AB4977 /* CircularButtonView.h */,
 				87147E941A8652E800AB4977 /* CircularButtonView.m */,
 			);
-			name = _CircularButton;
+			path = _CircularButton;
 			sourceTree = "<group>";
 		};
 		87297C531A883B6A004E9626 /* Schedule */ = {
@@ -535,7 +533,7 @@
 				87B4FDC01AF5593F008DA605 /* ScheduleTableViewController.h */,
 				87B4FDC11AF5593F008DA605 /* ScheduleTableViewController.m */,
 			);
-			name = Schedule;
+			path = Schedule;
 			sourceTree = "<group>";
 		};
 		874D0C711AB4E55200E0A3B1 /* Config */ = {
@@ -546,7 +544,7 @@
 				874D0C751AB4FEFC00E0A3B1 /* AboutTableViewController.h */,
 				874D0C761AB4FEFC00E0A3B1 /* AboutTableViewController.m */,
 			);
-			name = Config;
+			path = Config;
 			sourceTree = "<group>";
 		};
 		876398EA1A8D922E0002118E /* _AcessoryCircularButton */ = {
@@ -556,7 +554,7 @@
 				876398ED1A8D9BA00002118E /* AcessoryCircularButtonView.h */,
 				876398EE1A8D9BA00002118E /* AcessoryCircularButtonView.m */,
 			);
-			name = _AcessoryCircularButton;
+			path = _AcessoryCircularButton;
 			sourceTree = "<group>";
 		};
 		876398F01A911A790002118E /* Date */ = {
@@ -565,7 +563,7 @@
 				876398F21A911DA00002118E /* DateView.h */,
 				876398F31A911DA00002118E /* DateView.m */,
 			);
-			name = Date;
+			path = Date;
 			sourceTree = "<group>";
 		};
 		876398F11A911A920002118E /* Events */ = {
@@ -574,7 +572,7 @@
 				87A727E31ACCD89E0095764E /* IntervalTableViewHeaderView */,
 				87BD55FC1AC62ED6008E0511 /* WeekDateView */,
 			);
-			name = Events;
+			path = Events;
 			sourceTree = "<group>";
 		};
 		877081D51A92ADFD00541AB3 /* ActionButton */ = {
@@ -583,7 +581,7 @@
 				877081D61A92AE2700541AB3 /* ActionButton.h */,
 				877081D71A92AE2700541AB3 /* ActionButton.m */,
 			);
-			name = ActionButton;
+			path = ActionButton;
 			sourceTree = "<group>";
 		};
 		877AE3E11B15739B00A52542 /* Constants */ = {
@@ -594,7 +592,7 @@
 				2191D05E1B58A614002805AA /* ColorConstants.h */,
 				2191D05F1B58AA12002805AA /* StringConstants.h */,
 			);
-			name = Constants;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		877AE3E21B16975500A52542 /* DatePickerCell */ = {
@@ -604,7 +602,7 @@
 				877AE3E51B16986200A52542 /* DatePickerTableViewCell.h */,
 				877AE3E61B16986200A52542 /* DatePickerTableViewCell.m */,
 			);
-			name = DatePickerCell;
+			path = DatePickerCell;
 			sourceTree = "<group>";
 		};
 		877AE3E81B16B10A00A52542 /* CheckTimeCell */ = {
@@ -614,14 +612,14 @@
 				877AE3EB1B16B3F700A52542 /* CheckTimeTableViewCell.h */,
 				877AE3EC1B16B3F700A52542 /* CheckTimeTableViewCell.m */,
 			);
-			name = CheckTimeCell;
+			path = CheckTimeCell;
 			sourceTree = "<group>";
 		};
 		877AE3EF1B1B570800A52542 /* views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = views;
+			path = views;
 			sourceTree = "<group>";
 		};
 		877AE3F01B1B572000A52542 /* utils */ = {
@@ -634,7 +632,7 @@
 				87C732F81B271D720029C2E0 /* SessionDescriptionFormatterSpec.m */,
 				87C4D72E1B29194F004E3105 /* ArrayDataSourceSpec.m */,
 			);
-			name = utils;
+			path = utils;
 			sourceTree = "<group>";
 		};
 		877AE3F11B1B572500A52542 /* models */ = {
@@ -643,7 +641,7 @@
 				87C4D72B1B290B43004E3105 /* Event */,
 				87C4D7291B2908DF004E3105 /* Session */,
 			);
-			name = models;
+			path = models;
 			sourceTree = "<group>";
 		};
 		877AE3F21B1B572D00A52542 /* controllers */ = {
@@ -652,7 +650,7 @@
 				87C4D72A1B29099A004E3105 /* IntervalListTableViewController */,
 				87C4D7281B2908C0004E3105 /* ClockViewController */,
 			);
-			name = controllers;
+			path = controllers;
 			sourceTree = "<group>";
 		};
 		878BD94A1AC37EF00005DBD4 /* Interval */ = {
@@ -663,7 +661,7 @@
 				21E074151B4CBB38006D3C88 /* IntervalDetailTableViewController.h */,
 				21E074161B4CBB38006D3C88 /* IntervalDetailTableViewController.m */,
 			);
-			name = Interval;
+			path = Interval;
 			sourceTree = "<group>";
 		};
 		879FA6EF1A9D60FE00221AD1 /* CalendarView */ = {
@@ -671,7 +669,7 @@
 			children = (
 				879FA6F01A9D613600221AD1 /* CalendarView.xib */,
 			);
-			name = CalendarView;
+			path = CalendarView;
 			sourceTree = "<group>";
 		};
 		87A727E31ACCD89E0095764E /* IntervalTableViewHeaderView */ = {
@@ -681,7 +679,7 @@
 				87A727E61ACCDB090095764E /* IntervalTableViewHeaderView.h */,
 				87A727E71ACCDB090095764E /* IntervalTableViewHeaderView.m */,
 			);
-			name = IntervalTableViewHeaderView;
+			path = IntervalTableViewHeaderView;
 			sourceTree = "<group>";
 		};
 		87B5C6411AC6FC4C004AB6A7 /* DataSource */ = {
@@ -694,7 +692,7 @@
 				877AE3DE1B15709C00A52542 /* AccordionTableDictionaryDataSource.h */,
 				877AE3DF1B15709C00A52542 /* AccordionTableDictionaryDataSource.m */,
 			);
-			name = DataSource;
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		87BC41441A8706A00007768A /* Clock */ = {
@@ -705,7 +703,7 @@
 				87BC41471A8706F80007768A /* CircleShapeLayer.h */,
 				87BC41481A8706F80007768A /* CircleShapeLayer.m */,
 			);
-			name = Clock;
+			path = Clock;
 			sourceTree = "<group>";
 		};
 		87BD55FC1AC62ED6008E0511 /* WeekDateView */ = {
@@ -714,7 +712,7 @@
 				87BD55FD1AC62F00008E0511 /* MSWeekDateView.h */,
 				87BD55FE1AC62F00008E0511 /* MSWeekDateView.m */,
 			);
-			name = WeekDateView;
+			path = WeekDateView;
 			sourceTree = "<group>";
 		};
 		87C4D7281B2908C0004E3105 /* ClockViewController */ = {
@@ -723,7 +721,7 @@
 				87C732EE1B236C910029C2E0 /* ClockViewControllerSpec.m */,
 				87C4D7271B28800E004E3105 /* ClockViewController_Spec.h */,
 			);
-			name = ClockViewController;
+			path = ClockViewController;
 			sourceTree = "<group>";
 		};
 		87C4D7291B2908DF004E3105 /* Session */ = {
@@ -731,7 +729,7 @@
 			children = (
 				87ABAAF91B1BCE7F00060AA0 /* SessionSpec.m */,
 			);
-			name = Session;
+			path = Session;
 			sourceTree = "<group>";
 		};
 		87C4D72A1B29099A004E3105 /* IntervalListTableViewController */ = {
@@ -739,7 +737,7 @@
 			children = (
 				87C4D7301B29C16D004E3105 /* IntervalListTableViewControllerSpec.m */,
 			);
-			name = IntervalListTableViewController;
+			path = IntervalListTableViewController;
 			sourceTree = "<group>";
 		};
 		87C4D72B1B290B43004E3105 /* Event */ = {
@@ -747,7 +745,7 @@
 			children = (
 				87C4D72C1B290B7B004E3105 /* EventProtocol.m */,
 			);
-			name = Event;
+			path = Event;
 			sourceTree = "<group>";
 		};
 		87C683231A9FE88900A2C101 /* Event */ = {
@@ -760,7 +758,7 @@
 				87B5C6511AC82F16004AB6A7 /* EventDetailTableViewController.h */,
 				87B5C6521AC82F16004AB6A7 /* EventDetailTableViewController.m */,
 			);
-			name = Event;
+			path = Event;
 			sourceTree = "<group>";
 		};
 		87C732F31B25DDA20029C2E0 /* storyboards */ = {
@@ -768,16 +766,7 @@
 			children = (
 				87147E621A859F6000AB4977 /* Main.storyboard */,
 			);
-			name = storyboards;
-			sourceTree = "<group>";
-		};
-		87C732F71B271D050029C2E0 /* Formatter */ = {
-			isa = PBXGroup;
-			children = (
-				87C732F41B271AA90029C2E0 /* SessionDescriptionFormatter.h */,
-				87C732F51B271AA90029C2E0 /* SessionDescriptionFormatter.m */,
-			);
-			name = Formatter;
+			path = storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -975,7 +964,6 @@
 				874D0C771AB4FEFC00E0A3B1 /* AboutTableViewController.m in Sources */,
 				878BD9531AC382D70005DBD4 /* IntervalTableViewCell.m in Sources */,
 				2191D05B1B56048A002805AA /* LocalNotificationManager.m in Sources */,
-				87C732F61B271AA90029C2E0 /* SessionDescriptionFormatter.m in Sources */,
 				878BD94D1AC37F360005DBD4 /* IntervalListTableViewController.m in Sources */,
 				874D0C741AB4E5B000E0A3B1 /* ConfigTableViewController.m in Sources */,
 				87FE86A01AC0F30500421959 /* EventTableViewCell.m in Sources */,
@@ -986,6 +974,7 @@
 				21E074171B4CBB38006D3C88 /* IntervalDetailTableViewController.m in Sources */,
 				87A727E21ACCBF6B0095764E /* NSString+TimeInterval.m in Sources */,
 				877081D11A923D2C00541AB3 /* Event+Management.m in Sources */,
+				2127C6631B6E6D08008DAD01 /* SessionDescriptionFormatter.m in Sources */,
 				87FE86A31AC2336200421959 /* FetchedResultsControllerDataSource.m in Sources */,
 				21E074101B484C43006D3C88 /* TaskCheckBoxView.m in Sources */,
 				2191D0771B5A0025002805AA /* JBChartInformationView.m in Sources */,
@@ -1000,6 +989,7 @@
 				87147E8F1A85A96E00AB4977 /* ClockViewController.m in Sources */,
 				87DAF90F1AF847B200B692C5 /* Event.m in Sources */,
 				877081D41A927A3D00541AB3 /* NSDate-Utilities.m in Sources */,
+				2127C6601B6D5DC8008DAD01 /* JBBarChartFooterView.m in Sources */,
 				87624EA91AA35B5C00CE9FA5 /* Interval+Management.m in Sources */,
 				877AE3E01B15709C00A52542 /* AccordionTableDictionaryDataSource.m in Sources */,
 				87B5C6531AC82F16004AB6A7 /* EventDetailTableViewController.m in Sources */,
@@ -1044,6 +1034,7 @@
 				87147E631A859F6000AB4977 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1136,8 +1127,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PontoFacil/PontoFacil-Prefix.pch";
-				INFOPLIST_FILE = PontoFacil/Info.plist;
+				GCC_PREFIX_HEADER = "PontoFacil/Supporting Files/PontoFacil-Prefix.pch";
+				INFOPLIST_FILE = "PontoFacil/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -1156,8 +1147,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PontoFacil/PontoFacil-Prefix.pch";
-				INFOPLIST_FILE = PontoFacil/Info.plist;
+				GCC_PREFIX_HEADER = "PontoFacil/Supporting Files/PontoFacil-Prefix.pch";
+				INFOPLIST_FILE = "PontoFacil/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -1180,7 +1171,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = PontoFacilTests/Info.plist;
+				INFOPLIST_FILE = "PontoFacilTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1208,7 +1199,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = PontoFacilTests/Info.plist;
+				INFOPLIST_FILE = "PontoFacilTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
