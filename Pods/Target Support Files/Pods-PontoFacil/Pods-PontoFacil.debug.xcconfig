@@ -1,6 +1,0 @@
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/BDKNotifyHUD" "${PODS_ROOT}/Headers/Public/Expecta" "${PODS_ROOT}/Headers/Public/JBChartView" "${PODS_ROOT}/Headers/Public/OCHamcrest" "${PODS_ROOT}/Headers/Public/OCMock" "${PODS_ROOT}/Headers/Public/OCMockito" "${PODS_ROOT}/Headers/Public/Specta"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/BDKNotifyHUD" -isystem "${PODS_ROOT}/Headers/Public/Expecta" -isystem "${PODS_ROOT}/Headers/Public/JBChartView" -isystem "${PODS_ROOT}/Headers/Public/OCHamcrest" -isystem "${PODS_ROOT}/Headers/Public/OCMock" -isystem "${PODS_ROOT}/Headers/Public/OCMockito" -isystem "${PODS_ROOT}/Headers/Public/Specta"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-PontoFacil-BDKNotifyHUD" -l"Pods-PontoFacil-JBChartView" -framework "QuartzCore"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
-PODS_ROOT = ${SRCROOT}/Pods
