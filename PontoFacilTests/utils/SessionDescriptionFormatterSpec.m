@@ -13,7 +13,19 @@
 #import "SessionDescriptionFormatter.h"
 #import "Session+Management.h"
 #import "NSDate-Utilities.h"
-#import "SessionProtocol.h"
+
+@protocol SessionProtocol <NSObject>
+
+typedef enum {
+    kSessionStateStart = 0,
+    kSessionStateStop = 1,
+    kSessionStatePaused = 2
+} SessionStateCategory;
+
+@property (nonatomic) SessionStateCategory sessionStateCategory;
+@property (nonatomic) int timeBalance;
+
+@end
 
 SpecBegin(SessionDescriptionFormatter)
 

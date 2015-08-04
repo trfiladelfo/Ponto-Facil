@@ -10,18 +10,26 @@
 #import "Specta.h"
 #import "Expecta.h"
 #import "Session+Management.h"
-#import "EventProtocol.m"
 #import "Interval+Management.h"
 #import "NSDate-Utilities.h"
 #import "Event+Management.h"
 
+@protocol EventProtocol <NSObject>
+
+@property (nonatomic, retain) NSDate * estBreakFinish;
+@property (nonatomic, retain) NSDate * estBreakStart;
+@property (nonatomic, retain) NSDate * estWorkFinish;
+@property (nonatomic, retain) NSDate * estWorkStart;
+
+@end
+
 @protocol SessionProtocol <NSObject>
 
-@property (nonatomic, retain) NSDate * currentEstWorkFinishDate;
-@property (nonatomic, retain) NSDate * currentEstBreakFinishDate;
-@property (nonatomic, assign, readonly) double timeBalance;
-@property (nonatomic, retain) NSDate * finishDate;
-@property (nonatomic, retain) NSDate * startDate;
+typedef enum {
+    kSessionStateStart = 0,
+    kSessionStateStop = 1,
+    kSessionStatePaused = 2
+} SessionStateCategory;
 
 @property (nonatomic) SessionStateCategory sessionStateCategory;
 
