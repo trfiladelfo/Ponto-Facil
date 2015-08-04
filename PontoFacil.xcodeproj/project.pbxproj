@@ -81,7 +81,6 @@
 		87DAF90F1AF847B200B692C5 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DAF90E1AF847B200B692C5 /* Event.m */; };
 		87FE86A01AC0F30500421959 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE869F1AC0F30500421959 /* EventTableViewCell.m */; };
 		87FE86A31AC2336200421959 /* FetchedResultsControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE86A21AC2336200421959 /* FetchedResultsControllerDataSource.m */; };
-		87FE86A61AC2337F00421959 /* PaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE86A51AC2337F00421959 /* PaddingLabel.m */; };
 		8ED11A8A3BCB231EC3D2802E /* libPods-PontoFacil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CEA45DAC44D1EEEE511F27 /* libPods-PontoFacil.a */; };
 /* End PBXBuildFile section */
 
@@ -234,8 +233,6 @@
 		87FE869F1AC0F30500421959 /* EventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableViewCell.m; sourceTree = "<group>"; };
 		87FE86A11AC2336200421959 /* FetchedResultsControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FetchedResultsControllerDataSource.h; path = ../../../../DailyTaskManager/DailyTaskManager/FetchedResultsControllerDataSource.h; sourceTree = "<group>"; };
 		87FE86A21AC2336200421959 /* FetchedResultsControllerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FetchedResultsControllerDataSource.m; path = ../../../../DailyTaskManager/DailyTaskManager/FetchedResultsControllerDataSource.m; sourceTree = "<group>"; };
-		87FE86A41AC2337F00421959 /* PaddingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaddingLabel.h; path = ../../../DailyTaskManager/DailyTaskManager/PaddingLabel.h; sourceTree = "<group>"; };
-		87FE86A51AC2337F00421959 /* PaddingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaddingLabel.m; path = ../../../DailyTaskManager/DailyTaskManager/PaddingLabel.m; sourceTree = "<group>"; };
 		8B02029FCA829C9A053B2823 /* libPods-PontoFacilTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PontoFacilTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B181F1A9712B897CF2EA6353 /* Pods-PontoFacilTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PontoFacilTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PontoFacilTests/Pods-PontoFacilTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -481,8 +478,6 @@
 				87B5C6411AC6FC4C004AB6A7 /* DataSource */,
 				877AE3DB1B14209300A52542 /* NSUserDefaults+PontoFacil.h */,
 				877AE3DC1B14209300A52542 /* NSUserDefaults+PontoFacil.m */,
-				87FE86A41AC2337F00421959 /* PaddingLabel.h */,
-				87FE86A51AC2337F00421959 /* PaddingLabel.m */,
 				877081D21A927A3D00541AB3 /* NSDate-Utilities.h */,
 				877081D31A927A3D00541AB3 /* NSDate-Utilities.m */,
 				87A727E01ACCBF6B0095764E /* NSString+TimeInterval.h */,
@@ -948,7 +943,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2191D07A1B5A08C0002805AA /* JBChartHeaderView.m in Sources */,
-				87FE86A61AC2337F00421959 /* PaddingLabel.m in Sources */,
 				2191D0641B59DAB8002805AA /* OverviewViewController.m in Sources */,
 				87147E5B1A859F6000AB4977 /* AppDelegate.m in Sources */,
 				87C683261AA1495200A2C101 /* EventListTableViewController.m in Sources */,
