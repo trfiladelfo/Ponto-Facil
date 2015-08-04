@@ -12,6 +12,8 @@
 		2127C6631B6E6D08008DAD01 /* SessionDescriptionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127C6611B6E6D08008DAD01 /* SessionDescriptionFormatter.m */; };
 		2127C6681B7048F8008DAD01 /* FetchedResultsControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127C6661B7048F8008DAD01 /* FetchedResultsControllerDataSource.m */; };
 		2127C66B1B704954008DAD01 /* PaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127C6691B704954008DAD01 /* PaddingLabel.m */; };
+		2127C6741B706012008DAD01 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C6832A1AA15F2300A2C101 /* CoreData.framework */; };
+		2127C6761B70602E008DAD01 /* libPods-PontoFacilTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2127C6751B70602E008DAD01 /* libPods-PontoFacilTests.a */; };
 		2191D05B1B56048A002805AA /* LocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D05A1B56048A002805AA /* LocalNotificationManager.m */; };
 		2191D0641B59DAB8002805AA /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D0631B59DAB8002805AA /* OverviewViewController.m */; };
 		2191D06E1B59FBFB002805AA /* JBBaseChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2191D0671B59FBFB002805AA /* JBBaseChartViewController.m */; };
@@ -72,7 +74,6 @@
 		87C4D72F1B291950004E3105 /* ArrayDataSourceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C4D72E1B29194F004E3105 /* ArrayDataSourceSpec.m */; };
 		87C4D7311B29C16D004E3105 /* IntervalListTableViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C4D7301B29C16D004E3105 /* IntervalListTableViewControllerSpec.m */; };
 		87C683261AA1495200A2C101 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C683251AA1495200A2C101 /* EventListTableViewController.m */; };
-		87C6832B1AA15F2300A2C101 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C6832A1AA15F2300A2C101 /* CoreData.framework */; };
 		87C732E91B22009E0029C2E0 /* NSUserDefaultsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732E81B22009E0029C2E0 /* NSUserDefaultsSpec.m */; };
 		87C732EB1B226CCC0029C2E0 /* NSStringTimeIntervalSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732EA1B226CCC0029C2E0 /* NSStringTimeIntervalSpec.m */; };
 		87C732EF1B236C910029C2E0 /* ClockViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C732EE1B236C910029C2E0 /* ClockViewControllerSpec.m */; };
@@ -82,7 +83,6 @@
 		87CF5F6D1ABDF1BC004D5201 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 87CF5F6C1ABDF1BC004D5201 /* Localizable.strings */; };
 		87DAF90F1AF847B200B692C5 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DAF90E1AF847B200B692C5 /* Event.m */; };
 		87FE86A01AC0F30500421959 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FE869F1AC0F30500421959 /* EventTableViewCell.m */; };
-		8ED11A8A3BCB231EC3D2802E /* libPods-PontoFacil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CEA45DAC44D1EEEE511F27 /* libPods-PontoFacil.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +107,8 @@
 		2127C6671B7048F8008DAD01 /* FetchedResultsControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedResultsControllerDataSource.h; sourceTree = "<group>"; };
 		2127C6691B704954008DAD01 /* PaddingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddingLabel.m; sourceTree = "<group>"; };
 		2127C66A1B704954008DAD01 /* PaddingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingLabel.h; sourceTree = "<group>"; };
+		2127C6721B705FD3008DAD01 /* libPods-PontoFacilTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacilTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-PontoFacilTests.a"; sourceTree = "<group>"; };
+		2127C6751B70602E008DAD01 /* libPods-PontoFacilTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PontoFacilTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-PontoFacilTests.a"; sourceTree = "<group>"; };
 		2191D0591B56048A002805AA /* LocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotificationManager.h; sourceTree = "<group>"; };
 		2191D05A1B56048A002805AA /* LocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotificationManager.m; sourceTree = "<group>"; };
 		2191D05C1B58A397002805AA /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -245,8 +247,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87C6832B1AA15F2300A2C101 /* CoreData.framework in Frameworks */,
-				8ED11A8A3BCB231EC3D2802E /* libPods-PontoFacil.a in Frameworks */,
+				2127C6761B70602E008DAD01 /* libPods-PontoFacilTests.a in Frameworks */,
+				2127C6741B706012008DAD01 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +345,8 @@
 		6D9F0AE42298DF2C8CFB43E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2127C6751B70602E008DAD01 /* libPods-PontoFacilTests.a */,
+				2127C6721B705FD3008DAD01 /* libPods-PontoFacilTests.a */,
 				87C6832A1AA15F2300A2C101 /* CoreData.framework */,
 				87297C4F1A870AD2004E9626 /* libPods-PontoFacil-CircularProgressControl.a */,
 				87297C501A870AD2004E9626 /* libPods-PontoFacil.a */,
@@ -1131,7 +1135,10 @@
 				INFOPLIST_FILE = "PontoFacil/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1151,7 +1158,10 @@
 				INFOPLIST_FILE = "PontoFacil/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1186,7 +1196,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PontoFacil.app/PontoFacil";
+				TEST_HOST = "";
 			};
 			name = Debug;
 		};
@@ -1214,7 +1224,6 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PontoFacil.app/PontoFacil";
 			};
 			name = Release;
 		};
