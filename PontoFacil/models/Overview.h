@@ -16,6 +16,11 @@
 @property (nonatomic) int sessionCount;
 @property (nonatomic) int absentCount;
 @property (nonatomic) int holidayCount;
+
+@property (nonatomic) int weekDayCount;
+@property (nonatomic) int weekEndDayCount;
+@property (nonatomic) int pendingCount;
+
 @property (nonatomic) double timeBalance;
 @property (nonatomic) double workTime;
 

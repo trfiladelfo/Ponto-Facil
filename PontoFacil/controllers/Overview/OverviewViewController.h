@@ -17,7 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *sessionCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *absentCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *holidayCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pendingCountLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *graphContainerView;
 

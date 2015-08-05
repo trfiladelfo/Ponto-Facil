@@ -29,6 +29,7 @@
 		21E074141B484DC4006D3C88 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21E074131B484DC4006D3C88 /* Images.xcassets */; };
 		21E074171B4CBB38006D3C88 /* IntervalDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E074161B4CBB38006D3C88 /* IntervalDetailTableViewController.m */; };
 		61E0A6D4F076A33058087571 /* libPods-PontoFacilTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B02029FCA829C9A053B2823 /* libPods-PontoFacilTests.a */; };
+		7ABF2E9019ED769B4B97616C /* libPods-PontoFacil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CEA45DAC44D1EEEE511F27 /* libPods-PontoFacil.a */; };
 		87147E581A859F6000AB4977 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E571A859F6000AB4977 /* main.m */; };
 		87147E5B1A859F6000AB4977 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87147E5A1A859F6000AB4977 /* AppDelegate.m */; };
 		87147E5E1A859F6000AB4977 /* PontoFacil.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87147E5C1A859F6000AB4977 /* PontoFacil.xcdatamodeld */; };
@@ -249,6 +250,7 @@
 			files = (
 				2127C6761B70602E008DAD01 /* libPods-PontoFacilTests.a in Frameworks */,
 				2127C6741B706012008DAD01 /* CoreData.framework in Frameworks */,
+				7ABF2E9019ED769B4B97616C /* libPods-PontoFacil.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,10 +1137,7 @@
 				INFOPLIST_FILE = "PontoFacil/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1158,10 +1157,7 @@
 				INFOPLIST_FILE = "PontoFacil/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

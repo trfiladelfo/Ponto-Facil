@@ -109,13 +109,13 @@ CGFloat const kJBBarChartViewControllerChartFooterHeight = 25.0f;
     [self setFooterViewMonthLabels];
     
     self.refDateLabel.text = overviewData.title;
-    self.weekDayCountLabel.text = [NSString stringWithFormat:@"%02d", [self.refDate businessDaysInMonth]];
-    self.weekEndDayCountLabel.text = [NSString stringWithFormat:@"%02d", [self.refDate weekendDaysInMonth]];
+    self.weekDayCountLabel.text = [NSString stringWithFormat:@"%02d", overviewData.weekDayCount];
+    self.weekEndDayCountLabel.text = [NSString stringWithFormat:@"%02d", overviewData.weekEndDayCount];
     
     self.timeBalanceLabel.text = [NSString stringWithTimeInterval:overviewData.timeBalance];
     self.sessionCountLabel.text = [NSString stringWithFormat:@"%02d", overviewData.sessionCount];
     self.absentCountLabel.text = [NSString stringWithFormat:@"%02d", overviewData.absentCount];
-    self.holidayCountLabel.text = [NSString stringWithFormat:@"%02d", overviewData.holidayCount];
+    self.pendingCountLabel.text = [NSString stringWithFormat:@"%02d", overviewData.pendingCount];
 
 }
 

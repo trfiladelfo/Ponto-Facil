@@ -8,6 +8,7 @@
 
 #import "Overview.h"
 #import "Event+Management.h"
+#import "NSDate-Utilities.h"
 
 @interface Overview ()
 
@@ -42,6 +43,12 @@
         self.sessionCount = (int)[[eventList filteredArrayUsingPredicate:sessionPredicate] count];
         self.holidayCount = (int)[[eventList filteredArrayUsingPredicate:holidayPredicate] count];
         self.absentCount = (int)[[eventList filteredArrayUsingPredicate:absencePredicate] count];
+        
+        int weekDayCount = [[[self.eventArray firstObject] estWorkStart] businessDaysInMonth];
+        
+        self.weekDayCount = weekDayCount;
+        self.weekEndDayCount = [[[self.eventArray firstObject] estWorkStart] weekendDaysInMonth];
+        self.pendingCount = weekDayCount - (int)[eventList count];
         
         self.timeBalance = [[eventList valueForKeyPath:@"@sum.timeBalance"] doubleValue];
         self.workTime = [[[eventList filteredArrayUsingPredicate:sessionPredicate] valueForKeyPath:@"@sum.session.workTime"] doubleValue];

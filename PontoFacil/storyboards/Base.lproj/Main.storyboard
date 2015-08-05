@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -873,8 +872,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6b1-fo-dBL" userLabel="HolidayView">
                                         <rect key="frame" x="432" y="0.0" width="150" height="70"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FERIADOS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPb-i4-RBF">
-                                                <rect key="frame" x="49" y="10" width="51" height="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEM MARCAÇÃO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPb-i4-RBF">
+                                                <rect key="frame" x="33" y="10" width="84" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -1126,7 +1125,7 @@
                     <connections>
                         <outlet property="absentCountLabel" destination="Fde-8V-slv" id="4rw-z9-EGh"/>
                         <outlet property="graphContainerView" destination="R10-Az-LCR" id="CX9-dd-Ph5"/>
-                        <outlet property="holidayCountLabel" destination="lQR-qk-CRq" id="O9E-CS-2H1"/>
+                        <outlet property="pendingCountLabel" destination="lQR-qk-CRq" id="kZk-Ai-Gfe"/>
                         <outlet property="refDateLabel" destination="PKL-04-azp" id="HRX-4N-TuR"/>
                         <outlet property="sessionCountLabel" destination="gUu-qu-Rcy" id="SD4-bV-4BW"/>
                         <outlet property="timeBalanceLabel" destination="IVd-me-OCG" id="fHd-GB-ij5"/>
